@@ -1,0 +1,23 @@
+/**
+
+@page META_PLUGIN_INTRO Introduction
+
+The purpose of this module is to provide access to the meta data of observations.
+
+Following access parameters are available:
+- @b qualityCode
+- @b observableProperty
+
+<hr>
+
+- Quality code request example:
+@verbatim
+http://data.fmi.fi/meta?qualitycode=0&language=fin&fmi-apikey=YOUR-FMI-APIKEY&
+@endverbatim
+
+- Quality code request example:
+@verbatim
+http://data.fmi.fi/fmi-apikey/YOUR-FMI-APIKEY/meta?observableProperty=observation&param=TA&language=eng
+@endverbatim
+
+*/

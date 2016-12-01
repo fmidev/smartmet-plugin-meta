@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TMPL_if (SIZE(codeList) > 1)><CategoryRange<TMPL_else><Category</TMPL_if> xmlns="http://www.opengis.net/swe/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
+  <TMPL_foreach codeList as listItem>
+  <quality>
+   <Category id="qc-<TMPL_VAR listItem.code >">
+    <label><TMPL_VAR XMLESCAPE(listItem.label)></label>
+    <description><TMPL_VAR XMLESCAPE(listItem.description)></description>
+    <value><TMPL_VAR listItem.code></value>
+   </Category>
+  </quality></TMPL_foreach>
+<TMPL_if (SIZE(codeList) > 1)></CategoryRange><TMPL_else></Category></TMPL_if>

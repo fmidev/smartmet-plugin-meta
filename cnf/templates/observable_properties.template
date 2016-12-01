@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TMPL_if (SIZE(observableProperties)> 1)><CompositeObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="prop-1"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+  <count><TMPL_var propertiesCount></count><TMPL_else>
+<ObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  <TMPL_if (SIZE(observableProperties)> 1)>gml:id="prop-1"<TMPL_else><TMPL_foreach observableProperties as prop>gml:id="<TMPL_var prop.observablePropertyId>"</TMPL_foreach></TMPL_if>
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd"></TMPL_if><TMPL_foreach observableProperties as property><TMPL_if (SIZE(observableProperties) > 1)>
+    <component>
+      <ObservableProperty gml:id="<TMPL_var property.observablePropertyId>"></TMPL_if>
+        <label><TMPL_var XMLESCAPE(property.observablePropertyLabel)></label>
+      	<basePhenomenon><TMPL_var XMLESCAPE(property.basePhenomenon)></basePhenomenon>
+      	<TMPL_if DEFINED(property.uom)><uom uom="<TMPL_var property.uom>"/></TMPL_if><TMPL_if DEFINED(property.statisticalFunction)>
+      	<statisticalMeasure><TMPL_block "id"><TMPL_var property.statisticalFunction>-<TMPL_var property.aggregationTimePeriod>-<TMPL_var property.observablePropertyId>-<TMPL_var property.aggregationArea>-<TMPL_var property.aggregationVolume>-<TMPL_var property.aggregationLength></TMPL_block>     
+          <StatisticalMeasure gml:id="stat-<TMPL_call "id">">
+            <statisticalFunction><TMPL_var property.statisticalFunction></statisticalFunction><TMPL_if DEFINED(property.aggregationTimePeriod)><aggregationTimePeriod><TMPL_var property.aggregationTimePeriod></aggregationTimePeriod></TMPL_if><TMPL_if DEFINED(property.aggregationArea)><aggregationArea><TMPL_var property.aggregationArea></aggregationTimePeriod></TMPL_if><TMPL_if DEFINED(property.aggregationVolume)><aggregationVolume><TMPL_var property.aggregationVolume></aggregationVolume></TMPL_if><TMPL_if DEFINED(property.aggregationLength)><aggregationLength><TMPL_var property.aggregationLength></aggregationLength></TMPL_if><TMPL_if DEFINED(property.otherAggregation)>
+		<otherAggregation>
+                        <StatisticalMeasure gml:id="stat-other-<TMPL_call "id">"><statisticalFunction><TMPL_var property.otherAggregation.statisticalFunction></statisticalFunction><TMPL_if DEFINED(property.otherAggregation.aggregationTimePeriod)><aggregationTimePeriod><TMPL_var property.otherAggregation.aggregationTimePeriod></aggregationTimePeriod></TMPL_if><TMPL_if DEFINED(property.otherAggregation.aggregationArea)><aggregationArea><TMPL_var property.otherAggregation.aggregationArea></aggregationTimePeriod></TMPL_if><TMPL_if DEFINED(property.otherAggregation.aggregationVolume)><aggregationVolume><TMPL_var property.otherAggregation.aggregationVolume></aggregationVolume></TMPL_if><TMPL_if DEFINED(property.otherAggregation.aggregationLength)><aggregationLength><TMPL_var property.otherAggregation.aggregationLength></aggregationLength></TMPL_if>
+                        </StatisticalMeasure>
+                    </otherAggregation></TMPL_if>
+          </StatisticalMeasure>
+        </statisticalMeasure></TMPL_if><TMPL_if (SIZE(observableProperties)> 1)>
+      </ObservableProperty>
+    </component></TMPL_if>  </TMPL_foreach><TMPL_if (SIZE(observableProperties)> 1)></CompositeObservableProperty><TMPL_else></ObservableProperty></TMPL_if>

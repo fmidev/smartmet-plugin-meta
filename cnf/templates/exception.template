@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExceptionReport xmlns="http://www.opengis.net/ows/1.1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.opengis.net/ows/1.1 http://schemas.opengis.net/ows/1.1.0/owsExceptionReport.xsd"
+                 version="2.0.0"<TMPL_if (DEFINED(language))> xml:lang="<TMPL_var language>"</TMPL_if>>
+
+  <Exception exceptionCode="<TMPL_var exceptionCode>"<TMPL_if DEFINED(exceptionLocation)>
+                   locator="<TMPL_var exceptionLocation>"</TMPL_if>>
+    <ExceptionText><TMPL_var XMLESCAPE(exceptionText)></ExceptionText>
+  </Exception>
+</ExceptionReport>

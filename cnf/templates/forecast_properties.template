@@ -1,0 +1,38 @@
+[<TMPL_foreach modellist as model><TMPL_unless model.__first__>,</TMPL_unless>
+{"producer":"<TMPL_var model.producer>",
+"originTime":"<TMPL_var model.originTime>",
+"firstTime":"<TMPL_var model.firstTime>",
+"lastTime":"<TMPL_var model.lastTime>",
+"timeStep":"<TMPL_var model.timeStep>",
+"nTimeSteps":"<TMPL_var model.nTimeSteps>",
+"WKT":"<TMPL_var JSONESCAPE(model.WKT)>",
+"ullon":"<TMPL_var model.ullon>",
+"ullat":"<TMPL_var model.ullat>",
+"urlon":"<TMPL_var model.urlon>",
+"urlat":"<TMPL_var model.urlat>",
+"bllon":"<TMPL_var model.bllon>",
+"bllat":"<TMPL_var model.bllat>",
+"brlon":"<TMPL_var model.brlon>",
+"brlat":"<TMPL_var model.brlat>",
+"clon":"<TMPL_var model.clat>",
+"clat":"<TMPL_var model.clat>",
+"xNumber":"<TMPL_var model.xNumber>",
+"yNumber":"<TMPL_var model.yNumber>",
+"xResolution":"<TMPL_var model.xResolution>",
+"yResolution":"<TMPL_var model.yResolution>",
+"areaWidth":"<TMPL_var model.areaWidth>",
+"areaHeight":"<TMPL_var model.areaHeight>",
+"aspectRatio":"<TMPL_var model.aspectRatio>",
+"levels":[
+<TMPL_foreach model.levels as level>
+	      <TMPL_unless level.__first__>,</TMPL_unless>{"type" : "<TMPL_var level.type>",
+	      "name" : "<TMPL_var level.name>",
+	      "value" : "<TMPL_var level.value>"}
+</TMPL_foreach>
+],
+"parameters":[<TMPL_foreach model.parameters as param>
+	      <TMPL_unless param.__first__>,</TMPL_unless>{"name" : "<TMPL_var param.name>",
+	      "description" : "<TMPL_var param.description>",
+	      "precision" : "<TMPL_var param.precision>"}</TMPL_foreach>
+] }</TMPL_foreach>
+]

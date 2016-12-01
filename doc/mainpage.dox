@@ -1,0 +1,10 @@
+/**
+
+@mainpage
+
+- @subpage META_PLUGIN_INTRO
+- Configuration
+    - @subpage META_PLUGIN_CONFIG
+    - @subpage META_PLUGIN_DATA_QUALITY_CONFIG
+
+*/
