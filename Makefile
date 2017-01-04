@@ -90,7 +90,7 @@ endif
 
 LIBS = -L$(libdir) \
 	-lsmartmet-spine \
-	-lsmartmet_macgyver \
+	-lsmartmet-macgyver \
 	-lctpp2 
 
 TEMPLATES = $(wildcard cnf/templates/*.template)

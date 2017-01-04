@@ -2,7 +2,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 16.11.30
+Version: 17.1.4
 Release: 1%{?dist}.fmi
 License: FMI
 Group: SmartMet/Plugins
@@ -11,20 +11,20 @@ Source0: %{name}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: libconfig-devel
 BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-library-spine-devel >= 16.11.29
-BuildRequires: libsmartmet-macgyver-devel >= 16.9.30
-BuildRequires: smartmet-engine-querydata-devel >= 16.11.30
-BuildRequires: smartmet-engine-observation-devel >= 16.11.30
+BuildRequires: smartmet-library-spine-devel >= 17.1.4
+BuildRequires: smartmet-library-macgyver-devel >= 16.12.20
+BuildRequires: smartmet-engine-querydata-devel >= 17.1.4
+BuildRequires: smartmet-engine-observation-devel >= 17.1.4
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: libsmartmet-macgyver >= 16.9.30
-Requires: smartmet-server >= 16.11.30
-Requires: smartmet-engine-observation >= 16.11.30
-Requires: smartmet-engine-querydata >= 16.11.30
-Requires: smartmet-library-spine >= 16.11.29
+Requires: smartmet-library-macgyver >= 16.12.20
+Requires: smartmet-server >= 17.1.4
+Requires: smartmet-engine-observation >= 17.1.4
+Requires: smartmet-engine-querydata >= 17.1.4
+Requires: smartmet-library-spine >= 17.1.4
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -58,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Wed Jan  4 2017 Mika Heiskanen <mika.heiskanen@fmi.fi> - 17.1.4-1.fmi
+- Changed to use renamed SmartMet base libraries
+
 * Wed Nov 30 2016 Mika Heiskanen <mika.heiskanen@fmi.fi> - 16.11.30-1.fmi
 - No installation for configuration
 
@@ -203,7 +206,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Tue Nov  5 2013 Mika Heiskanen <mika.heiskanen@fmi.fi> - 13.11.5-1.fmi
 - Added two new parameters VerticalVelocityMMS and PseudoAdiabaticPotentialTemperature
-- Fixed libsmartmet-macgyver build dependency.
+- Fixed smartmet-library-macgyver build dependency.
 - Code conversion only for integers and minor description changes into QC-configurations.
 
 * Wed Oct  9 2013 Tuomo Lauri <tuomo.lauri@fmi.fi> - 13.10.9-1.fmi
