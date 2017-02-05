@@ -114,7 +114,7 @@ class Plugin : public SmartMetPlugin, virtual boost::noncopyable
 
   DataQualityRegistry itsDataQualityRegistry;
 
-  boost::scoped_ptr<Fmi::TemplateDirectory> itsTemplateDirectory;
+  std::unique_ptr<Fmi::TemplateDirectory> itsTemplateDirectory;
   boost::shared_ptr<Fmi::TemplateFormatterMT> itsExceptionFormatter;
   boost::shared_ptr<Fmi::TemplateFormatterMT> itsDataQualityFormatter;
 
