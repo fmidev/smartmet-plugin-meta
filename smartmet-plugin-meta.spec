@@ -1,3 +1,4 @@
+%bcond_without observation
 %define DIRNAME meta
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
@@ -10,11 +11,13 @@ URL: https://github.com/fmidev/smartmet-plugin-meta
 Source0: %{name}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: libconfig-devel
-BuildRequires: oracle-instantclient11.2-devel
 BuildRequires: smartmet-library-spine-devel >= 17.2.3
 BuildRequires: smartmet-library-macgyver-devel >= 17.1.18
 BuildRequires: smartmet-engine-querydata-devel >= 17.2.3
+%if %{with observation}
+BuildRequires: oracle-instantclient11.2-devel
 BuildRequires: smartmet-engine-observation-devel >= 17.2.9
+%endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
@@ -22,7 +25,9 @@ Requires: ctpp2
 Requires: libconfig
 Requires: smartmet-library-macgyver >= 17.1.18
 Requires: smartmet-server >= 17.1.25
+%if %{with observation}
 Requires: smartmet-engine-observation >= 17.2.9
+%endif
 Requires: smartmet-engine-querydata >= 17.2.3
 Requires: smartmet-library-spine >= 17.2.3
 Provides: %{SPECNAME}
@@ -38,7 +43,8 @@ rm -rf $RPM_BUILD_ROOT
 %setup -q -n %{SPECNAME}
  
 %build -q -n %{SPECNAME}
-make %{_smp_mflags}
+make %{_smp_mflags} \
+     %{?!with_observation:CFLAGS=-DWITHOUT_OBSERVATION}
 
 %install
 %makeinstall

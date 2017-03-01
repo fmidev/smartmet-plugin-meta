@@ -1,5 +1,4 @@
-#ifndef SMARTMET_META_PLUGIN_DATA_QUALITY_H
-#define SMARTMET_META_PLUGIN_DATA_QUALITY_H
+#pragma once
 
 #include <map>
 #include <string>
@@ -149,5 +148,3 @@ class DataQualityRegistry : protected virtual boost::noncopyable
 }  // namespace Meta
 }  // namespace Plugin
 }  // namespace SmartMet
-
-#endif  // SMARTMET_META_PLUGIN_DATA_QUALITY_H

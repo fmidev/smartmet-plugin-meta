@@ -12,11 +12,14 @@
 #include <spine/Reactor.h>
 #include <spine/ConfigBase.h>
 #include <spine/OptionParsers.h>
-#include <engines/observation/ObservableProperty.h>
 
 #include <engines/geonames/Engine.h>
 #include <engines/querydata/Engine.h>
+
+#ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Engine.h>
+#include <engines/observation/ObservableProperty.h>
+#endif
 
 #include <macgyver/TemplateFormatterMT.h>
 #include <macgyver/TemplateDirectory.h>
@@ -39,24 +42,24 @@ struct ForecastMetaData;
 class Plugin : public SmartMetPlugin, virtual boost::noncopyable
 {
  public:
-  Plugin(SmartMet::Spine::Reactor* theReactor, const char* theConfig);
+  Plugin(Spine::Reactor* theReactor, const char* theConfig);
   virtual ~Plugin();
 
   const std::string& getPluginName() const;
   int getRequiredAPIVersion() const;
-  bool queryIsFast(const SmartMet::Spine::HTTP::Request& theRequest) const;
+  bool queryIsFast(const Spine::HTTP::Request& theRequest) const;
 
  protected:
   void init();
   void shutdown();
-  void requestHandler(SmartMet::Spine::Reactor& theReactor,
-                      const SmartMet::Spine::HTTP::Request& theRequest,
-                      SmartMet::Spine::HTTP::Response& theResponse);
+  void requestHandler(Spine::Reactor& theReactor,
+                      const Spine::HTTP::Request& theRequest,
+                      Spine::HTTP::Response& theResponse);
 
  private:
-  std::string query(SmartMet::Spine::Reactor& theReactor,
-                    const SmartMet::Spine::HTTP::Request& theRequest,
-                    SmartMet::Spine::HTTP::Response& theResponse);
+  std::string query(Spine::Reactor& theReactor,
+                    const Spine::HTTP::Request& theRequest,
+                    Spine::HTTP::Response& theResponse);
 
   /**
    *  \brief Existence of emplate directory and files are checked and initilized.
@@ -64,50 +67,56 @@ class Plugin : public SmartMetPlugin, virtual boost::noncopyable
    */
   void createTemplateFormatters();
 
-  std::string getDataQualityMetadata(SmartMet::Spine::Reactor& theReactor,
-                                     const SmartMet::Spine::HTTP::Request& theRequest,
-                                     SmartMet::Spine::HTTP::Response& theResponse);
+  std::string getDataQualityMetadata(Spine::Reactor& theReactor,
+                                     const Spine::HTTP::Request& theRequest,
+                                     Spine::HTTP::Response& theResponse);
 
-  std::string getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
-                            const SmartMet::Spine::HTTP::Request& theRequest,
-                            SmartMet::Spine::HTTP::Response& theResponse);
-
-  std::string getObsEngineMetadata(SmartMet::Spine::Reactor& theReactor,
-                                   const SmartMet::Spine::HTTP::Request& theRequest,
-                                   SmartMet::Spine::HTTP::Response& theResponse);
-
-  std::string getForecastMetadata(SmartMet::Spine::Reactor& theReactor,
-                                  const SmartMet::Spine::HTTP::Request& theRequest,
-                                  SmartMet::Spine::HTTP::Response& theResponse);
+  std::string getForecastMetadata(Spine::Reactor& theReactor,
+                                  const Spine::HTTP::Request& theRequest,
+                                  Spine::HTTP::Response& theResponse);
 
   std::string formatObservablePropertiesResponse(CTPP::CDT& hash);
 
+#ifndef WITHOUT_OBSERVATION
+  std::string getFlashCount(Spine::Reactor& /* theReactor */,
+                            const Spine::HTTP::Request& theRequest,
+                            Spine::HTTP::Response& theResponse);
+
+  std::string getObsEngineMetadata(Spine::Reactor& theReactor,
+                                   const Spine::HTTP::Request& theRequest,
+                                   Spine::HTTP::Response& theResponse);
+
   void parseObservablePropertiesResponse(
-      boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+      boost::shared_ptr<std::vector<Engine::Observation::ObservableProperty> >&
           observableProperties,
       CTPP::CDT& hash,
       std::vector<std::string>& parameters);
+#endif
 
   void parseForecastConfig();
 
   void parseDataQualityConfig();
 
+#ifndef WITHOUT_OBSERVATION
   void updateObservableProperties(
-      boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+      boost::shared_ptr<std::vector<Engine::Observation::ObservableProperty> >&
           observableProperties,
       const std::string& language);
+#endif
 
   const std::string itsModuleName;
 
-  SmartMet::Spine::ConfigBase itsConfig;
+  Spine::ConfigBase itsConfig;
 
-  SmartMet::Spine::Reactor* itsReactor;
+  Spine::Reactor* itsReactor;
 
-  SmartMet::Engine::Geonames::Engine* itsGeoEngine;
+  Engine::Geonames::Engine* itsGeoEngine;
 
-  SmartMet::Engine::Querydata::Engine* itsQEngine;
+  Engine::Querydata::Engine* itsQEngine;
 
-  SmartMet::Engine::Observation::Engine* itsObsEngine;
+#ifndef WITHOUT_OBSERVATION
+  Engine::Observation::Engine* itsObsEngine;
+#endif
 
   std::map<std::string, std::map<std::string, ForecastMetaData> >
       itsForecastMap;  // parameter->language->metadata

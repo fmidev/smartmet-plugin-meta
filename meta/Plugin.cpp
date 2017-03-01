@@ -15,7 +15,10 @@
 #include <spine/TableFormatter.h>
 #include <spine/TableFormatterOptions.h>
 #include <spine/Value.h>
+
+#ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Utils.h>
+#endif
 
 #include <macgyver/String.h>
 #include <macgyver/TemplateFormatterMT.h>
@@ -110,6 +113,7 @@ void Plugin::init()
 
     itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(geoengine);
 
+#ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
     SmartMet::Engine::Observation::Engine* obsengine =
         reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
@@ -117,20 +121,31 @@ void Plugin::init()
 
     if (!obsengine)
     {
-      itsObsEngine = NULL;
+      itsObsEngine = nullptr;
     }
     else
     {
       itsObsEngine = obsengine;
       itsObsEngine->setGeonames(itsGeoEngine);
     }
+#endif
 
+#ifndef WITHOUT_OBSERVATION
     if (!qengine && !obsengine)
     {
       // Nothing of interest available, print notification
-      throw SmartMet::Spine::Exception(
-          BCP, "Both Querydata engine and Observation engine are absent in Meta plugin");
+      throw SmartMet::Spine::Exception(BCP,
+                                       "Both Querydata-engine and Observation-engine are absent, "
+                                       "Meta-plugin has nothing to show");
     }
+#else
+    if (!qengine)
+    {
+      // Nothing of interest available, print notification
+      throw SmartMet::Spine::Exception(BCP,
+                                       "Querydata engine absent, Meta-plugin has nothing to show");
+    }
+#endif
 
     itsDataQualityRegistry.supportQualityCodeConversion(true);
     createTemplateFormatters();
@@ -477,19 +492,22 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
       auto observableProperty =
           SmartMet::Spine::required_string(theRequest.getParameter("observableProperty"),
                                            "Parameter 'observableProperty' is undefined");
-      if (observableProperty == "observation")
-      {
-        return getObsEngineMetadata(theReactor, theRequest, theResponse);
-      }
-      else if (observableProperty == "forecast")
+
+      if (observableProperty == "forecast")
       {
         return getForecastMetadata(theReactor, theRequest, theResponse);
+      }
+#ifndef WITHOUT_OBSERVATION
+      else if (observableProperty == "observation")
+      {
+        return getObsEngineMetadata(theReactor, theRequest, theResponse);
       }
       else if (observableProperty == "flashcount")
       {
         theResponse.setHeader("Content-Type", "application/json; charset=UTF-8");
         return getFlashCount(theReactor, theRequest, theResponse);
       }
+#endif
       else
       {
         throw SmartMet::Spine::Exception(
@@ -522,6 +540,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
   }
 }
 
+#ifndef WITHOUT_OBSERVATION
 void Plugin::updateObservableProperties(
     boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
@@ -558,6 +577,9 @@ void Plugin::updateObservableProperties(
     throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
   }
 }
+#endif
+
+#ifndef WITHOUT_OBSERVATION
 
 void Plugin::parseObservablePropertiesResponse(
     boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
@@ -598,6 +620,7 @@ void Plugin::parseObservablePropertiesResponse(
     throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
   }
 }
+#endif
 
 std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
 {
@@ -692,6 +715,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
   }
 }
 
+#ifndef WITHOUT_OBSERVATION
 std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
                                   const SmartMet::Spine::HTTP::Request& theRequest,
                                   SmartMet::Spine::HTTP::Response& theResponse)
@@ -735,7 +759,9 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
     throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
   }
 }
+#endif
 
+#ifndef WITHOUT_OBSERVATION
 std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor */,
                                          const SmartMet::Spine::HTTP::Request& theRequest,
                                          SmartMet::Spine::HTTP::Response& theResponse)
@@ -832,6 +858,7 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
     throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
   }
 }
+#endif
 
 std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor */,
                                         const SmartMet::Spine::HTTP::Request& theRequest,
