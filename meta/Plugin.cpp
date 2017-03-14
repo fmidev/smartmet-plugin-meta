@@ -20,7 +20,7 @@
 #include <engines/observation/Utils.h>
 #endif
 
-#include <macgyver/String.h>
+#include <macgyver/StringConversion.h>
 #include <macgyver/TemplateFormatterMT.h>
 #include <macgyver/TimeZoneFactory.h>
 
