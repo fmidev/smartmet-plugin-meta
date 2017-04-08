@@ -7,12 +7,12 @@
 #include "Plugin.h"
 #include "ForecastMetaData.h"
 
+#include <spine/Convenience.h>
 #include <spine/Exception.h>
 #include <spine/SmartMet.h>
-#include <spine/Convenience.h>
 #include <spine/Table.h>
-#include <spine/TableFormatterFactory.h>
 #include <spine/TableFormatter.h>
+#include <spine/TableFormatterFactory.h>
 #include <spine/TableFormatterOptions.h>
 #include <spine/Value.h>
 
@@ -24,15 +24,15 @@
 #include <macgyver/TemplateFormatterMT.h>
 #include <macgyver/TimeZoneFactory.h>
 
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include "boost/date_time/local_time/local_time.hpp"
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
 
 #include <ctpp2/CDT.hpp>
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -748,10 +748,10 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
     SmartMet::Engine::Observation::FlashCounts flashcounts =
         itsObsEngine->getFlashCount(utc_start_time, utc_end_time, loptions->locations());
 
-    std::string response = "{\n    \"flashcount\": " + Fmi::to_string(flashcounts.flashcount) +
-                           ",\n" + "    \"strokecount\": " +
-                           Fmi::to_string(flashcounts.strokecount) + ",\n" + "    \"iccount\": " +
-                           Fmi::to_string(flashcounts.iccount) + "\n}\n";
+    std::string response =
+        "{\n    \"flashcount\": " + Fmi::to_string(flashcounts.flashcount) + ",\n" +
+        "    \"strokecount\": " + Fmi::to_string(flashcounts.strokecount) + ",\n" +
+        "    \"iccount\": " + Fmi::to_string(flashcounts.iccount) + "\n}\n";
     return response;
   }
   catch (...)
@@ -1080,11 +1080,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
 
       SmartMet::Spine::Exception exception(BCP, "Request processing exception!", NULL);
       exception.addParameter("URI", theRequest.getURI());
-
-      if (!exception.stackTraceDisabled())
-        std::cerr << exception.getStackTrace();
-      else if (!exception.loggingDisabled())
-        std::cerr << "Error: " << exception.what() << std::endl;
+      exception.printError();
 
       if (isdebug)
       {
