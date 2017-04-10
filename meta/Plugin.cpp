@@ -195,9 +195,9 @@ void Plugin::createTemplateFormatters()
 {
   try
   {
-    std::string template_dir = itsConfig.get_mandatory_config_param<std::string>("templateDir");
+    std::string template_dir = itsConfig.get_mandatory_path("templateDir");
     std::string etn = itsConfig.get_mandatory_config_param<std::string>("exceptionTemplate");
-    std::string dqtn = itsConfig.get_mandatory_config_param<std::string>("dataQualityTemplate");
+    std::string dqtn = itsConfig.get_mandatory_path("dataQualityTemplate");
 
     // TemplateDirectory constructor verifies that directory exists
     // and create_template_formatter method makes the same for template names.
