@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 17.4.10
+Version: 17.4.11
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Tue Apr 11 2017 Mika Heiskanen <mika.heiskanen@fmi.fi> - 17.4.11-1.fmi
+- Fixed dataQualityTemplate not to be a path but a filename
+
 * Mon Apr 10 2017 Mika Heiskanen <mika.heiskanen@fmi.fi> - 17.4.10-1.fmi
 - Configuration paths can now be relative
 
