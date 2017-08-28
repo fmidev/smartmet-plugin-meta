@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 17.4.11
+Version: 17.8.28
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -13,25 +13,25 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 17.4.8
-BuildRequires: smartmet-library-macgyver-devel >= 17.3.16
-BuildRequires: smartmet-engine-querydata-devel >= 17.4.8
+BuildRequires: smartmet-library-spine-devel >= 17.8.28
+BuildRequires: smartmet-library-macgyver-devel >= 17.8.28
+BuildRequires: smartmet-engine-querydata-devel >= 17.8.28
 %if %{with observation}
 BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 17.4.7
+BuildRequires: smartmet-engine-observation-devel >= 17.8.28
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: smartmet-library-macgyver >= 17.3.16
-Requires: smartmet-server >= 17.4.7
+Requires: smartmet-library-macgyver >= 17.8.28
+Requires: smartmet-server >= 17.8.28
 %if %{with observation}
-Requires: smartmet-engine-observation >= 17.4.7
+Requires: smartmet-engine-observation >= 17.8.28
 %endif
-Requires: smartmet-engine-querydata >= 17.4.8
-Requires: smartmet-library-spine >= 17.4.8
+Requires: smartmet-engine-querydata >= 17.8.28
+Requires: smartmet-library-spine >= 17.8.28
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -66,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Mon Aug 28 2017 Mika Heiskanen <mika.heiskanen@fmi.fi> - 17.8.28-1.fmi
+- Upgrade to boost 1.65
+
 * Tue Apr 11 2017 Mika Heiskanen <mika.heiskanen@fmi.fi> - 17.4.11-1.fmi
 - Fixed dataQualityTemplate not to be a path but a filename
 
