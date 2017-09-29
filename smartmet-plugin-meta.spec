@@ -16,6 +16,8 @@ BuildRequires: libconfig-devel
 BuildRequires: smartmet-library-spine-devel >= 17.8.28
 BuildRequires: smartmet-library-macgyver-devel >= 17.8.28
 BuildRequires: smartmet-engine-querydata-devel >= 17.8.28
+BuildRequires: boost-devel
+BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 BuildRequires: oracle-instantclient11.2-devel
 BuildRequires: smartmet-engine-observation-devel >= 17.8.28
