@@ -53,7 +53,7 @@ namespace
 	return os.str();
   }
 #endif
-}
+}  // namespace
 
 namespace SmartMet
 {
@@ -115,23 +115,14 @@ void Plugin::init()
 
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
-    SmartMet::Engine::Observation::Engine* obsengine =
+    SmartMet::Engine::Observation::Engine* itsObsEngine =
         reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
             itsReactor->getSingleton("Observation", (void*)NULL));
 
-    if (!obsengine)
-    {
-      itsObsEngine = nullptr;
-    }
-    else
-    {
-      itsObsEngine = obsengine;
-      itsObsEngine->setGeonames(itsGeoEngine);
-    }
 #endif
 
 #ifndef WITHOUT_OBSERVATION
-    if (!qengine && !obsengine)
+    if (!qengine && !itsObsEngine)
     {
       // Nothing of interest available, print notification
       throw SmartMet::Spine::Exception(BCP,
@@ -178,9 +169,7 @@ void Plugin::shutdown()
  */
 // ----------------------------------------------------------------------
 
-Plugin::~Plugin()
-{
-}
+Plugin::~Plugin() {}
 // ----------------------------------------------------------------------
 /*!
  * \brief Return the plugin name
