@@ -4,3 +4,4 @@
 obj/
 lib*.a
 *.c2t
+compile_commands.json
