@@ -7,6 +7,10 @@
 #include "Plugin.h"
 #include "ForecastMetaData.h"
 
+#ifndef WITHOUT_OBSERVATION
+#include <engines/observation/Utils.h>
+#endif
+
 #include <spine/Convenience.h>
 #include <spine/Exception.h>
 #include <spine/SmartMet.h>
@@ -15,22 +19,14 @@
 #include <spine/TableFormatterFactory.h>
 #include <spine/TableFormatterOptions.h>
 #include <spine/Value.h>
-
-#ifndef WITHOUT_OBSERVATION
-#include <engines/observation/Utils.h>
-#endif
-
 #include <macgyver/StringConversion.h>
 #include <macgyver/TemplateFormatterMT.h>
 #include <macgyver/TimeZoneFactory.h>
-
-#include "boost/date_time/local_time/local_time.hpp"
+#include <boost/date_time/local_time/local_time.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
-
 #include <ctpp2/CDT.hpp>
-
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -92,37 +88,24 @@ void Plugin::init()
   try
   {
     // Obtain the QEngine pointer
-    SmartMet::Engine::Querydata::Engine* qengine =
+    itsQEngine =
         reinterpret_cast<SmartMet::Engine::Querydata::Engine*>(
-            itsReactor->getSingleton("Querydata", (void*)NULL));
-
-    if (!qengine)
-    {
-      // This backend does not have QEngine
-      itsQEngine = NULL;
-    }
-    else
-    {
-      itsQEngine = qengine;
-    }
+            itsReactor->getSingleton("Querydata", nullptr));
 
     // ObsEngine needs also GeoEngine, get it
-    auto geoengine = itsReactor->getSingleton("Geonames", NULL);
-    if (!geoengine)
+    itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(itsReactor->getSingleton("Geonames", nullptr));
+    if (!itsGeoEngine)
       throw SmartMet::Spine::Exception(BCP, "Geonames engine unavailable");
-
-    itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(geoengine);
 
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
-    SmartMet::Engine::Observation::Engine* itsObsEngine =
+    itsObsEngine =
         reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
             itsReactor->getSingleton("Observation", (void*)NULL));
-
 #endif
 
 #ifndef WITHOUT_OBSERVATION
-    if (!qengine && !itsObsEngine)
+    if (!itsQEngine && !itsObsEngine)
     {
       // Nothing of interest available, print notification
       throw SmartMet::Spine::Exception(BCP,
@@ -130,7 +113,7 @@ void Plugin::init()
                                        "Meta-plugin has nothing to show");
     }
 #else
-    if (!qengine)
+    if (!itsQEngine)
     {
       // Nothing of interest available, print notification
       throw SmartMet::Spine::Exception(BCP,

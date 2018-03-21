@@ -108,14 +108,14 @@ class Plugin : public SmartMetPlugin, virtual boost::noncopyable
 
   Spine::ConfigBase itsConfig;
 
-  Spine::Reactor* itsReactor;
+  Spine::Reactor* itsReactor{nullptr};
 
-  Engine::Geonames::Engine* itsGeoEngine;
+  Engine::Geonames::Engine* itsGeoEngine{nullptr};
 
-  Engine::Querydata::Engine* itsQEngine;
+  Engine::Querydata::Engine* itsQEngine{nullptr};
 
 #ifndef WITHOUT_OBSERVATION
-  Engine::Observation::Engine* itsObsEngine;
+  Engine::Observation::Engine* itsObsEngine{nullptr};
 #endif
 
   std::map<std::string, std::map<std::string, ForecastMetaData> >
