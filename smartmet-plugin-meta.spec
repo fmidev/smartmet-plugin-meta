@@ -3,8 +3,8 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 18.3.20
-Release: 2%{?dist}.fmi
+Version: 18.4.7
+Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
 URL: https://github.com/fmidev/smartmet-plugin-meta
@@ -13,27 +13,27 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 18.3.7
-BuildRequires: smartmet-library-macgyver-devel >= 18.2.12
-BuildRequires: smartmet-engine-querydata-devel >= 18.3.20
+BuildRequires: smartmet-library-spine-devel >= 18.4.7
+BuildRequires: smartmet-library-macgyver-devel >= 18.4.7
+BuildRequires: smartmet-engine-querydata-devel >= 18.4.7
 BuildRequires: boost-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 18.3.20
+BuildRequires: smartmet-engine-observation-devel >= 18.4.7
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: smartmet-library-macgyver >= 18.2.12
-Requires: smartmet-server >= 17.11.10
+Requires: smartmet-library-macgyver >= 18.4.7
+Requires: smartmet-server >= 18.4.7
 %if %{with observation}
-Requires: smartmet-engine-observation >= 18.3.20
+Requires: smartmet-engine-observation >= 18.4.7
 %endif
-Requires: smartmet-engine-querydata >= 18.3.20
-Requires: smartmet-library-spine >= 18.3.7
+Requires: smartmet-engine-querydata >= 18.4.7
+Requires: smartmet-library-spine >= 18.4.7
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -68,6 +68,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Sat Apr  7 2018 Mika Heiskanen <mika.heiskanen@fmi.fi> - 18.4.7-1.fmi
+- Upgrade to boost 1.66
+
 * Tue Mar 20 2018 Mika Heiskanen <mika.heiskanen@fmi.fi> - 18.3.20-2.fmi
 - Fixed obsengine initialization
 
