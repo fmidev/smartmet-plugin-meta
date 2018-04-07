@@ -1,10 +1,10 @@
 #pragma once
 
+#include "MultiLanguageString.h"
+#include <boost/noncopyable.hpp>
 #include <map>
 #include <string>
 #include <vector>
-#include <boost/noncopyable.hpp>
-#include "MultiLanguageString.h"
 
 namespace SmartMet
 {

@@ -11,6 +11,14 @@
 #include <engines/observation/Utils.h>
 #endif
 
+#include <boost/date_time/local_time/local_time.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/foreach.hpp>
+#include <ctpp2/CDT.hpp>
+#include <macgyver/StringConversion.h>
+#include <macgyver/TemplateFormatterMT.h>
+#include <macgyver/TimeZoneFactory.h>
 #include <spine/Convenience.h>
 #include <spine/Exception.h>
 #include <spine/SmartMet.h>
@@ -19,14 +27,6 @@
 #include <spine/TableFormatterFactory.h>
 #include <spine/TableFormatterOptions.h>
 #include <spine/Value.h>
-#include <macgyver/StringConversion.h>
-#include <macgyver/TemplateFormatterMT.h>
-#include <macgyver/TimeZoneFactory.h>
-#include <boost/date_time/local_time/local_time.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/foreach.hpp>
-#include <ctpp2/CDT.hpp>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -88,20 +88,19 @@ void Plugin::init()
   try
   {
     // Obtain the QEngine pointer
-    itsQEngine =
-        reinterpret_cast<SmartMet::Engine::Querydata::Engine*>(
-            itsReactor->getSingleton("Querydata", nullptr));
+    itsQEngine = reinterpret_cast<SmartMet::Engine::Querydata::Engine*>(
+        itsReactor->getSingleton("Querydata", nullptr));
 
     // ObsEngine needs also GeoEngine, get it
-    itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(itsReactor->getSingleton("Geonames", nullptr));
+    itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(
+        itsReactor->getSingleton("Geonames", nullptr));
     if (!itsGeoEngine)
       throw SmartMet::Spine::Exception(BCP, "Geonames engine unavailable");
 
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
-    itsObsEngine =
-        reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
-            itsReactor->getSingleton("Observation", (void*)NULL));
+    itsObsEngine = reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
+        itsReactor->getSingleton("Observation", (void*)NULL));
 #endif
 
 #ifndef WITHOUT_OBSERVATION

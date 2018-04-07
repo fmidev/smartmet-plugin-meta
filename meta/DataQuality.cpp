@@ -1,12 +1,12 @@
 #include "DataQuality.h"
-#include <spine/Exception.h>
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <stdexcept>
-#include <macgyver/TypeName.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
+#include <macgyver/TypeName.h>
+#include <spine/Exception.h>
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <string>
 
 namespace ba = boost::algorithm;
 
@@ -16,13 +16,9 @@ namespace Plugin
 {
 namespace Meta
 {
-DataQualityRegistry::DataQualityRegistry() : m_keyConversionEnabled(false)
-{
-}
+DataQualityRegistry::DataQualityRegistry() : m_keyConversionEnabled(false) {}
 
-DataQualityRegistry::~DataQualityRegistry()
-{
-}
+DataQualityRegistry::~DataQualityRegistry() {}
 
 void DataQualityRegistry::addMapEntry(const std::string& code,
                                       const std::string& default_language,

@@ -8,10 +8,10 @@
 
 #include "DataQuality.h"
 
-#include <spine/SmartMetPlugin.h>
-#include <spine/Reactor.h>
 #include <spine/ConfigBase.h>
 #include <spine/OptionParsers.h>
+#include <spine/Reactor.h>
+#include <spine/SmartMetPlugin.h>
 
 #include <engines/geonames/Engine.h>
 #include <engines/querydata/Engine.h>
@@ -21,15 +21,15 @@
 #include <engines/observation/ObservableProperty.h>
 #endif
 
-#include <macgyver/TemplateFormatterMT.h>
 #include <macgyver/TemplateDirectory.h>
+#include <macgyver/TemplateFormatterMT.h>
 
 #include <boost/noncopyable.hpp>
 
 #include <ctpp2/CDT.hpp>
 
-#include <utility>
 #include <string>
+#include <utility>
 
 namespace SmartMet
 {

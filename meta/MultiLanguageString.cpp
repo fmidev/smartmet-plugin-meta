@@ -1,9 +1,9 @@
 #include "MultiLanguageString.h"
-#include <spine/Exception.h>
-#include <sstream>
 #include <boost/algorithm/string.hpp>
 #include <macgyver/StringConversion.h>
 #include <macgyver/TypeName.h>
+#include <spine/Exception.h>
+#include <sstream>
 
 /**
 
@@ -99,9 +99,7 @@ boost::shared_ptr<MultiLanguageString> MultiLanguageString::create(
   }
 }
 
-MultiLanguageString::~MultiLanguageString()
-{
-}
+MultiLanguageString::~MultiLanguageString() {}
 
 std::string MultiLanguageString::get(const std::string& language) const
 {
