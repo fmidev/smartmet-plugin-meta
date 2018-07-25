@@ -34,7 +34,7 @@ void DataQualityRegistry::addMapEntry(const std::string& code,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -56,7 +56,7 @@ bool DataQualityRegistry::addMapEntryAlias(const std::string& code, const std::s
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -84,7 +84,7 @@ bool DataQualityRegistry::getMapEntry(const std::string& code, struct MapEntry& 
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -98,7 +98,7 @@ void DataQualityRegistry::getMapKeyList(std::vector<std::string>& keyList)
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -136,7 +136,7 @@ bool DataQualityRegistry::getKey(std::string& code, const std::string& codeAlias
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -151,7 +151,7 @@ bool DataQualityRegistry::isMapEntry(const std::string& code) const
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -166,7 +166,7 @@ bool DataQualityRegistry::isMapEntryAlias(const std::string& codeAlias) const
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 

@@ -74,7 +74,7 @@ Plugin::Plugin(SmartMet::Spine::Reactor* theReactor, const char* theConfig)
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -100,7 +100,7 @@ void Plugin::init()
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
     itsObsEngine = reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
-        itsReactor->getSingleton("Observation", (void*)NULL));
+        itsReactor->getSingleton("Observation", (void*)nullptr));
 #endif
 
 #ifndef WITHOUT_OBSERVATION
@@ -131,7 +131,7 @@ void Plugin::init()
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -178,7 +178,7 @@ void Plugin::createTemplateFormatters()
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -327,7 +327,7 @@ void Plugin::parseForecastConfig()
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -427,7 +427,7 @@ void Plugin::parseDataQualityConfig()
                     << " file '" << entry.string() << "'" << std::endl;
 
           SmartMet::Spine::Exception exception(
-              BCP, "Error while reading data quality code configuration!", NULL);
+              BCP, "Error while reading data quality code configuration!", nullptr);
           exception.addParameter("File", entry.string());
           throw exception;
         }
@@ -436,7 +436,7 @@ void Plugin::parseDataQualityConfig()
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -507,7 +507,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -545,7 +545,7 @@ void Plugin::updateObservableProperties(
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -588,7 +588,7 @@ void Plugin::parseObservablePropertiesResponse(
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -610,7 +610,7 @@ std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -682,7 +682,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -727,7 +727,7 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -826,7 +826,7 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -988,7 +988,7 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -1049,7 +1049,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
     {
       // Catching all exceptions
 
-      SmartMet::Spine::Exception exception(BCP, "Request processing exception!", NULL);
+      SmartMet::Spine::Exception exception(BCP, "Request processing exception!", nullptr);
       exception.addParameter("URI", theRequest.getURI());
       exception.printError();
 
@@ -1075,7 +1075,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception(BCP, "Operation failed!", NULL);
+    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
