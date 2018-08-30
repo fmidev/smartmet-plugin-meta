@@ -336,8 +336,7 @@ void Plugin::parseDataQualityConfig()
   try
   {
     // Test folder path and file existencies
-    boost::filesystem::path features_dir(
-        itsConfig.get_mandatory_config_param<std::string>("dataQualityDefinitionDir"));
+    boost::filesystem::path features_dir(itsConfig.get_mandatory_path("dataQualityDefinitionDir"));
 
     if (not boost::filesystem::exists(features_dir))
     {
