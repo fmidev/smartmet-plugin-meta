@@ -254,11 +254,10 @@ void Plugin::parseForecastConfig()
         m_supportedUnits[unitKey] = true;
       }
 
-      for (auto it = labelmap.begin(); it != labelmap.end(); ++it)
+      for (const auto& tmp : labelmap)
       {
-        auto& lan = it->first;
-
-        auto thisLabel = it->second;
+        const auto& lan = tmp.first;
+        const auto& thisLabel = tmp.second;
 
         // Find the matching phenomenon
         auto phit = phenomenonmap.find(lan);
