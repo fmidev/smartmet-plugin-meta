@@ -19,7 +19,7 @@ class MultiLanguageString
   static boost::shared_ptr<MultiLanguageString> create(const std::string& default_language,
                                                        libconfig::Setting& setting);
 
-  virtual ~MultiLanguageString();
+  virtual ~MultiLanguageString() = default;
 
   inline std::string get_default_language() const { return default_language; }
   inline std::string get() const { return get(default_language); }

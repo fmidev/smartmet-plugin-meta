@@ -99,8 +99,6 @@ boost::shared_ptr<MultiLanguageString> MultiLanguageString::create(
   }
 }
 
-MultiLanguageString::~MultiLanguageString() {}
-
 std::string MultiLanguageString::get(const std::string& language) const
 {
   try
