@@ -144,10 +144,7 @@ bool DataQualityRegistry::isMapEntry(const std::string& code) const
 {
   try
   {
-    if (m_codeMap.count(code) <= 0)
-      return false;
-
-    return true;
+    return !(m_codeMap.count(code) <= 0);
   }
   catch (...)
   {
@@ -159,10 +156,7 @@ bool DataQualityRegistry::isMapEntryAlias(const std::string& codeAlias) const
 {
   try
   {
-    if (m_codeAliasMap.count(codeAlias) <= 0)
-      return false;
-
-    return true;
+    return !(m_codeAliasMap.count(codeAlias) <= 0);
   }
   catch (...)
   {
