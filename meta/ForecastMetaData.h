@@ -11,28 +11,28 @@ namespace Meta
 {
 struct ForecastMetaData
 {
-  ForecastMetaData(const std::string& thename,
-                   const std::string& thelabel,
-                   const std::string& thebasePhenomenon,
-                   const std::string& theunit,
-                   const std::string& thestatId,
-                   const std::string& thestatFunc,
-                   const std::string& thetimePeriod,
-                   const std::string& otherstatFunc,
-                   const std::string& othertimePeriod);
+  ForecastMetaData(std::string thename,
+                   std::string thelabel,
+                   std::string thebasePhenomenon,
+                   std::string theunit,
+                   std::string thestatId,
+                   std::string thestatFunc,
+                   std::string thetimePeriod,
+                   std::string otherstatFunc,
+                   std::string othertimePeriod);
 
-  ForecastMetaData(const std::string& thename,
-                   const std::string& thelabel,
-                   const std::string& thebasePhenomenon,
-                   const std::string& theunit,
-                   const std::string& thestatId,
-                   const std::string& thestatFunc,
-                   const std::string& thetimePeriod);
+  ForecastMetaData(std::string thename,
+                   std::string thelabel,
+                   std::string thebasePhenomenon,
+                   std::string theunit,
+                   std::string thestatId,
+                   std::string thestatFunc,
+                   std::string thetimePeriod);
 
-  ForecastMetaData(const std::string& thename,
-                   const std::string& thelabel,
-                   const std::string& thebasePhenomenon,
-                   const std::string& theunit);
+  ForecastMetaData(std::string thename,
+                   std::string thelabel,
+                   std::string thebasePhenomenon,
+                   std::string theunit);
 
   std::string name;
 

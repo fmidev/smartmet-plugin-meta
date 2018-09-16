@@ -7,15 +7,15 @@ namespace Plugin
 {
 namespace Meta
 {
-ForecastMetaData::ForecastMetaData(const std::string& thename,
-                                   const std::string& thelabel,
-                                   const std::string& thebasePhenomenon,
-                                   const std::string& theunit,
-                                   const std::string& thestatId,
-                                   const std::string& thestatFunc,
-                                   const std::string& thetimePeriod,
-                                   const std::string& otherstatFunc,
-                                   const std::string& othertimePeriod)
+ForecastMetaData::ForecastMetaData(std::string thename,
+                                   std::string thelabel,
+                                   std::string thebasePhenomenon,
+                                   std::string theunit,
+                                   std::string thestatId,
+                                   std::string thestatFunc,
+                                   std::string thetimePeriod,
+                                   std::string otherstatFunc,
+                                   std::string othertimePeriod)
     : name(thename),
       label(thelabel),
       basePhenomenon(thebasePhenomenon),
@@ -30,13 +30,13 @@ ForecastMetaData::ForecastMetaData(const std::string& thename,
 {
 }
 
-ForecastMetaData::ForecastMetaData(const std::string& thename,
-                                   const std::string& thelabel,
-                                   const std::string& thebasePhenomenon,
-                                   const std::string& theunit,
-                                   const std::string& thestatId,
-                                   const std::string& thestatFunc,
-                                   const std::string& thetimePeriod)
+ForecastMetaData::ForecastMetaData(std::string thename,
+                                   std::string thelabel,
+                                   std::string thebasePhenomenon,
+                                   std::string theunit,
+                                   std::string thestatId,
+                                   std::string thestatFunc,
+                                   std::string thetimePeriod)
     : name(thename),
       label(thelabel),
       basePhenomenon(thebasePhenomenon),
@@ -49,10 +49,10 @@ ForecastMetaData::ForecastMetaData(const std::string& thename,
 {
 }
 
-ForecastMetaData::ForecastMetaData(const std::string& thename,
-                                   const std::string& thelabel,
-                                   const std::string& thebasePhenomenon,
-                                   const std::string& theunit)
+ForecastMetaData::ForecastMetaData(std::string thename,
+                                   std::string thelabel,
+                                   std::string thebasePhenomenon,
+                                   std::string theunit)
     : name(thename),
       label(thelabel),
       basePhenomenon(thebasePhenomenon),
