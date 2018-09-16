@@ -31,7 +31,7 @@ namespace Meta
 {
 MultiLanguageString::MultiLanguageString(const std::string& the_default_language,
                                          libconfig::Setting& setting)
-    : default_language(Fmi::ascii_tolower_copy(the_default_language)), data()
+    : default_language(Fmi::ascii_tolower_copy(the_default_language))
 {
   try
   {
