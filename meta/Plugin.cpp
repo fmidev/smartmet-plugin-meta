@@ -365,9 +365,8 @@ void Plugin::parseDataQualityConfig()
           auto& root = desc->get_root();
           const bool disabled = desc->get_optional_config_param<bool>(root, "disabled", false);
           const std::string code = desc->get_mandatory_config_param<std::string>(root, "code");
-          libconfig::Setting& labelDesc =
-              desc->get_mandatory_config_param<libconfig::Setting&>("label");
-          libconfig::Setting& descriptionDesc =
+          auto& labelDesc = desc->get_mandatory_config_param<libconfig::Setting&>("label");
+          auto& descriptionDesc =
               desc->get_mandatory_config_param<libconfig::Setting&>("description");
 
           if (code.length() == 0)
