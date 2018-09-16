@@ -94,7 +94,7 @@ void Plugin::init()
     // ObsEngine needs also GeoEngine, get it
     itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(
         itsReactor->getSingleton("Geonames", nullptr));
-    if (!itsGeoEngine)
+    if (itsGeoEngine == nullptr)
       throw SmartMet::Spine::Exception(BCP, "Geonames engine unavailable");
 
 #ifndef WITHOUT_OBSERVATION
@@ -104,7 +104,7 @@ void Plugin::init()
 #endif
 
 #ifndef WITHOUT_OBSERVATION
-    if (!itsQEngine && !itsObsEngine)
+    if (itsQEngine == nullptr && itsObsEngine == nullptr)
     {
       // Nothing of interest available, print notification
       throw SmartMet::Spine::Exception(BCP,
@@ -112,7 +112,7 @@ void Plugin::init()
                                        "Meta-plugin has nothing to show");
     }
 #else
-    if (!itsQEngine)
+    if (itsQEngine == nullptr)
     {
       // Nothing of interest available, print notification
       throw SmartMet::Spine::Exception(BCP,
