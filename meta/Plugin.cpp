@@ -65,7 +65,7 @@ namespace bp = boost::posix_time;
 // ----------------------------------------------------------------------
 
 Plugin::Plugin(SmartMet::Spine::Reactor* theReactor, const char* theConfig)
-    : SmartMetPlugin(), itsModuleName("Meta"), itsConfig(theConfig), itsReactor(theReactor)
+    : itsModuleName("Meta"), itsConfig(theConfig), itsReactor(theReactor)
 {
   try
   {
