@@ -801,7 +801,7 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
         qc_observableProperties = itsObsEngine->observablePropertyQuery(qc_parameters, language);
         updateObservableProperties(qc_observableProperties, language);
 
-        if (observableProperties == 0)
+        if (observableProperties == nullptr)
           observableProperties = qc_observableProperties;
         else
           observableProperties->insert(observableProperties->begin() + observableProperties->size(),
