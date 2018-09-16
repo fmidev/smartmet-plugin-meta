@@ -682,7 +682,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
 #ifndef WITHOUT_OBSERVATION
 std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
                                   const SmartMet::Spine::HTTP::Request& theRequest,
-                                  SmartMet::Spine::HTTP::Response& theResponse)
+                                  SmartMet::Spine::HTTP::Response& /* theResponse */)
 {
   try
   {
