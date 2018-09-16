@@ -100,7 +100,7 @@ void Plugin::init()
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
     itsObsEngine = reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
-        itsReactor->getSingleton("Observation", (void*)nullptr));
+        itsReactor->getSingleton("Observation", nullptr));
 #endif
 
 #ifndef WITHOUT_OBSERVATION
