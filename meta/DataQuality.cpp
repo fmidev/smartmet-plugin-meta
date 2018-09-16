@@ -16,8 +16,6 @@ namespace Meta
 {
 DataQualityRegistry::DataQualityRegistry() : m_keyConversionEnabled(false) {}
 
-DataQualityRegistry::~DataQualityRegistry() {}
-
 void DataQualityRegistry::addMapEntry(const std::string& code,
                                       const std::string& default_language,
                                       libconfig::Setting& label,

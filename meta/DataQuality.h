@@ -26,7 +26,7 @@ class DataQualityRegistry : protected virtual boost::noncopyable
 
  public:
   DataQualityRegistry();
-  ~DataQualityRegistry();
+  ~DataQualityRegistry() = default;
 
   /**
    *  \brief Set data quality information for a data quality code.
