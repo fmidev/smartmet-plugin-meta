@@ -63,17 +63,17 @@ class DataQualityRegistry : protected virtual boost::noncopyable
   void getMapKeyList(std::vector<std::string>& keyList);
 
   /**
-   *  \brief Conversion from alias to key.
+   *  \brief Conversion from alias to code.
    *  If quality code conversion is enabled the conversion is done with
    *  the modified way explained in comments of
    *  supportQualityCodeConversion method.
    *
-   *  \param [out] key Result of the conversion.
-   *  \param [in] keyAlias Alias Data quality code that is alias of the code
+   *  \param [out] code Result of the conversion.
+   *  \param [in] codeAlias Alias Data quality code that is alias of the code
    *              that the information contains.
    *  \return false if conversion fail.
    */
-  bool getKey(std::string& key, const std::string& keyAlias);
+  bool getKey(std::string& code, const std::string& codeAlias);
 
   /**
    *  \brief Enable or disable key conversion.
