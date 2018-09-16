@@ -1060,7 +1060,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
       std::string firstMessage = exception.what();
       boost::algorithm::replace_all(firstMessage, "\n", " ");
       firstMessage = firstMessage.substr(0, 300);
-      theResponse.setHeader("X-Meta-Error", firstMessage.c_str());
+      theResponse.setHeader("X-Meta-Error", firstMessage);
     }
   }
   catch (...)
