@@ -8,26 +8,19 @@
 
 #include "DataQuality.h"
 
+#include <engines/geonames/Engine.h>
+#include <engines/querydata/Engine.h>
 #include <spine/ConfigBase.h>
 #include <spine/OptionParsers.h>
 #include <spine/Reactor.h>
 #include <spine/SmartMetPlugin.h>
-
-#include <engines/geonames/Engine.h>
-#include <engines/querydata/Engine.h>
-
 #ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Engine.h>
 #include <engines/observation/ObservableProperty.h>
 #endif
-
-#include <macgyver/TemplateDirectory.h>
-#include <macgyver/TemplateFormatterMT.h>
-
 #include <boost/noncopyable.hpp>
-
 #include <ctpp2/CDT.hpp>
-
+#include <macgyver/TemplateFactory.h>
 #include <string>
 #include <utility>
 
@@ -65,8 +58,6 @@ class Plugin : public SmartMetPlugin, virtual boost::noncopyable
    *  \brief Existence of emplate directory and files are checked and initilized.
    *  \exception std::runtime_error Directory or file is not found.
    */
-  void createTemplateFormatters();
-
   std::string getDataQualityMetadata(Spine::Reactor& theReactor,
                                      const Spine::HTTP::Request& theRequest,
                                      Spine::HTTP::Response& theResponse);
@@ -123,9 +114,9 @@ class Plugin : public SmartMetPlugin, virtual boost::noncopyable
 
   DataQualityRegistry itsDataQualityRegistry;
 
-  std::unique_ptr<Fmi::TemplateDirectory> itsTemplateDirectory;
-  boost::shared_ptr<Fmi::TemplateFormatterMT> itsExceptionFormatter;
-  boost::shared_ptr<Fmi::TemplateFormatterMT> itsDataQualityFormatter;
+  std::string itsExceptionTemplateFile;
+  std::string itsDataQualityTemplateFile;
+  Fmi::TemplateFactory itsTemplateFactory;
 
   // Map contains the keys configured in plugin parameter configuration.
   std::map<std::string, bool> m_supportedUnits;

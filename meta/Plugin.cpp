@@ -6,18 +6,15 @@
 
 #include "Plugin.h"
 #include "ForecastMetaData.h"
-
 #ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Utils.h>
 #endif
-
 #include <boost/date_time/local_time/local_time.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
 #include <ctpp2/CDT.hpp>
 #include <macgyver/StringConversion.h>
-#include <macgyver/TemplateFormatterMT.h>
 #include <macgyver/TimeZoneFactory.h>
 #include <spine/Convenience.h>
 #include <spine/Exception.h>
@@ -121,9 +118,15 @@ void Plugin::init()
 #endif
 
     itsDataQualityRegistry.supportQualityCodeConversion(true);
-    createTemplateFormatters();
     parseForecastConfig();
     parseDataQualityConfig();
+
+    std::string template_dir = itsConfig.get_mandatory_path("templateDir");
+    std::string itsExceptionTemplateFile =
+        template_dir + "/" + itsConfig.get_mandatory_config_param<std::string>("exceptionTemplate");
+    std::string itsDataQualityTemplateFile =
+        template_dir + "/" +
+        itsConfig.get_mandatory_config_param<std::string>("dataQualityTemplate");
 
     if (!itsReactor->addContentHandler(
             this, "/meta", boost::bind(&Plugin::callRequestHandler, this, _1, _2, _3)))
@@ -155,25 +158,6 @@ void Plugin::shutdown()
 const std::string& Plugin::getPluginName() const
 {
   return itsModuleName;
-}
-void Plugin::createTemplateFormatters()
-{
-  try
-  {
-    std::string template_dir = itsConfig.get_mandatory_path("templateDir");
-    std::string etn = itsConfig.get_mandatory_config_param<std::string>("exceptionTemplate");
-    std::string dqtn = itsConfig.get_mandatory_config_param<std::string>("dataQualityTemplate");
-
-    // TemplateDirectory constructor verifies that directory exists
-    // and create_template_formatter method makes the same for template names.
-    itsTemplateDirectory.reset(new Fmi::TemplateDirectory(template_dir));
-    itsExceptionFormatter = itsTemplateDirectory->create_template_formatter(etn);
-    itsDataQualityFormatter = itsTemplateDirectory->create_template_formatter(dqtn);
-  }
-  catch (...)
-  {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
-  }
 }
 
 // ----------------------------------------------------------------------
@@ -488,7 +472,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
     hash["exceptionText"] = "Bad request";
 
     std::ostringstream output, log;
-    itsExceptionFormatter->get()->process(hash, output, log);
+    itsTemplateFactory.get(itsExceptionTemplateFile)->process(hash, output, log);
 
     theResponse.setStatus(SmartMet::Spine::HTTP::Status::bad_request);
     theResponse.setHeader("X-Meta-Error", "OperationParsingFailed");
@@ -593,9 +577,7 @@ std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
     std::string tmpl =
         itsConfig.get_mandatory_config_param<std::string>("observable_properties_template");
 
-    boost::shared_ptr<Fmi::TemplateFormatterMT> formatter(new Fmi::TemplateFormatterMT(tmpl));
-
-    formatter->get()->process(hash, output, log);
+    itsTemplateFactory.get(tmpl)->process(hash, output, log);
 
     return output.str();
   }
@@ -655,7 +637,8 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
       hash["language"] = "eng";
       hash["exceptionCode"] = "OperationParsingFailed";
       hash["exceptionText"] = "Data quality code not match with the supported codes.";
-      itsExceptionFormatter->get()->process(hash, output, log);
+
+      itsTemplateFactory.get(itsExceptionTemplateFile)->process(hash, output, log);
 
       theResponse.setStatus(SmartMet::Spine::HTTP::Status::bad_request);
       theResponse.setHeader("X-Meta-Error", "OperationParsingFailed");
@@ -663,7 +646,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
     else
     {
       hash["language"] = language;
-      itsDataQualityFormatter->get()->process(hash, output, log);
+      itsTemplateFactory.get(itsDataQualityTemplateFile)->process(hash, output, log);
 
       theResponse.setStatus(SmartMet::Spine::HTTP::Status::ok);
     }
@@ -847,7 +830,8 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
       hash["language"] = "eng";
       hash["exceptionCode"] = "InvalidParameterValue";
       hash["exceptionText"] = "Unknown units parameter value.";
-      itsExceptionFormatter->get()->process(hash, output, log);
+
+      itsTemplateFactory.get(itsExceptionTemplateFile)->process(hash, output, log);
 
       theResponse.setStatus(SmartMet::Spine::HTTP::Status::bad_request);
       theResponse.setHeader("X-Meta-Error", "InvalidParameterValue");
