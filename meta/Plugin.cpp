@@ -1025,6 +1025,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
 
       SmartMet::Spine::Exception exception(BCP, "Request processing exception!", nullptr);
       exception.addParameter("URI", theRequest.getURI());
+      exception.addParameter("ClientIP", theRequest.getClientIP());
       exception.printError();
 
       if (isdebug)

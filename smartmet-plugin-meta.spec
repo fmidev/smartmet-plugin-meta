@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 18.12.4
+Version: 19.2.14
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -14,9 +14,9 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 18.12.4
+BuildRequires: smartmet-library-spine-devel >= 18.12.13
 BuildRequires: smartmet-library-macgyver-devel >= 18.11.24
-BuildRequires: smartmet-engine-querydata-devel >= 18.12.4
+BuildRequires: smartmet-engine-querydata-devel >= 19.2.8
 BuildRequires: boost-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
@@ -29,12 +29,12 @@ BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
 Requires: smartmet-library-macgyver >= 18.11.24
-Requires: smartmet-server >= 18.11.8
+Requires: smartmet-server >= 18.12.14
 %if %{with observation}
 Requires: smartmet-engine-observation >= 18.12.4
 %endif
-Requires: smartmet-engine-querydata >= 18.12.4
-Requires: smartmet-library-spine >= 18.12.4
+Requires: smartmet-engine-querydata >= 19.2.8
+Requires: smartmet-library-spine >= 18.12.13
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -69,6 +69,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+%changelog
+* Thu Feb 14 2019 Mika Heiskanen <mika.heiskanen@fmi.fi> - 19.2.14-1.fmi
+- Added client IP to exception reports
+
 * Tue Dec  4 2018 Pertti Kinnia <pertti.kinnia@fmi.fi> - 18.12.4-1.fmi
 - Repackaged since Spine::Table size changed
 
