@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 19.2.14
+Version: 19.9.9
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -14,27 +14,27 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 18.12.13
-BuildRequires: smartmet-library-macgyver-devel >= 18.11.24
-BuildRequires: smartmet-engine-querydata-devel >= 19.2.8
+BuildRequires: smartmet-library-spine-devel >= 19.8.28
+BuildRequires: smartmet-library-macgyver-devel >= 19.8.2
+BuildRequires: smartmet-engine-querydata-devel >= 19.8.28
 BuildRequires: boost-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 18.12.4
+BuildRequires: smartmet-engine-observation-devel >= 19.9.5
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: smartmet-library-macgyver >= 18.11.24
-Requires: smartmet-server >= 18.12.14
+Requires: smartmet-library-macgyver >= 19.8.2
+Requires: smartmet-server >= 19.8.9
 %if %{with observation}
-Requires: smartmet-engine-observation >= 18.12.4
+Requires: smartmet-engine-observation >= 19.9.5
 %endif
-Requires: smartmet-engine-querydata >= 19.2.8
-Requires: smartmet-library-spine >= 18.12.13
+Requires: smartmet-engine-querydata >= 19.8.28
+Requires: smartmet-library-spine >= 19.8.28
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Mon Sep  9 2019 Mika Heiskanen <mika.heiskanen@fmi.fi> - 19.9.9-1.fmi
+- Repackaged due to Locus::Location ABI changes
+
 %changelog
 * Thu Feb 14 2019 Mika Heiskanen <mika.heiskanen@fmi.fi> - 19.2.14-1.fmi
 - Added client IP to exception reports
