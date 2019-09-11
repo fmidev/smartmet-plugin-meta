@@ -72,7 +72,6 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Sep  9 2019 Mika Heiskanen <mika.heiskanen@fmi.fi> - 19.9.9-1.fmi
 - Repackaged due to Locus::Location ABI changes
 
-%changelog
 * Thu Feb 14 2019 Mika Heiskanen <mika.heiskanen@fmi.fi> - 19.2.14-1.fmi
 - Added client IP to exception reports
 
