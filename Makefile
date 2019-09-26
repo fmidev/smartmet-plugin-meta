@@ -28,6 +28,9 @@ objdir = obj
 
 DEFINES = -DUNIX -D_REENTRANT
 
+-include $(HOME)/.smartmet.mk
+GCC_DIAG_COLOR ?= always
+
 ifeq ($(CXX), clang++)
 
  # TODO: sign-conversion should be enabled
@@ -45,14 +48,11 @@ ifeq ($(CXX), clang++)
 
  INCLUDES = \
 	-isystem $(includedir) \
-	-isystem $(includedir)/smartmet \
-	-isystem $(includedir)/soci \
-	-isystem $(includedir)/mysql \
-	-isystem $(includedir)/oracle/11.2/client64
+	-isystem $(includedir)/smartmet
 
 else
 
- FLAGS = -std=c++11 -fPIC -MD -Wall -W -Wno-unused-parameter -fno-omit-frame-pointer -Wno-unknown-pragmas -fdiagnostics-color=always
+ FLAGS = -std=c++11 -fPIC -MD -Wall -W -Wno-unused-parameter -fno-omit-frame-pointer -Wno-unknown-pragmas -fdiagnostics-color=$(GCC_DIAG_COLOR)
 
  FLAGS_DEBUG = \
 	-Wcast-align \
@@ -69,12 +69,15 @@ else
 
  INCLUDES = \
 	-I$(includedir) \
-	-I$(includedir)/smartmet \
-	-I$(includedir)/soci \
-	-I$(includedir)/mysql \
-	-I$(includedir)/soci \
-	-I$(includedir)/oracle/11.2/client64
+	-I$(includedir)/smartmet
 
+endif
+
+ifeq ($(TSAN), yes)
+  FLAGS += -fsanitize=thread
+endif
+ifeq ($(ASAN), yes)
+  FLAGS += -fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-subtract -fsanitize=undefined -fsanitize-address-use-after-scope
 endif
 
 # Compile options in detault, debug and profile modes
@@ -133,6 +136,7 @@ $(LIBFILE): $(OBJS)
 clean: clean-templates
 	rm -f $(LIBFILE) *~ $(SUBNAME)/*~
 	rm -rf obj
+	cd test && make clean
 
 format:
 	clang-format -i -style=file $(SUBNAME)/*.h $(SUBNAME)/*.cpp
