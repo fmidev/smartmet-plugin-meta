@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompositeObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="prop-1"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+  <count>4</count>
+    <component>
+      <ObservableProperty gml:id="rrday">
+        <label>Precipitation amount</label>
+      	<basePhenomenon>Amount of precipitation</basePhenomenon>
+      	<uom uom="mm"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-sum-PT24H-rrday---">
+            <statisticalFunction>sum</statisticalFunction><aggregationTimePeriod>PT24H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="tday">
+        <label>Air temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="degC"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-P1D-tday---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>P1D</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="tmax">
+        <label>Maximum temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="degC"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-max-PT24H-tmax---">
+            <statisticalFunction>max</statisticalFunction><aggregationTimePeriod>PT24H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="tmin">
+        <label>Minimum temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="degC"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-min-PT24H-tmin---">
+            <statisticalFunction>min</statisticalFunction><aggregationTimePeriod>PT24H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  </CompositeObservableProperty>

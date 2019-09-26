@@ -1,0 +1,1 @@
+GET /meta?language=fin&observableProperty=observation&param=TG_PT12H_min HTTP/1.0

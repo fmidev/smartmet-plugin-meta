@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="trsc_pt1h_avg"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+        <label>Odorous sulphur compounds</label>
+      	<basePhenomenon>Ilmanlaatu</basePhenomenon>
+      	<uom uom="ugS/m3"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-PT1H-trsc_pt1h_avg---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>  </ObservableProperty>

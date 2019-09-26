@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=forecast&param=WindUMS HTTP/1.0

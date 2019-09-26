@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="ri_10min"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+        <label>Precipitation intensity</label>
+      	<basePhenomenon>Amount of precipitation</basePhenomenon>
+      	<uom uom="mm/h"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-PT10M-ri_10min---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT10M</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>  </ObservableProperty>

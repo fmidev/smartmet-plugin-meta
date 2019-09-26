@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=observation&param=ri_10min HTTP/1.0

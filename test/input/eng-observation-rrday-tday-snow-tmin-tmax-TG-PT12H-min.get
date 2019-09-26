@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=observation&param=rrday%2Ctday%2Csnow%2Ctmin%2Ctmax%2CTG_PT12H_min HTTP/1.0

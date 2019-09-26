@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=forecast&param=WeatherSymbol3%2Ctemperature%2Cwindspeedms%2CWindDirection HTTP/1.0

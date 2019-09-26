@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="rrday"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+        <label>Sademäärä</label>
+      	<basePhenomenon>Sademäärä</basePhenomenon>
+      	<uom uom="mm"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-sum-PT24H-rrday---">
+            <statisticalFunction>sum</statisticalFunction><aggregationTimePeriod>PT24H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>  </ObservableProperty>

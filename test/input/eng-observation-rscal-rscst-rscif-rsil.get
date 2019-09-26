@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=observation&param=rscal%2Crscst%2Crscif%2Crsil HTTP/1.0

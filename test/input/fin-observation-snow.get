@@ -1,0 +1,1 @@
+GET /meta?language=fin&observableProperty=observation&param=snow HTTP/1.0

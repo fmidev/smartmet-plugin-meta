@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=forecast&param=TotalCloudCover HTTP/1.0

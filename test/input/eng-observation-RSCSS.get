@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=observation&param=RSCSS HTTP/1.0

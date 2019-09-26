@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=forecast&param=Temperature%2CHumidity%2CWindDirection%2CWindSpeedMS HTTP/1.0

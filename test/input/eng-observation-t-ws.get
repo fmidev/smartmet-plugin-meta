@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=observation&param=t%2Cws HTTP/1.0

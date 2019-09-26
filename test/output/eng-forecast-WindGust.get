@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="windgust"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+        <label>Wind gust</label>
+      	<basePhenomenon>Wind</basePhenomenon>
+      	<uom uom="m/s"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-max-PT1H-windgust---">
+            <statisticalFunction>max</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+		<otherAggregation>
+                        <StatisticalMeasure gml:id="stat-other-max-PT1H-windgust---"><statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT3S</aggregationTimePeriod>
+                        </StatisticalMeasure>
+                    </otherAggregation>
+          </StatisticalMeasure>
+        </statisticalMeasure>  </ObservableProperty>

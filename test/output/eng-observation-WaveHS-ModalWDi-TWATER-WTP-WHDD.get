@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompositeObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="prop-1"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+  <count>5</count>
+    <component>
+      <ObservableProperty gml:id="modalwdi">
+        <label>Direction of waves</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="deg"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-instant-PT1S-modalwdi---">
+            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="twater">
+        <label>Water temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="degC"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-PT1M-twater---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="wavehs">
+        <label>Wave height</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="m"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-instant-PT1S-wavehs---">
+            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="whdd">
+        <label>Deviation of wave direction</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="deg"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-instant-PT1S-whdd---">
+            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="wtp">
+        <label>Modal period</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="s"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-instant-PT1S-wtp---">
+            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  </CompositeObservableProperty>

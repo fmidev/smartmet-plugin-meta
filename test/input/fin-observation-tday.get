@@ -1,0 +1,1 @@
+GET /meta?language=fin&observableProperty=observation&param=tday HTTP/1.0

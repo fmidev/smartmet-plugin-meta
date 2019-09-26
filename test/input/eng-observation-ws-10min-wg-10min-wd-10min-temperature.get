@@ -1,0 +1,1 @@
+GET /meta?language=eng&observableProperty=observation&param=ws_10min%2Cwg_10min%2Cwd_10min%2Ctemperature HTTP/1.0
