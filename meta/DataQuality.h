@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MultiLanguageString.h"
 #include <boost/noncopyable.hpp>
+#include <spine/MultiLanguageString.h>
 #include <map>
 #include <string>
 #include <vector>
@@ -17,8 +17,8 @@ class DataQualityRegistry : protected virtual boost::noncopyable
  public:
   struct MapEntry
   {
-    MultiLanguageStringP label;
-    MultiLanguageStringP description;
+    SmartMet::Spine::MultiLanguageStringP label;
+    SmartMet::Spine::MultiLanguageStringP description;
   };
 
   typedef std::map<std::string, MapEntry> EntryMapType;

@@ -24,8 +24,8 @@ void DataQualityRegistry::addMapEntry(const std::string& code,
   try
   {
     MapEntry entry;
-    entry.label = MultiLanguageString::create(default_language, label);
-    entry.description = MultiLanguageString::create(default_language, description);
+    entry.label = SmartMet::Spine::MultiLanguageString::create(default_language, label);
+    entry.description = SmartMet::Spine::MultiLanguageString::create(default_language, description);
     m_codeMap.insert(std::make_pair(code, entry));
   }
   catch (...)
