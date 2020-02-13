@@ -30,7 +30,6 @@ LIBS =  -lsmartmet-spine  \
 	-lsmartmet-newbase \
 	-lboost_filesystem \
 	-lboost_system \
-	-lgdal \
 	`pkg-config --libs libconfig++` \
 	-lpthread
 

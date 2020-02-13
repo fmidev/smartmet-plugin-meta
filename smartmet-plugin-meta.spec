@@ -4,7 +4,7 @@
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
 Version: 20.2.13
-Release: 1%{?dist}.fmi
+Release: 2%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
 URL: https://github.com/fmidev/smartmet-plugin-meta
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Thu Feb 13 2020 Mika Heiskanen <mika.heiskanen@fmi.fi> - 20.2.13-2.fmi
+- Use system installed test observation database instead of an own copy
+
 * Thu Feb 13 2020 Andris Pavenis <nadris.pavenis@fmi.fi> - 20.2.13-1.fmi
 - Use MultiLanguageString from smartmet-library-spine and remove local version
 
