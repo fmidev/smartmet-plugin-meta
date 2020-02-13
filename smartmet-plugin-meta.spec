@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 19.9.26
+Version: 20.2.13
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -14,7 +14,7 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 19.9.26
+BuildRequires: smartmet-library-spine-devel >= 20.2.13
 BuildRequires: smartmet-library-macgyver-devel >= 19.9.26
 BuildRequires: smartmet-engine-querydata-devel >= 19.9.26
 BuildRequires: boost-devel
@@ -35,7 +35,7 @@ Requires: smartmet-server >= 19.9.26
 Requires: smartmet-engine-observation >= 19.9.26
 %endif
 Requires: smartmet-engine-querydata >= 19.9.26
-Requires: smartmet-library-spine >= 19.9.26
+Requires: smartmet-library-spine >= 20.2.13
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Thu Feb 13 2020 Andris Pavenis <nadris.pavenis@fmi.fi> - 20.2.13-1.fmi
+- Use MultiLanguageString from smartmet-library-spine and remove local version
+
 * Thu Sep 26 2019 Mika Heiskanen <mika.heiskanen@fmi.fi> - 19.9.26-1.fmi
 - Added support for ASAN & TSAN builds
 
