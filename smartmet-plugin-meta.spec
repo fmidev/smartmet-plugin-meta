@@ -3,8 +3,8 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 20.2.13
-Release: 2%{?dist}.fmi
+Version: 20.4.18
+Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
 URL: https://github.com/fmidev/smartmet-plugin-meta
@@ -14,28 +14,28 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 20.2.13
-BuildRequires: smartmet-library-macgyver-devel >= 20.2.5
-BuildRequires: smartmet-engine-querydata-devel >= 20.1.30
-BuildRequires: boost-devel
+BuildRequires: smartmet-library-spine-devel >= 20.4.18
+BuildRequires: smartmet-library-macgyver-devel >= 20.4.18
+BuildRequires: smartmet-engine-querydata-devel >= 20.4.18
+BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 20.2.10
+BuildRequires: smartmet-engine-observation-devel >= 20.4.18
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: smartmet-library-macgyver >= 20.2.5
-Requires: smartmet-server >= 20.2.13
+Requires: smartmet-library-macgyver >= 20.4.18
+Requires: smartmet-server >= 20.4.18
 %if %{with observation}
-Requires: smartmet-engine-observation >= 20.2.10
+Requires: smartmet-engine-observation >= 20.4.18
 %endif
-Requires: smartmet-engine-querydata >= 20.1.30
-Requires: smartmet-library-spine >= 20.2.13
+Requires: smartmet-engine-querydata >= 20.4.18
+Requires: smartmet-library-spine >= 20.4.18
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -70,6 +70,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Sat Apr 18 2020 Mika Heiskanen <mika.heiskanen@fmi.fi> - 20.4.18-1.fmi
+- Upgraded to Boost 1.69
+
 * Thu Feb 13 2020 Mika Heiskanen <mika.heiskanen@fmi.fi> - 20.2.13-2.fmi
 - Use system installed test observation database instead of an own copy
 
