@@ -21,7 +21,7 @@ BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
-BuildRequires: oracle-instantclient11.2-devel
+# BuildRequires: oracle-instantclient11.2-devel
 BuildRequires: smartmet-engine-observation-devel >= 20.4.18
 %endif
 BuildRequires: ctpp2
