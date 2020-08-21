@@ -10,7 +10,7 @@
       	<basePhenomenon>Clouds</basePhenomenon>
       	<uom uom="1/8"/>
       	<statisticalMeasure>     
-          <StatisticalMeasure gml:id="stat-instant-PT1M-n_man---">
-            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
+          <StatisticalMeasure gml:id="stat-acc-PT1M-n_man---">
+            <statisticalFunction>acc</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
           </StatisticalMeasure>
         </statisticalMeasure>  </ObservableProperty>

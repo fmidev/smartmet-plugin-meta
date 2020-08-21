@@ -12,8 +12,8 @@
       	<basePhenomenon>Sea roll</basePhenomenon>
       	<uom uom="deg"/>
       	<statisticalMeasure>     
-          <StatisticalMeasure gml:id="stat-instant-PT1S-modalwdi---">
-            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          <StatisticalMeasure gml:id="stat-acc-PT1M-modalwdi---">
+            <statisticalFunction>acc</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
           </StatisticalMeasure>
         </statisticalMeasure>
       </ObservableProperty>
@@ -36,8 +36,8 @@
       	<basePhenomenon>Sea roll</basePhenomenon>
       	<uom uom="m"/>
       	<statisticalMeasure>     
-          <StatisticalMeasure gml:id="stat-instant-PT1S-wavehs---">
-            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          <StatisticalMeasure gml:id="stat-acc-PT1M-wavehs---">
+            <statisticalFunction>acc</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
           </StatisticalMeasure>
         </statisticalMeasure>
       </ObservableProperty>
@@ -48,8 +48,8 @@
       	<basePhenomenon>Sea roll</basePhenomenon>
       	<uom uom="deg"/>
       	<statisticalMeasure>     
-          <StatisticalMeasure gml:id="stat-instant-PT1S-whdd---">
-            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          <StatisticalMeasure gml:id="stat-acc-PT1M-whdd---">
+            <statisticalFunction>acc</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
           </StatisticalMeasure>
         </statisticalMeasure>
       </ObservableProperty>
@@ -60,8 +60,8 @@
       	<basePhenomenon>Sea roll</basePhenomenon>
       	<uom uom="s"/>
       	<statisticalMeasure>     
-          <StatisticalMeasure gml:id="stat-instant-PT1S-wtp---">
-            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>PT1S</aggregationTimePeriod>
+          <StatisticalMeasure gml:id="stat-acc-PT1M-wtp---">
+            <statisticalFunction>acc</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
           </StatisticalMeasure>
         </statisticalMeasure>
       </ObservableProperty>
