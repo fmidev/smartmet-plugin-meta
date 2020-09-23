@@ -17,7 +17,7 @@
 #include <macgyver/StringConversion.h>
 #include <macgyver/TimeZoneFactory.h>
 #include <spine/Convenience.h>
-#include <spine/Exception.h>
+#include <macgyver/Exception.h>
 #include <spine/SmartMet.h>
 #include <spine/Table.h>
 #include <spine/TableFormatter.h>
@@ -67,11 +67,11 @@ Plugin::Plugin(SmartMet::Spine::Reactor* theReactor, const char* theConfig)
   try
   {
     if (theReactor->getRequiredAPIVersion() != SMARTMET_API_VERSION)
-      throw SmartMet::Spine::Exception(BCP, "Meta plugin and Server API version mismatch");
+      throw Fmi::Exception(BCP, "Meta plugin and Server API version mismatch");
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -92,7 +92,7 @@ void Plugin::init()
     itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(
         itsReactor->getSingleton("Geonames", nullptr));
     if (itsGeoEngine == nullptr)
-      throw SmartMet::Spine::Exception(BCP, "Geonames engine unavailable");
+      throw Fmi::Exception(BCP, "Geonames engine unavailable");
 
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
@@ -104,7 +104,7 @@ void Plugin::init()
     if (itsQEngine == nullptr && itsObsEngine == nullptr)
     {
       // Nothing of interest available, print notification
-      throw SmartMet::Spine::Exception(BCP,
+      throw Fmi::Exception(BCP,
                                        "Both Querydata-engine and Observation-engine are absent, "
                                        "Meta-plugin has nothing to show");
     }
@@ -112,7 +112,7 @@ void Plugin::init()
     if (itsQEngine == nullptr)
     {
       // Nothing of interest available, print notification
-      throw SmartMet::Spine::Exception(BCP,
+      throw Fmi::Exception(BCP,
                                        "Querydata engine absent, Meta-plugin has nothing to show");
     }
 #endif
@@ -130,11 +130,11 @@ void Plugin::init()
 
     if (!itsReactor->addContentHandler(
             this, "/meta", boost::bind(&Plugin::callRequestHandler, this, _1, _2, _3)))
-      throw SmartMet::Spine::Exception(BCP, "Failed to register Meta plugin content handler");
+      throw Fmi::Exception(BCP, "Failed to register Meta plugin content handler");
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -181,7 +181,7 @@ void Plugin::parseForecastConfig()
           itsForecastMap.insert(std::make_pair(name, std::map<std::string, ForecastMetaData>()));
       if (!iteratorPair.second)
       {
-        throw SmartMet::Spine::Exception(
+        throw Fmi::Exception(
             BCP, "Multiple definition of parameter " + param + " in Meta config");
       }
 
@@ -203,7 +203,7 @@ void Plugin::parseForecastConfig()
 
       if (labelLength != phenomenonLength)
       {
-        throw SmartMet::Spine::Exception(
+        throw Fmi::Exception(
             BCP, "Language number mismatch in parameter " + param + " in Meta config");
       }
 
@@ -247,7 +247,7 @@ void Plugin::parseForecastConfig()
         auto phit = phenomenonmap.find(lan);
         if (phit == phenomenonmap.end())
         {
-          throw SmartMet::Spine::Exception(
+          throw Fmi::Exception(
               BCP,
               "Invalid translation for base phenomenon in parameter " + param + " in Meta config");
         }
@@ -304,7 +304,7 @@ void Plugin::parseForecastConfig()
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -317,12 +317,12 @@ void Plugin::parseDataQualityConfig()
 
     if (not boost::filesystem::exists(features_dir))
     {
-      throw SmartMet::Spine::Exception(BCP, "Directory '" + features_dir.string() + "' not found!");
+      throw Fmi::Exception(BCP, "Directory '" + features_dir.string() + "' not found!");
     }
 
     if (not boost::filesystem::is_directory(features_dir))
     {
-      throw SmartMet::Spine::Exception(BCP, "'" + features_dir.string() + "' is not a directory!");
+      throw Fmi::Exception(BCP, "'" + features_dir.string() + "' is not a directory!");
     }
 
     std::string defaultLanguage =
@@ -359,7 +359,7 @@ void Plugin::parseDataQualityConfig()
             msg << SmartMet::Spine::log_time_str()
                 << ": [Meta] error reading Data quality description"
                 << " file '" << entry.string() << "'. Parameter 'code' is zero length.";
-            throw SmartMet::Spine::Exception(BCP, msg.str());
+            throw Fmi::Exception(BCP, msg.str());
           }
 
           if (disabled)
@@ -401,7 +401,7 @@ void Plugin::parseDataQualityConfig()
                     << ": error reading data quality code configuration"
                     << " file '" << entry.string() << "'" << std::endl;
 
-          SmartMet::Spine::Exception exception(
+          Fmi::Exception exception(
               BCP, "Error while reading data quality code configuration!", nullptr);
           exception.addParameter("File", entry.string());
           throw exception;
@@ -411,7 +411,7 @@ void Plugin::parseDataQualityConfig()
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -456,7 +456,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
 #endif
       else
       {
-        throw SmartMet::Spine::Exception(
+        throw Fmi::Exception(
             BCP, "Bad 'observableProperty' parameter: " + observableProperty);
       }
     }
@@ -482,7 +482,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -520,7 +520,7 @@ void Plugin::updateObservableProperties(
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -563,7 +563,7 @@ void Plugin::parseObservablePropertiesResponse(
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -583,7 +583,7 @@ std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -656,7 +656,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -676,7 +676,7 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
     // Handle timezones
     auto tz = theRequest.getParameter("tz");
     if (!tz)
-      throw SmartMet::Spine::Exception(BCP, "Timezone 'tz' must be specified");
+      throw Fmi::Exception(BCP, "Timezone 'tz' must be specified");
 
     boost::local_time::time_zone_ptr tz_ptr =
         Fmi::TimeZoneFactory::instance().time_zone_from_string(*tz);
@@ -701,7 +701,7 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -729,7 +729,7 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
     }
     else
     {
-      throw SmartMet::Spine::Exception(BCP, "[Meta] Bad language: " + language);
+      throw Fmi::Exception(BCP, "[Meta] Bad language: " + language);
     }
 
     // true is the qc_parameter
@@ -800,7 +800,7 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 #endif
@@ -963,7 +963,7 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -1023,7 +1023,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
     {
       // Catching all exceptions
 
-      SmartMet::Spine::Exception exception(BCP, "Request processing exception!", nullptr);
+      Fmi::Exception exception(BCP, "Request processing exception!", nullptr);
       exception.addParameter("URI", theRequest.getURI());
       exception.addParameter("ClientIP", theRequest.getClientIP());
       exception.printError();
@@ -1050,7 +1050,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 

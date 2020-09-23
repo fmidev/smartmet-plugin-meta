@@ -2,7 +2,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 #include <macgyver/TypeName.h>
-#include <spine/Exception.h>
+#include <macgyver/Exception.h>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -30,7 +30,7 @@ void DataQualityRegistry::addMapEntry(const std::string& code,
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -43,7 +43,7 @@ bool DataQualityRegistry::addMapEntryAlias(const std::string& code, const std::s
 
     if (isMapEntryAlias(codeAlias))
     {
-      throw SmartMet::Spine::Exception(BCP, "Dublicate alias '" + codeAlias + "' found!");
+      throw Fmi::Exception(BCP, "Dublicate alias '" + codeAlias + "' found!");
     }
 
     m_codeAliasMap[codeAlias] = code;
@@ -52,7 +52,7 @@ bool DataQualityRegistry::addMapEntryAlias(const std::string& code, const std::s
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -80,7 +80,7 @@ bool DataQualityRegistry::getMapEntry(const std::string& code, struct MapEntry& 
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -94,7 +94,7 @@ void DataQualityRegistry::getMapKeyList(std::vector<std::string>& keyList)
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -132,7 +132,7 @@ bool DataQualityRegistry::getKey(std::string& code, const std::string& codeAlias
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -144,7 +144,7 @@ bool DataQualityRegistry::isMapEntry(const std::string& code) const
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
@@ -156,7 +156,7 @@ bool DataQualityRegistry::isMapEntryAlias(const std::string& codeAlias) const
   }
   catch (...)
   {
-    throw SmartMet::Spine::Exception::Trace(BCP, "Operation failed!");
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
 
