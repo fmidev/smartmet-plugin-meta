@@ -4,5 +4,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:gml="http://www.opengis.net/gml/3.2"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  
-  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd"></ObservableProperty>
+  gml:id="tg_pt12h_min"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+        <label>Maanpintaminimi</label>
+      	<basePhenomenon>Lämpötila</basePhenomenon>
+      	<uom uom="degC"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-min-PT12H-tg_pt12h_min---">
+            <statisticalFunction>min</statisticalFunction><aggregationTimePeriod>PT12H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>  </ObservableProperty>

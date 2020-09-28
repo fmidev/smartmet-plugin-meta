@@ -4,5 +4,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:gml="http://www.opengis.net/gml/3.2"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  
-  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd"></ObservableProperty>
+  gml:id="snow"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+        <label>Lumensyvyys</label>
+      	<basePhenomenon>Lumi maassa</basePhenomenon>
+      	<uom uom="cm"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-instant-P1D-snow---">
+            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>P1D</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>  </ObservableProperty>

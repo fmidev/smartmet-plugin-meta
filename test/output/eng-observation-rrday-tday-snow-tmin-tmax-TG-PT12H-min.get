@@ -5,7 +5,7 @@
   xmlns:xlink="http://www.w3.org/1999/xlink"
   gml:id="prop-1"
   xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
-  <count>4</count>
+  <count>6</count>
     <component>
       <ObservableProperty gml:id="rrday">
         <label>Precipitation amount</label>
@@ -19,6 +19,18 @@
       </ObservableProperty>
     </component>  
     <component>
+      <ObservableProperty gml:id="snow">
+        <label>Snow depth</label>
+      	<basePhenomenon>Snow cover</basePhenomenon>
+      	<uom uom="cm"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-instant-P1D-snow---">
+            <statisticalFunction>instant</statisticalFunction><aggregationTimePeriod>P1D</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
       <ObservableProperty gml:id="tday">
         <label>Air temperature</label>
       	<basePhenomenon>Temperature</basePhenomenon>
@@ -26,6 +38,18 @@
       	<statisticalMeasure>     
           <StatisticalMeasure gml:id="stat-avg-P1D-tday---">
             <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>P1D</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="tg_pt12h_min">
+        <label>Ground minimum temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="degC"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-min-PT12H-tg_pt12h_min---">
+            <statisticalFunction>min</statisticalFunction><aggregationTimePeriod>PT12H</aggregationTimePeriod>
           </StatisticalMeasure>
         </statisticalMeasure>
       </ObservableProperty>
