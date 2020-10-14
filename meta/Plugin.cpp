@@ -20,9 +20,6 @@
 #include <macgyver/Exception.h>
 #include <spine/SmartMet.h>
 #include <spine/Table.h>
-#include <spine/TableFormatter.h>
-#include <spine/TableFormatterFactory.h>
-#include <spine/TableFormatterOptions.h>
 #include <spine/Value.h>
 #include <iomanip>
 #include <iostream>
