@@ -39,6 +39,22 @@ Requires: smartmet-library-spine >= 20.9.23
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
+#TestRequires: boost169-devel
+#TestRequires: gcc-c++
+#TestRequires: libconfig
+#TestRequires: libconfig-devel
+#TestRequires: smartmet-library-spine-devel >= 20.9.23
+#TestRequires: smartmet-library-spine >= 20.9.23
+#TestRequires: smartmet-engine-geonames-devel
+#TestRequires: smartmet-engine-geonames
+%if 0%{rhel} >= 8
+#TestRequires: gdal30-devel
+#TestRequires: geos-devel
+%else
+#TestRequires: gdal-devel
+#TestRequires: gdal-libs
+%endif
+
 
 %description
 FMI SmartMet meta plugin
