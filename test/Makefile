@@ -50,14 +50,17 @@ all: $(PROG)
 clean:
 	rm -f $(PROG) *~
 
+ifdef CI
+test: $(PROG) fminames
+else
 test: $(PROG)
+endif
 	@mkdir -p failures
 	@rm -f failures/*
 	@echo Running tests:
 	@rm -f *.err
 ifdef CI
 	@cp input/.testignore_dummy input/.testignore
-	@sed -i -e 's/"smartmet-test"/"localhost"/g' cnf/*.conf
 	@for prog in $(PROG); do ( ./$$prog -c cnf/reactor_dummy.conf || touch $$prog.err ) ; done
 	@rm -f input/.testignore
 else
@@ -65,6 +68,11 @@ else
 endif
 	@test `find . -name \*.err | wc -l` = "0" || ( echo ; echo "The following tests have errors:" ; \
 	   for i in *.err ; do echo `basename $$i .err`; done ; rm -f *.err ; false ) 
+
+fminames:
+        sed -i -e 's/"smartmet-test"/"localhost"/g' cnf/*.conf
+        @/usr/share/smartmet/test/db/init-and-start.sh && /usr/share/smartmet/test/db/install-test-db.sh
+
 
 $(PROG) : % : %.cpp Makefile ../meta.so
 	$(CXX) $(CFLAGS) -o $@ $@.cpp $(INCLUDES) $(LIBS)

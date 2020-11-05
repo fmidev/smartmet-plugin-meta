@@ -50,6 +50,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-engine-querydata-devel >= 20.9.23
 #TestRequires: smartmet-engine-observation-devel >= 20.9.23
 #TestRequires: smartmet-test-data
+#TestRequires: smartmet-test-db
 %if 0%{rhel} >= 8
 #TestRequires: gdal30-devel
 #TestRequires: geos-devel
