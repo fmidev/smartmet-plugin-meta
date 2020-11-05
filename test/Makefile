@@ -57,6 +57,7 @@ test: $(PROG)
 	@rm -f *.err
 ifdef CI
 	@cp input/.testignore_dummy input/.testignore
+	@sed -i -e 's/"smartmet-test"/"localhost"/g' cnf/*.conf
 	@for prog in $(PROG); do ( ./$$prog -c cnf/reactor_dummy.conf || touch $$prog.err ) ; done
 	@rm -f input/.testignore
 else
