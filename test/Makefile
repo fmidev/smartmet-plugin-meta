@@ -55,9 +55,13 @@ test: $(PROG)
 	@rm -f failures/*
 	@echo Running tests:
 	@rm -f *.err
-	@for prog in $(PROG); do \
-		( ./$$prog || touch $$prog.err ) ; \
-	 done
+ifdef CI
+	@cp input/.testignore_dummy input/.testignore
+	@for prog in $(PROG); do ( ./$$prog -c cnf/reactor_dummy.conf || touch $$prog.err ) ; done
+	@rm -f input/.testignore
+else
+	@for prog in $(PROG); do ( ./$$prog -c cnf/reactor_oracle.conf || touch $$prog.err ) ; done
+endif
 	@test `find . -name \*.err | wc -l` = "0" || ( echo ; echo "The following tests have errors:" ; \
 	   for i in *.err ; do echo `basename $$i .err`; done ; rm -f *.err ; false ) 
 
