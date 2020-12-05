@@ -434,24 +434,19 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
                                            "Parameter 'observableProperty' is undefined");
 
       if (observableProperty == "forecast")
-      {
         return getForecastMetadata(theReactor, theRequest, theResponse);
-      }
+
 #ifndef WITHOUT_OBSERVATION
-      else if (observableProperty == "observation")
-      {
+      if (observableProperty == "observation")
         return getObsEngineMetadata(theReactor, theRequest, theResponse);
-      }
-      else if (observableProperty == "flashcount")
+
+      if (observableProperty == "flashcount")
       {
         theResponse.setHeader("Content-Type", "application/json; charset=UTF-8");
         return getFlashCount(theReactor, theRequest, theResponse);
       }
 #endif
-      else
-      {
-        throw Fmi::Exception(BCP, "Bad 'observableProperty' parameter: " + observableProperty);
-      }
+      throw Fmi::Exception(BCP, "Bad 'observableProperty' parameter: " + observableProperty);
     }
 
     if (parameterMap.count("qualityCode") == 1)
@@ -524,7 +519,8 @@ void Plugin::parseObservablePropertiesResponse(
     boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     CTPP::CDT& hash,
-    std::vector<std::string>& /* parameters */)
+    std::vector<std::string>&
+    /* parameters */)
 {
   try
   {
