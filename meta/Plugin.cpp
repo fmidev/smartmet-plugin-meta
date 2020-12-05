@@ -459,7 +459,8 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
     hash["exceptionCode"] = "OperationParsingFailed";
     hash["exceptionText"] = "Bad request";
 
-    std::ostringstream output, log;
+    std::ostringstream output;
+    std::ostringstream log;
     itsTemplateFactory.get(itsExceptionTemplateFile)->process(hash, output, log);
 
     theResponse.setStatus(SmartMet::Spine::HTTP::Status::bad_request);
@@ -561,7 +562,8 @@ std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
 {
   try
   {
-    std::ostringstream output, log;
+    std::ostringstream output;
+    std::ostringstream log;
 
     std::string tmpl =
         itsConfig.get_mandatory_config_param<std::string>("observable_properties_template");
@@ -590,7 +592,8 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
     hash["language"] = language;
     bool exceptionResponse = false;
     std::string responseTemplate;
-    std::ostringstream output, log;
+    std::ostringstream output;
+    std::ostringstream log;
     DataQualityRegistry::MapEntry mapEntry;
 
     // Return all if no a code given.
@@ -812,7 +815,8 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
     // If the value of units parameter is not configured throw an error.
     if (!units_key.empty() and m_supportedUnits.find(units_key) == m_supportedUnits.end())
     {
-      std::ostringstream output, log;
+      std::ostringstream output;
+      std::ostringstream log;
       hash["language"] = "eng";
       hash["exceptionCode"] = "InvalidParameterValue";
       hash["exceptionText"] = "Unknown units parameter value.";
