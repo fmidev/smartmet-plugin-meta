@@ -475,7 +475,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
 }
 
 #ifndef WITHOUT_OBSERVATION
-void Plugin::updateObservableProperties(
+void updateObservableProperties(
     boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     const std::string& language)
@@ -515,7 +515,7 @@ void Plugin::updateObservableProperties(
 
 #ifndef WITHOUT_OBSERVATION
 
-void Plugin::parseObservablePropertiesResponse(
+void parseObservablePropertiesResponse(
     boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     CTPP::CDT& hash,

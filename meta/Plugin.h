@@ -77,23 +77,11 @@ class Plugin : public SmartMetPlugin, virtual boost::noncopyable
                                    const Spine::HTTP::Request& theRequest,
                                    Spine::HTTP::Response& theResponse);
 
-  void parseObservablePropertiesResponse(
-      boost::shared_ptr<std::vector<Engine::Observation::ObservableProperty> >&
-          observableProperties,
-      CTPP::CDT& hash,
-      std::vector<std::string>& parameters);
 #endif
 
   void parseForecastConfig();
 
   void parseDataQualityConfig();
-
-#ifndef WITHOUT_OBSERVATION
-  void updateObservableProperties(
-      boost::shared_ptr<std::vector<Engine::Observation::ObservableProperty> >&
-          observableProperties,
-      const std::string& language);
-#endif
 
   const std::string itsModuleName;
 
