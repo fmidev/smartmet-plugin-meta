@@ -12,12 +12,11 @@
 #include <boost/date_time/local_time/local_time.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/foreach.hpp>
 #include <ctpp2/CDT.hpp>
+#include <macgyver/Exception.h>
 #include <macgyver/StringConversion.h>
 #include <macgyver/TimeZoneFactory.h>
 #include <spine/Convenience.h>
-#include <macgyver/Exception.h>
 #include <spine/SmartMet.h>
 #include <spine/Table.h>
 #include <spine/Value.h>
@@ -102,15 +101,14 @@ void Plugin::init()
     {
       // Nothing of interest available, print notification
       throw Fmi::Exception(BCP,
-                                       "Both Querydata-engine and Observation-engine are absent, "
-                                       "Meta-plugin has nothing to show");
+                           "Both Querydata-engine and Observation-engine are absent, "
+                           "Meta-plugin has nothing to show");
     }
 #else
     if (itsQEngine == nullptr)
     {
       // Nothing of interest available, print notification
-      throw Fmi::Exception(BCP,
-                                       "Querydata engine absent, Meta-plugin has nothing to show");
+      throw Fmi::Exception(BCP, "Querydata engine absent, Meta-plugin has nothing to show");
     }
 #endif
 
@@ -168,7 +166,7 @@ void Plugin::parseForecastConfig()
   {
     auto parameters = itsConfig.get_mandatory_config_array<std::string>("forecast_parameters");
 
-    BOOST_FOREACH (const std::string& param, parameters)
+    for (const auto& param : parameters)
     {
       auto name = itsConfig.get_mandatory_config_param<std::string>(param + ".name");
 
@@ -178,8 +176,7 @@ void Plugin::parseForecastConfig()
           itsForecastMap.insert(std::make_pair(name, std::map<std::string, ForecastMetaData>()));
       if (!iteratorPair.second)
       {
-        throw Fmi::Exception(
-            BCP, "Multiple definition of parameter " + param + " in Meta config");
+        throw Fmi::Exception(BCP, "Multiple definition of parameter " + param + " in Meta config");
       }
 
       const libconfig::Setting& units =
@@ -200,8 +197,8 @@ void Plugin::parseForecastConfig()
 
       if (labelLength != phenomenonLength)
       {
-        throw Fmi::Exception(
-            BCP, "Language number mismatch in parameter " + param + " in Meta config");
+        throw Fmi::Exception(BCP,
+                             "Language number mismatch in parameter " + param + " in Meta config");
       }
 
       // Language maps for labels and phenomenons
@@ -453,8 +450,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
 #endif
       else
       {
-        throw Fmi::Exception(
-            BCP, "Bad 'observableProperty' parameter: " + observableProperty);
+        throw Fmi::Exception(BCP, "Bad 'observableProperty' parameter: " + observableProperty);
       }
     }
 
@@ -902,7 +898,7 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
     else
     {
       // Return only the given parameters
-      BOOST_FOREACH (auto& param, parameters)
+      for (const auto& param : parameters)
       {
         auto it = itsForecastMap.find(param);
         if (it != itsForecastMap.end())
