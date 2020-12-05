@@ -594,7 +594,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
     DataQualityRegistry::MapEntry mapEntry;
 
     // Return all if no a code given.
-    if (!code || (*code == ""))
+    if (!code || (code->empty()))
     {
       std::vector<std::string> keyList;
       itsDataQualityRegistry.getMapKeyList(keyList);
@@ -995,7 +995,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
       theResponse.setHeader("Last-Modified", modification);
       theResponse.setHeader("Access-Control-Allow-Origin", "*");
 
-      if (response.size() == 0)
+      if (response.empty())
       {
         std::cerr << "Warning: Empty input for request " << theRequest.getQueryString() << " from "
                   << theRequest.getClientIP() << std::endl;
