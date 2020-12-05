@@ -656,19 +656,16 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
 {
   try
   {
-    SmartMet::Spine::TimeSeriesGeneratorOptions toptions(
-        SmartMet::Spine::OptionParsers::parseTimes(theRequest));
+    auto toptions = Spine::OptionParsers::parseTimes(theRequest);
 
-    auto loptions(
-        new SmartMet::Engine::Geonames::LocationOptions(itsGeoEngine->parseLocations(theRequest)));
+    auto loptions = itsGeoEngine->parseLocations(theRequest);
 
     // Handle timezones
     auto tz = theRequest.getParameter("tz");
     if (!tz)
       throw Fmi::Exception(BCP, "Timezone 'tz' must be specified");
 
-    boost::local_time::time_zone_ptr tz_ptr =
-        Fmi::TimeZoneFactory::instance().time_zone_from_string(*tz);
+    auto tz_ptr = Fmi::TimeZoneFactory::instance().time_zone_from_string(*tz);
 
     auto local_start_time = Fmi::TimeParser::make_time(
         toptions.startTime.date(), toptions.startTime.time_of_day(), tz_ptr);
@@ -676,11 +673,11 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
     auto local_end_time =
         Fmi::TimeParser::make_time(toptions.endTime.date(), toptions.endTime.time_of_day(), tz_ptr);
 
-    boost::posix_time::ptime utc_start_time = local_start_time.utc_time();
-    boost::posix_time::ptime utc_end_time = local_end_time.utc_time();
+    auto utc_start_time = local_start_time.utc_time();
+    auto utc_end_time = local_end_time.utc_time();
 
-    SmartMet::Engine::Observation::FlashCounts flashcounts =
-        itsObsEngine->getFlashCount(utc_start_time, utc_end_time, loptions->locations());
+    auto flashcounts =
+        itsObsEngine->getFlashCount(utc_start_time, utc_end_time, loptions.locations());
 
     std::string response =
         "{\n    \"flashcount\": " + Fmi::to_string(flashcounts.flashcount) + ",\n" +
