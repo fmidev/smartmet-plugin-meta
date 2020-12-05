@@ -594,7 +594,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
     DataQualityRegistry::MapEntry mapEntry;
 
     // Return all if no a code given.
-    if (not code or (*code == ""))
+    if (!code || (*code == ""))
     {
       std::vector<std::string> keyList;
       itsDataQualityRegistry.getMapKeyList(keyList);
