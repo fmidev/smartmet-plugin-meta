@@ -477,7 +477,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
 
 #ifndef WITHOUT_OBSERVATION
 void updateObservableProperties(
-    boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+    std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     const std::string& language)
 {
@@ -517,7 +517,7 @@ void updateObservableProperties(
 #ifndef WITHOUT_OBSERVATION
 
 void parseObservablePropertiesResponse(
-    boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+    std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     CTPP::CDT& hash,
     std::vector<std::string>&
@@ -751,7 +751,7 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
     }
 
     // If parameter map is empty, all metadata is returned by the engine
-    boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >
+    std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >
         observableProperties;
     if (parameters.empty() and qc_parameters.empty())
     {
@@ -759,16 +759,15 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
     }
     else
     {
-      if (not parameters.empty())
+      if (!parameters.empty())
       {
         observableProperties = itsObsEngine->observablePropertyQuery(parameters, language);
       }
 
       if (not qc_parameters.empty())
       {
-        boost::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >
-            qc_observableProperties;
-        qc_observableProperties = itsObsEngine->observablePropertyQuery(qc_parameters, language);
+        auto qc_observableProperties =
+            itsObsEngine->observablePropertyQuery(qc_parameters, language);
         updateObservableProperties(qc_observableProperties, language);
 
         if (observableProperties == nullptr)
