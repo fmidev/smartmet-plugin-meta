@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 20.9.23
+Version: 20.12.7
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -14,28 +14,28 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 20.9.23
-BuildRequires: smartmet-library-macgyver-devel >= 20.9.18
-BuildRequires: smartmet-engine-querydata-devel >= 20.9.23
+BuildRequires: smartmet-library-spine-devel >= 20.12.4
+BuildRequires: smartmet-library-macgyver-devel >= 20.11.24
+BuildRequires: smartmet-engine-querydata-devel >= 20.10.6
 BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 20.9.23
+BuildRequires: smartmet-engine-observation-devel >= 20.12.7
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: smartmet-library-macgyver >= 20.9.18
-Requires: smartmet-server >= 20.9.23
+Requires: smartmet-library-macgyver >= 20.11.24
+Requires: smartmet-server >= 20.10.28
 %if %{with observation}
-Requires: smartmet-engine-observation >= 20.9.23
+Requires: smartmet-engine-observation >= 20.12.7
 %endif
-Requires: smartmet-engine-querydata >= 20.9.23
-Requires: smartmet-library-spine >= 20.9.23
+Requires: smartmet-engine-querydata >= 20.10.6
+Requires: smartmet-library-spine >= 20.12.4
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -43,12 +43,12 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: gcc-c++
 #TestRequires: libconfig
 #TestRequires: libconfig-devel
-#TestRequires: smartmet-library-spine-devel >= 20.9.23
-#TestRequires: smartmet-library-spine >= 20.9.23
+#TestRequires: smartmet-library-spine-devel >= 20.12.4
+#TestRequires: smartmet-library-spine >= 20.12.4
 #TestRequires: smartmet-engine-geonames-devel
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata-devel >= 20.9.23
-#TestRequires: smartmet-engine-observation-devel >= 20.9.23
+#TestRequires: smartmet-engine-querydata-devel >= 20.10.6
+#TestRequires: smartmet-engine-observation-devel >= 20.12.7
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db
 %if 0%{rhel} >= 8
@@ -90,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Mon Dec  7 2020 Mika Heiskanen <mika.heiskanen@fmi.fi> - 20.12.7-1.fmi
+- Minor fixes to silence CodeChecker warnings
+
 * Wed Sep 23 2020 Mika Heiskanen <mika.heiskanen@fmi.fi> - 20.9.23-1.fmi
 - Use Fmi::Exception instead of Spine::Exception
 
