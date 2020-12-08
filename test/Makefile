@@ -7,7 +7,7 @@ clean:
 	rm -f tmp-geonames-db.log
 
 TEST_PREPARE_TARGETS := cnf/geonames.conf cnf/meta.conf
-TEST_FINISH_TARGETS := nothing
+TEST_FINISH_TARGETS := .dummy
 ifdef CI
 GEONAMES_HOST_EDIT := sed -e 's/"smartmet-test"/"localhost"/g'
 META_CONF_EDIT := sed -e 's|../cnf/templates|/etc/smartmet/plugins/meta/templates|g'
