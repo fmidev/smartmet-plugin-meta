@@ -39,16 +39,12 @@ Requires: smartmet-library-spine >= 20.12.4
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
-#TestRequires: boost169-devel
-#TestRequires: gcc-c++
 #TestRequires: libconfig
 #TestRequires: libconfig-devel
 #TestRequires: smartmet-library-spine-devel >= 20.12.4
-#TestRequires: smartmet-library-spine >= 20.12.4
-#TestRequires: smartmet-engine-geonames-devel
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata-devel >= 20.10.6
-#TestRequires: smartmet-engine-observation-devel >= 20.12.7
+#TestRequires: smartmet-engine-querydata >= 20.10.6
+#TestRequires: smartmet-engine-observation >= 20.12.7
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db
 %if 0%{rhel} >= 8

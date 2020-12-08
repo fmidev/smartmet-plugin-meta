@@ -6,3 +6,4 @@ lib*.a
 *.c2t
 compile_commands.json
 database_info.conf
+/smartmet-plugin-meta.tar.gz

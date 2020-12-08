@@ -1,79 +1,45 @@
-PROG = $(patsubst %.cpp,%,$(wildcard *Test.cpp))
+all:
 
-FLAGS = -std=c++11 -Wall -W -Wno-unused-parameter
-
-EXTRAFLAGS = -Werror -pedantic -Wpointer-arith -Wcast-qual \
-	-Wcast-align -Wwrite-strings -Wconversion -Winline \
-	-Wctor-dtor-privacy -Wnon-virtual-dtor -Wno-pmf-conversions \
-	-Wsign-promo -Wchar-subscripts -Wold-style-cast \
-	-Wshadow -Woverloaded-virtual
-
-DIFFICULTFLAGS = -Weffc++ -Wunreachable-code -Wredundant-decls
-
-ifeq ($(TSAN), yes)
-  FLAGS += -fsanitize=thread
-endif
-ifeq ($(ASAN), yes)
-  FLAGS += -fsanitize=address -fsanitize=pointer-compare -fsanitize=pointer-subtract -fsanitize=undefined -fsanitize-address-use-after-scope
-endif
-
-CFLAGS = -DUNIX -O0 -g $(FLAGS) -Wno-unknown-pragmas
-
-# Boost 1.69
-
-ifneq "$(wildcard /usr/include/boost169)" ""
-  INCLUDES += -isystem /usr/include/boost169
-  LIBS += -L/usr/lib64/boost169
-endif
-
-ifneq "$(wildcard /usr/gdal30/include)" ""
-  INCLUDES += -isystem /usr/gdal30/include
-  LIBS += -L$(PREFIX)/gdal30/lib
-else
-  INCLUDES += -isystem /usr/include/gdal
-endif
-
-INCLUDES += \
-	-I ../meta \
-	-I /usr/include/smartmet \
-	`pkg-config --cflags libconfig++`
-
-LIBS +=  -lsmartmet-spine  \
-	-lsmartmet-macgyver \
-	-lsmartmet-newbase \
-	-lboost_filesystem \
-	-lboost_system \
-	`pkg-config --libs libconfig++` \
-	-lpthread
-
-all: $(PROG)
 clean:
-	rm -f $(PROG) *~
+	rm -f PluginTest *~
+	rm -f cnf/geonames.conf
+	rm -fr tmp-geonames-db
+	rm -f tmp-geonames-db.log
 
+TEST_PREPARE_TARGETS := cnf/geonames.conf
+TEST_FINISH_TARGETS := nothing
 ifdef CI
-test: $(PROG) fminames
+GEONAMES_HOST_EDIT := sed -e 's/"smartmet-test"/"localhost"/g'
+TEST_PREPARE_TARGETS += geonames-database
+TEST_FINISH_TARGETS += stop-test-db
+TEST_TARGET := dummy
 else
-test: $(PROG)
+GEONAMES_HOST_EDIT := cat
+TEST_TARGET := oracle
 endif
-	@mkdir -p failures
+
+TEST_DB_DIR := tmp-geonames-db
+TESTER_PARAM := --handler=/meta --reactor-config=cnf/reactor_$(TEST_TARGET).conf --ignore input/.testignore_$(TEST_TARGET)
+
+test:	$(TEST_PREPARE_TARGETS)
 	@rm -f failures/*
 	@echo Running tests:
-	@rm -f *.err
-ifdef CI
-	@cp input/.testignore_dummy input/.testignore
-	@sed -i -e 's|../cnf/templates|/etc/smartmet/plugins/meta/templates|g' cnf/*.conf
-	@for prog in $(PROG); do ( ./$$prog -c cnf/reactor_dummy.conf || touch $$prog.err ) ; done
-	@rm -f input/.testignore
-else
-	@for prog in $(PROG); do ( ./$$prog -c cnf/reactor_oracle.conf || touch $$prog.err ) ; done
-endif
-	@test `find . -name \*.err | wc -l` = "0" || ( echo ; echo "The following tests have errors:" ; \
-	   for i in *.err ; do echo `basename $$i .err`; done ; rm -f *.err ; false ) 
+	ok=true; smartmet-plugin-test $(TESTER_PARAM) || ok=false; $(MAKE) $(TEST_FINISH_TARGETS); $$ok
 
-fminames:
-	@sed -i -e 's/"smartmet-test"/"localhost"/g' cnf/*.conf
-	@/usr/share/smartmet/test/db/init-and-start.sh && /usr/share/smartmet/test/db/install-test-db.sh > /dev/null
+cnf/geonames.conf: cnf/geonames.conf.in nothing
+	$(GEONAMES_HOST_EDIT) $< >$@
+
+geonames-database:
+	rm -rf tmp-geonames-db
+	if ! /usr/share/smartmet/test/db/create-local-db.sh $(TEST_DB_DIR) >tmp-geonames-db.log 2>&1 ; then \
+	    cat tmp-geonames-db.log; \
+	    false; \
+	fi
+	/usr/share/smartmet/test/db/test-db-ctl.sh $(TEST_DB_DIR) start -w
+
+stop-test-db:
+	/usr/share/smartmet/test/db/test-db-ctl.sh $(TEST_DB_DIR) stop
 
 
-$(PROG) : % : %.cpp Makefile ../meta.so
-	$(CXX) $(CFLAGS) -o $@ $@.cpp $(INCLUDES) $(LIBS)
+nothing:
+	true
