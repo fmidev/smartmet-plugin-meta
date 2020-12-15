@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 20.12.7
+Version: 20.12.15
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -14,45 +14,41 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 20.12.4
-BuildRequires: smartmet-library-macgyver-devel >= 20.11.24
-BuildRequires: smartmet-engine-querydata-devel >= 20.10.6
+BuildRequires: smartmet-library-spine-devel >= 20.12.15
+BuildRequires: smartmet-library-macgyver-devel >= 20.12.15
+BuildRequires: smartmet-engine-querydata-devel >= 20.12.15
 BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 20.12.7
+BuildRequires: smartmet-engine-observation-devel >= 20.12.15
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: smartmet-library-macgyver >= 20.11.24
+Requires: smartmet-library-macgyver >= 20.12.15
 Requires: smartmet-server >= 20.10.28
 %if %{with observation}
-Requires: smartmet-engine-observation >= 20.12.7
+Requires: smartmet-engine-observation >= 20.12.15
 %endif
-Requires: smartmet-engine-querydata >= 20.10.6
-Requires: smartmet-library-spine >= 20.12.4
+Requires: smartmet-engine-querydata >= 20.12.15
+Requires: smartmet-library-spine >= 20.12.15
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig
 #TestRequires: libconfig-devel
-#TestRequires: smartmet-library-spine-devel >= 20.12.4
+#TestRequires: smartmet-library-spine-devel >= 20.12.15
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 20.10.6
-#TestRequires: smartmet-engine-observation >= 20.12.7
+#TestRequires: smartmet-engine-querydata >= 20.12.15
+#TestRequires: smartmet-engine-observation >= 20.12.15
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db
-%if 0%{rhel} >= 8
-#TestRequires: gdal30-devel
-#TestRequires: geos-devel
-%else
-#TestRequires: gdal-devel
-#TestRequires: gdal-libs
+#TestRequires: gdal32-devel
+#TestRequires: geos38-devel
 %endif
 
 
@@ -86,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Tue Dec 15 2020 Mika Heiskanen <mika.heiskanen@fmi.fi> - 20.12.15-1.fmi
+- Upgrade to pgdg12
+
 * Mon Dec  7 2020 Mika Heiskanen <mika.heiskanen@fmi.fi> - 20.12.7-1.fmi
 - Minor fixes to silence CodeChecker warnings
 
