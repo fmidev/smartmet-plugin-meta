@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 21.1.14
+Version: 21.1.20
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -46,7 +46,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-engine-querydata >= 21.1.14
 #TestRequires: smartmet-engine-observation >= 21.1.14
 #TestRequires: smartmet-test-data
-#TestRequires: smartmet-test-db
+#TestRequires: smartmet-test-db >= 21.1.20
 #TestRequires: gdal32-devel
 #TestRequires: geos38-devel
 
