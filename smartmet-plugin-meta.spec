@@ -39,6 +39,7 @@ Requires: smartmet-library-spine >= 21.1.14
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
+#TestRequires: gcc-c++
 #TestRequires: libconfig
 #TestRequires: libconfig-devel
 #TestRequires: smartmet-library-spine-devel >= 21.1.14
