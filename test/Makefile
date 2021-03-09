@@ -8,9 +8,9 @@ clean:
 
 TEST_PREPARE_TARGETS := templates cnf/geonames.conf cnf/meta.conf
 TEST_FINISH_TARGETS := .dummy
+TEST_DB_DIR := $(shell pwd)/tmp-geonames-db
 ifdef CI
-GEONAMES_HOST_EDIT := sed -e 's/"smartmet-test"/"localhost"/g'
-#META_CONF_EDIT := sed -e 's|../cnf/templates|/etc/smartmet/plugins/meta/templates|g'
+GEONAMES_HOST_EDIT := sed -e 's|"smartmet-test"|"$(TEST_DB_DIR)"|g'
 META_CONF_EDIT := cat
 TEST_PREPARE_TARGETS += start-geonames-db
 TEST_FINISH_TARGETS += stop-geonames-db
@@ -21,7 +21,6 @@ META_CONF_EDIT := cat
 TEST_TARGET := oracle
 endif
 
-TEST_DB_DIR := tmp-geonames-db
 TESTER_PARAM := --handler=/meta --reactor-config=cnf/reactor_$(TEST_TARGET).conf --ignore input/.testignore_$(TEST_TARGET)
 
 test:	$(TEST_PREPARE_TARGETS)
