@@ -59,7 +59,7 @@ install:
 	@mkdir -p $(plugindir)
 	$(INSTALL_PROG) $(LIBFILE) $(plugindir)/$(LIBFILE)
 
-test:
+test test-oracle test-postgresql:
 	$(MAKE) -C test $@
 
 objdir:
