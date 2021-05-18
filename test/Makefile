@@ -5,6 +5,7 @@ clean:
 	rm -f cnf/geonames.conf
 	rm -fr tmp-geonames-db
 	rm -f tmp-geonames-db.log
+	rm -rf failures-dummy failures-oracle failures-postgresql
 
 TEST_PREPARE_TARGETS := templates cnf/geonames.conf cnf/meta.conf
 TEST_FINISH_TARGETS := .dummy
@@ -27,7 +28,7 @@ test:	$(TEST_PREPARE_TARGETS)
 	@rm -f failures/*
 	ok=true; \
 	for target in $(TEST_TARGETS); do \
-		@echo Running tests for $$target; \
+		echo Running tests for $$target; \
 		$(MAKE) do-test-$$target || ok=false; \
 	done; \
 	$(MAKE) $(TEST_FINISH_TARGETS); \
