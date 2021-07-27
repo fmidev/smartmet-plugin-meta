@@ -21,8 +21,8 @@ class DataQualityRegistry : protected virtual boost::noncopyable
     SmartMet::Spine::MultiLanguageStringP description;
   };
 
-  typedef std::map<std::string, MapEntry> EntryMapType;
-  typedef std::map<std::string, std::string> AliasMapType;
+  using EntryMapType = std::map<std::string, MapEntry>;
+  using AliasMapType = std::map<std::string, std::string>;
 
   DataQualityRegistry();
   ~DataQualityRegistry() = default;
