@@ -24,7 +24,6 @@ class DataQualityRegistry : protected virtual boost::noncopyable
   typedef std::map<std::string, MapEntry> EntryMapType;
   typedef std::map<std::string, std::string> AliasMapType;
 
- public:
   DataQualityRegistry();
   ~DataQualityRegistry() = default;
 
@@ -138,7 +137,6 @@ class DataQualityRegistry : protected virtual boost::noncopyable
    */
   bool isMapEntryAlias(const std::string& codeAlias) const;
 
- private:
   // Data Quality code collection.
   EntryMapType m_codeMap;
   AliasMapType m_codeAliasMap;
