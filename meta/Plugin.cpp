@@ -377,11 +377,10 @@ void Plugin::parseDataQualityConfig()
             if (desc->get_config_array("alias", tmp))
             {
               msg << "aliases ";
-              for (auto ait = tmp.begin(); ait != tmp.end(); ++ait)
+              for (const auto& alias : tmp)
               {
-                const auto& codeAlias = *ait;
-                itsDataQualityRegistry.addMapEntryAlias(code, codeAlias);
-                msg << "'" << codeAlias << "' ";
+                itsDataQualityRegistry.addMapEntryAlias(code, alias);
+                msg << "'" << alias << "' ";
               }
             }
             msg << "\n";
@@ -494,16 +493,17 @@ void updateObservableProperties(
       quality_s = " quality";
       phenomenon_s = "Quality";
     }
-    for (auto prop = observableProperties->begin(); prop != observableProperties->end(); ++prop)
+
+    for (auto& prop : *observableProperties)
     {
-      if (!prop->gmlId.empty())
-        prop->gmlId.append("-qc");
-      if (!prop->observablePropertyLabel.empty())
-        prop->observablePropertyLabel.append(quality_s);
-      prop->basePhenomenon = phenomenon_s;
-      prop->uom = "Index";
+      if (!prop.gmlId.empty())
+        prop.gmlId.append("-qc");
+      if (!prop.observablePropertyLabel.empty())
+        prop.observablePropertyLabel.append(quality_s);
+      prop.basePhenomenon = phenomenon_s;
+      prop.uom = "Index";
       // block statistical fields to shown out.
-      prop->statisticalFunction.resize(0);
+      prop.statisticalFunction.resize(0);
     }
   }
   catch (...)
@@ -526,25 +526,24 @@ void parseObservablePropertiesResponse(
   {
     int propertiesCount = 0;
 
-    for (auto prop = observableProperties->begin(); prop != observableProperties->end(); ++prop)
+    for (auto& prop : *observableProperties)
     {
-      hash["observableProperties"][prop->gmlId]["observablePropertyId"] = prop->gmlId;
-      hash["observableProperties"][prop->gmlId]["observablePropertyLabel"] =
-          prop->observablePropertyLabel;
-      hash["observableProperties"][prop->gmlId]["basePhenomenon"] = prop->basePhenomenon;
+      hash["observableProperties"][prop.gmlId]["observablePropertyId"] = prop.gmlId;
+      hash["observableProperties"][prop.gmlId]["observablePropertyLabel"] =
+          prop.observablePropertyLabel;
+      hash["observableProperties"][prop.gmlId]["basePhenomenon"] = prop.basePhenomenon;
 
-      boost::erase_all(prop->uom, " ");  // e.g. "ug S/m3"
-      if (not prop->uom.empty())
-        hash["observableProperties"][prop->gmlId]["uom"] = prop->uom;
+      boost::erase_all(prop.uom, " ");  // e.g. "ug S/m3"
+      if (not prop.uom.empty())
+        hash["observableProperties"][prop.gmlId]["uom"] = prop.uom;
       // No need to define if statisticalFunction is empty
-      if (not prop->statisticalFunction.empty())
+      if (not prop.statisticalFunction.empty())
       {
-        hash["observableProperties"][prop->gmlId]["statisticalMeasureId"] =
-            prop->statisticalMeasureId;
-        hash["observableProperties"][prop->gmlId]["statisticalFunction"] =
-            prop->statisticalFunction;
-        hash["observableProperties"][prop->gmlId]["aggregationTimePeriod"] =
-            prop->aggregationTimePeriod;
+        hash["observableProperties"][prop.gmlId]["statisticalMeasureId"] =
+            prop.statisticalMeasureId;
+        hash["observableProperties"][prop.gmlId]["statisticalFunction"] = prop.statisticalFunction;
+        hash["observableProperties"][prop.gmlId]["aggregationTimePeriod"] =
+            prop.aggregationTimePeriod;
       }
       propertiesCount++;
     }
@@ -830,10 +829,8 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
     {
       boost::algorithm::split(
           parameters, observablePropertyParameters, boost::algorithm::is_any_of(","));
-      for (auto it = parameters.begin(); it != parameters.end(); ++it)
-      {
-        Fmi::ascii_tolower(*it);
-      }
+      for (auto& param : parameters)
+        Fmi::ascii_tolower(param);
     }
 
     uint32_t propertiesCount = 0;
@@ -841,10 +838,10 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
     if (parameters.empty())
     {
       // Empty parameters-vector means we want all
-      for (auto iter = itsForecastMap.begin(); iter != itsForecastMap.end(); ++iter)
+      for (const auto& forecast : itsForecastMap)
       {
-        auto langit = iter->second.find(language);
-        if (langit != iter->second.end())
+        auto langit = forecast.second.find(language);
+        if (langit != forecast.second.end())
         {
           // We found the requested translation
 
