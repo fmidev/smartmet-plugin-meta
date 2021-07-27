@@ -319,8 +319,7 @@ void Plugin::parseDataQualityConfig()
       throw Fmi::Exception(BCP, "'" + features_dir.string() + "' is not a directory!");
     }
 
-    std::string defaultLanguage =
-        itsConfig.get_mandatory_config_param<std::string>("defaultLanguage");
+    auto defaultLanguage = itsConfig.get_mandatory_config_param<std::string>("defaultLanguage");
 
     // Iterate over all data quality code configurations.
     for (auto it = boost::filesystem::directory_iterator(features_dir);
@@ -342,7 +341,7 @@ void Plugin::parseDataQualityConfig()
           // DataQualityRegistry.
           auto& root = desc->get_root();
           const bool disabled = desc->get_optional_config_param<bool>(root, "disabled", false);
-          const std::string code = desc->get_mandatory_config_param<std::string>(root, "code");
+          const auto code = desc->get_mandatory_config_param<std::string>(root, "code");
           auto& labelDesc = desc->get_mandatory_config_param<libconfig::Setting&>("label");
           auto& descriptionDesc =
               desc->get_mandatory_config_param<libconfig::Setting&>("description");
@@ -565,8 +564,7 @@ std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
     std::ostringstream output;
     std::ostringstream log;
 
-    std::string tmpl =
-        itsConfig.get_mandatory_config_param<std::string>("observable_properties_template");
+    auto tmpl = itsConfig.get_mandatory_config_param<std::string>("observable_properties_template");
 
     itsTemplateFactory.get(tmpl)->process(hash, output, log);
 
