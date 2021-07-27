@@ -211,8 +211,8 @@ void Plugin::parseForecastConfig()
         auto& thisLabel = labels[i];
         auto& thisPhenomenon = phenomenons[i];
 
-        auto labelLan = thisLabel.getName();
-        auto phenomenonLan = thisPhenomenon.getName();
+        const auto* labelLan = thisLabel.getName();
+        const auto* phenomenonLan = thisPhenomenon.getName();
 
         const std::string labelString = thisLabel;
         const std::string phenString = thisPhenomenon;
