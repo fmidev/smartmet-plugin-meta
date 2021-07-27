@@ -140,7 +140,7 @@ class DataQualityRegistry : protected virtual boost::noncopyable
   // Data Quality code collection.
   EntryMapType m_codeMap;
   AliasMapType m_codeAliasMap;
-  bool m_keyConversionEnabled;
+  bool m_keyConversionEnabled = false;
 };
 
 }  // namespace Meta
