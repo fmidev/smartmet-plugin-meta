@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 21.2.18
+Version: 21.7.28
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -14,38 +14,38 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig-devel
-BuildRequires: smartmet-library-spine-devel >= 21.2.5
-BuildRequires: smartmet-library-macgyver-devel >= 21.1.25
-BuildRequires: smartmet-engine-querydata-devel >= 21.2.18
+BuildRequires: smartmet-library-spine-devel >= 21.7.28
+BuildRequires: smartmet-library-macgyver-devel >= 21.7.27
+BuildRequires: smartmet-engine-querydata-devel >= 21.6.3
 BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 21.2.11
+BuildRequires: smartmet-engine-observation-devel >= 21.7.28
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig
-Requires: smartmet-library-macgyver >= 21.1.25
-Requires: smartmet-server >= 21.1.14
+Requires: smartmet-library-macgyver >= 21.7.27
+Requires: smartmet-server >= 21.6.3
 %if %{with observation}
-Requires: smartmet-engine-observation >= 21.2.11
+Requires: smartmet-engine-observation >= 21.7.28
 %endif
-Requires: smartmet-engine-querydata >= 21.2.18
-Requires: smartmet-library-spine >= 21.2.5
+Requires: smartmet-engine-querydata >= 21.6.3
+Requires: smartmet-library-spine >= 21.7.28
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: gcc-c++
 #TestRequires: libconfig
 #TestRequires: libconfig-devel
-#TestRequires: smartmet-library-spine-devel >= 21.2.5
+#TestRequires: smartmet-library-spine-devel >= 21.7.28
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 21.2.18
-#TestRequires: smartmet-engine-observation >= 21.2.11
+#TestRequires: smartmet-engine-querydata >= 21.6.3
+#TestRequires: smartmet-engine-observation >= 21.7.28
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 21.1.20
 #TestRequires: gdal32-devel
@@ -81,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Wed Jul 28 2021 Mika Heiskanen <mika.heiskanen@fmi.fi> - 21.7.28-1.fmi
+- Silenced compiler warnings
+
 * Thu Feb 18 2021 Mika Heiskanen <mika.heiskanen@fmi.fi> - 21.2.18-1.fmi
 - Repackaged due to newbase ABI changes
 
