@@ -40,6 +40,7 @@ Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
+#TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
 #TestRequires: smartmet-engine-geonames
 #TestRequires: smartmet-engine-querydata >= 21.9.7
