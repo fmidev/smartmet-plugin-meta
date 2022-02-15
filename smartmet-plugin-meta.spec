@@ -3,8 +3,8 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 21.9.9
-Release: 2%{?dist}.fmi
+Version: 22.1.21
+Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
 URL: https://github.com/fmidev/smartmet-plugin-meta
@@ -14,42 +14,41 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 21.9.7
-BuildRequires: smartmet-library-macgyver-devel >= 21.8.30
-BuildRequires: smartmet-engine-querydata-devel >= 21.9.7
+BuildRequires: smartmet-library-spine-devel >= 21.1.21
+BuildRequires: smartmet-library-macgyver-devel >= 21.1.21
+BuildRequires: smartmet-engine-querydata-devel >= 21.1.21
 BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 21.9.7
+BuildRequires: smartmet-engine-observation-devel >= 21.1.21
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 21.8.30
+Requires: smartmet-library-macgyver >= 21.1.21
 Requires: smartmet-server >= 21.9.7
 %if %{with observation}
-Requires: smartmet-engine-observation >= 21.9.7
+Requires: smartmet-engine-observation >= 21.1.21
 %endif
-Requires: smartmet-engine-querydata >= 21.9.7
-Requires: smartmet-library-spine >= 21.9.7
+Requires: smartmet-engine-querydata >= 21.1.21
+Requires: smartmet-library-spine >= 21.1.21
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
-#TestRequires: gcc-c++
 #TestRequires: libconfig17
-#TestRequires: libconfig17-devel
-#TestRequires: smartmet-library-spine-devel >= 21.9.7
+#TestRequires: smartmet-utils-devel
+#TestRequires: smartmet-library-spine-plugin-test
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 21.9.7
-#TestRequires: smartmet-engine-observation >= 21.9.7
+#TestRequires: smartmet-engine-querydata >= 21.1.21
+#TestRequires: smartmet-engine-observation >= 21.1.21
 #TestRequires: smartmet-test-data
-#TestRequires: smartmet-test-db >= 21.1.20
-#TestRequires: gdal32-devel
-#TestRequires: geos39-devel
+#TestRequires: smartmet-test-db >= 21.1.21
+#TestRequires: gdal34
+#TestRequires: geos310
 
 %description
 FMI SmartMet meta plugin
@@ -81,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Fri Jan 21 2022 Andris Pavēnis <andris.pavenis@fmi.fi> 22.1.21-1.fmi
+- Repackage due to upgrade of packages from PGDG repo: gdal-3.4, geos-3.10, proj-8.2
+
 * Thu Sep  9 2021 Andris Pavenis <andris.pavenis@fmi.fi> 21.9.9-2.fmi
 - Repackage due to dependency change (libconfig->libconfig17)
 
