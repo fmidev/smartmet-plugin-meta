@@ -16,6 +16,7 @@ BuildRequires: make
 BuildRequires: libconfig17-devel
 BuildRequires: smartmet-library-spine-devel >= 21.1.21
 BuildRequires: smartmet-library-macgyver-devel >= 21.1.21
+BuildRequires: smartmet-library-timeseries-devel >= 22.3.10
 BuildRequires: smartmet-engine-querydata-devel >= 21.1.21
 BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
