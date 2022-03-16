@@ -42,6 +42,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
+#TestRequires: smartmet-library-timeseries-devel >= 22.3.10
 #TestRequires: smartmet-engine-geonames
 #TestRequires: smartmet-engine-querydata >= 21.1.21
 #TestRequires: smartmet-engine-observation >= 21.1.21
