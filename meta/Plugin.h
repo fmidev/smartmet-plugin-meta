@@ -11,9 +11,9 @@
 #include <engines/geonames/Engine.h>
 #include <engines/querydata/Engine.h>
 #include <spine/ConfigBase.h>
-#include <spine/OptionParsers.h>
 #include <spine/Reactor.h>
 #include <spine/SmartMetPlugin.h>
+#include <timeseries/OptionParsers.h>
 #ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Engine.h>
 #include <engines/observation/ObservableProperty.h>

@@ -16,6 +16,7 @@
 #include <macgyver/Exception.h>
 #include <macgyver/StringConversion.h>
 #include <macgyver/TimeZoneFactory.h>
+#include <timeseries/TimeSeriesGeneratorOptions.h>
 #include <spine/Convenience.h>
 #include <spine/SmartMet.h>
 #include <spine/Table.h>
@@ -656,7 +657,7 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
 {
   try
   {
-    auto toptions = Spine::OptionParsers::parseTimes(theRequest);
+    auto toptions = TimeSeries::parseTimes(theRequest);
 
     auto loptions = itsGeoEngine->parseLocations(theRequest);
 
