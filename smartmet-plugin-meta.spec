@@ -17,13 +17,13 @@ BuildRequires: libconfig17-devel
 BuildRequires: smartmet-library-spine-devel >= 22.5.24
 BuildRequires: smartmet-library-macgyver-devel >= 22.5.24
 BuildRequires: smartmet-library-timeseries-devel >= 22.5.24
-BuildRequires: smartmet-engine-querydata-devel >= 22.5.24
+BuildRequires: smartmet-engine-querydata-devel >= 22.5.30
 BuildRequires: boost169-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 22.5.24
+BuildRequires: smartmet-engine-observation-devel >= 22.5.30
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -33,9 +33,9 @@ Requires: libconfig17
 Requires: smartmet-library-macgyver >= 22.5.24
 Requires: smartmet-server >= 22.5.16
 %if %{with observation}
-Requires: smartmet-engine-observation >= 22.5.24
+Requires: smartmet-engine-observation >= 22.5.30
 %endif
-Requires: smartmet-engine-querydata >= 22.5.24
+Requires: smartmet-engine-querydata >= 22.5.30
 Requires: smartmet-library-spine >= 22.5.24
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
