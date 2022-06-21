@@ -10,43 +10,52 @@ Group: SmartMet/Plugins
 URL: https://github.com/fmidev/smartmet-plugin-meta
 Source0: %{name}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+%if 0%{?rhel} && 0%{rhel} < 9
+%define smartmet_boost boost169
+%else
+%define smartmet_boost boost
+%endif
+
+%define smartmet_fmt_min 8.1.1
+%define smartmet_fmt_max 8.2.0
+
 BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 22.5.24
-BuildRequires: smartmet-library-macgyver-devel >= 22.5.24
-BuildRequires: smartmet-library-timeseries-devel >= 22.5.24
-BuildRequires: smartmet-engine-querydata-devel >= 22.5.31
-BuildRequires: boost169-devel
+BuildRequires: smartmet-library-spine-devel >= 22.6.16
+BuildRequires: smartmet-library-macgyver-devel >= 22.6.16
+BuildRequires: smartmet-library-timeseries-devel >= 22.6.16
+BuildRequires: smartmet-engine-querydata-devel >= 22.6.17
+BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 22.5.31
+BuildRequires: smartmet-engine-observation-devel >= 22.6.17
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 22.5.24
+Requires: smartmet-library-macgyver >= 22.6.16
 Requires: smartmet-server >= 22.5.16
 %if %{with observation}
-Requires: smartmet-engine-observation >= 22.5.31
+Requires: smartmet-engine-observation >= 22.6.17
 %endif
-Requires: smartmet-engine-querydata >= 22.5.31
-Requires: smartmet-library-spine >= 22.5.24
+Requires: smartmet-engine-querydata >= 22.6.17
+Requires: smartmet-library-spine >= 22.6.16
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 22.5.24
+#TestRequires: smartmet-library-timeseries-devel >= 22.6.16
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 22.5.31
-#TestRequires: smartmet-engine-observation >= 22.5.31
+#TestRequires: smartmet-engine-querydata >= 22.6.17
+#TestRequires: smartmet-engine-observation >= 22.6.17
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 21.1.21
 #TestRequires: gdal34
