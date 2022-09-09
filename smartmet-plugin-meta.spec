@@ -3,8 +3,8 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 22.7.28
-Release: 2%{?dist}.fmi
+Version: 22.9.9
+Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
 URL: https://github.com/fmidev/smartmet-plugin-meta
@@ -23,41 +23,41 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 22.7.27
-BuildRequires: smartmet-library-macgyver-devel >= 22.7.27
-BuildRequires: smartmet-library-timeseries-devel >= 22.7.27
-BuildRequires: smartmet-engine-querydata-devel >= 22.7.28
+BuildRequires: smartmet-library-spine-devel >= 22.9.5
+BuildRequires: smartmet-library-macgyver-devel >= 22.8.23
+BuildRequires: smartmet-library-timeseries-devel >= 22.9.9
+BuildRequires: smartmet-engine-querydata-devel >= 22.9.9
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 22.7.28
+BuildRequires: smartmet-engine-observation-devel >= 22.9.9
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 22.6.16
-Requires: smartmet-server >= 22.5.16
+Requires: smartmet-library-macgyver >= 22.8.23
+Requires: smartmet-server >= 22.8.19
 %if %{with observation}
-Requires: smartmet-engine-observation >= 22.7.28
+Requires: smartmet-engine-observation >= 22.9.9
 %endif
-Requires: smartmet-engine-querydata >= 22.7.28
-Requires: smartmet-library-spine >= 22.7.27
+Requires: smartmet-engine-querydata >= 22.9.9
+Requires: smartmet-library-spine >= 22.9.5
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 22.7.27
+#TestRequires: smartmet-library-timeseries-devel >= 22.9.9
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 22.7.28
-#TestRequires: smartmet-engine-observation >= 22.7.28
+#TestRequires: smartmet-engine-querydata >= 22.9.9
+#TestRequires: smartmet-engine-observation >= 22.9.9
 #TestRequires: smartmet-test-data
-#TestRequires: smartmet-test-db >= 21.1.21
+#TestRequires: smartmet-test-db >= 22.4.14
 #TestRequires: gdal34
 #TestRequires: geos310
 
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Fri Sep  9 2022 Mika Heiskanen <mika.heiskanen@fmi.fi> - 22.9.9-1.fmi
+- Repackaged due to TimeSeries library ABI changes
+
 * Thu Jul 28 2022 Mika Heiskanen <mika.heiskanen@fmi.fi> - 22.7.28-2.fmi
 - Repackaged due to QEngine ABI change
 
