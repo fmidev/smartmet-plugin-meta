@@ -18,7 +18,6 @@
 #include <engines/observation/Engine.h>
 #include <engines/observation/ObservableProperty.h>
 #endif
-#include <boost/noncopyable.hpp>
 #include <ctpp2/CDT.hpp>
 #include <macgyver/TemplateFactory.h>
 #include <string>
@@ -32,11 +31,15 @@ namespace Meta
 {
 struct ForecastMetaData;
 
-class Plugin : public SmartMetPlugin, virtual boost::noncopyable
+class Plugin : public SmartMetPlugin
 {
  public:
   Plugin(Spine::Reactor* theReactor, const char* theConfig);
   ~Plugin() override = default;
+  Plugin(const Plugin& other) = delete;
+  Plugin(Plugin&& other) = delete;
+  Plugin& operator=(const Plugin& other) = delete;
+  Plugin& operator=(Plugin&& other) = delete;
 
   const std::string& getPluginName() const override;
   int getRequiredAPIVersion() const override;

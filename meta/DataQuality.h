@@ -1,6 +1,5 @@
 #pragma once
 
-#include <boost/noncopyable.hpp>
 #include <spine/MultiLanguageString.h>
 #include <map>
 #include <string>
@@ -12,7 +11,7 @@ namespace Plugin
 {
 namespace Meta
 {
-class DataQualityRegistry : protected virtual boost::noncopyable
+class DataQualityRegistry
 {
  public:
   struct MapEntry
@@ -24,8 +23,12 @@ class DataQualityRegistry : protected virtual boost::noncopyable
   using EntryMapType = std::map<std::string, MapEntry>;
   using AliasMapType = std::map<std::string, std::string>;
 
-  DataQualityRegistry();
   ~DataQualityRegistry() = default;
+  DataQualityRegistry() = default;
+  DataQualityRegistry(const DataQualityRegistry& other) = delete;
+  DataQualityRegistry(DataQualityRegistry&& other) = delete;
+  DataQualityRegistry& operator=(const DataQualityRegistry& other) = delete;
+  DataQualityRegistry& operator=(const DataQualityRegistry&& other) = delete;
 
   /**
    *  \brief Set data quality information for a data quality code.
