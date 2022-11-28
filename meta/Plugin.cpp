@@ -16,11 +16,11 @@
 #include <macgyver/Exception.h>
 #include <macgyver/StringConversion.h>
 #include <macgyver/TimeZoneFactory.h>
-#include <timeseries/TimeSeriesGeneratorOptions.h>
 #include <spine/Convenience.h>
 #include <spine/SmartMet.h>
 #include <spine/Table.h>
 #include <spine/Value.h>
+#include <timeseries/TimeSeriesGeneratorOptions.h>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -311,12 +311,12 @@ void Plugin::parseDataQualityConfig()
     // Test folder path and file existencies
     boost::filesystem::path features_dir(itsConfig.get_mandatory_path("dataQualityDefinitionDir"));
 
-    if (not boost::filesystem::exists(features_dir))
+    if (!boost::filesystem::exists(features_dir))
     {
       throw Fmi::Exception(BCP, "Directory '" + features_dir.string() + "' not found!");
     }
 
-    if (not boost::filesystem::is_directory(features_dir))
+    if (!boost::filesystem::is_directory(features_dir))
     {
       throw Fmi::Exception(BCP, "'" + features_dir.string() + "' is not a directory!");
     }
@@ -477,7 +477,7 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
 
 #ifndef WITHOUT_OBSERVATION
 void updateObservableProperties(
-    std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+    const std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     const std::string& language)
 {
@@ -518,7 +518,7 @@ void updateObservableProperties(
 #ifndef WITHOUT_OBSERVATION
 
 void parseObservablePropertiesResponse(
-    std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+    const std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     CTPP::CDT& hash,
     std::vector<std::string>&
@@ -590,7 +590,6 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
     CTPP::CDT hash;
     hash["language"] = language;
     bool exceptionResponse = false;
-    std::string responseTemplate;
     std::ostringstream output;
     std::ostringstream log;
     DataQualityRegistry::MapEntry mapEntry;
@@ -723,7 +722,6 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
     // true is the qc_parameter
     std::vector<std::string> parameters;
     std::vector<std::string> qc_parameters;
-    std::string param_name;
     if (!observablePropertyParameters.empty())
     {
       boost::algorithm::split(
@@ -969,6 +967,8 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
 
     try
     {
+      isdebug = ("debug" == Spine::optional_string(theRequest.getParameter("format"), ""));
+
       const int expires_seconds = 60;
       bp::ptime t_now = bp::second_clock::universal_time();
 

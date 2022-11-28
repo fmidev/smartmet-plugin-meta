@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 22.9.12
+Version: 22.11.28
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -23,39 +23,39 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 22.9.5
-BuildRequires: smartmet-library-macgyver-devel >= 22.8.23
-BuildRequires: smartmet-library-timeseries-devel >= 22.9.9
-BuildRequires: smartmet-engine-querydata-devel >= 22.9.9
+BuildRequires: smartmet-library-spine-devel >= 22.11.25
+BuildRequires: smartmet-library-macgyver-devel >= 22.10.20
+BuildRequires: smartmet-library-timeseries-devel >= 22.10.25
+BuildRequires: smartmet-engine-querydata-devel >= 22.11.25
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 22.9.9
+BuildRequires: smartmet-engine-observation-devel >= 22.11.26
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 22.8.23
-Requires: smartmet-server >= 22.8.19
+Requires: smartmet-library-macgyver >= 22.10.20
+Requires: smartmet-server >= 22.11.25
 %if %{with observation}
-Requires: smartmet-engine-observation >= 22.9.9
+Requires: smartmet-engine-observation >= 22.11.26
 %endif
-Requires: smartmet-engine-querydata >= 22.9.9
-Requires: smartmet-library-spine >= 22.9.5
+Requires: smartmet-engine-querydata >= 22.11.25
+Requires: smartmet-library-spine >= 22.11.25
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 22.9.9
+#TestRequires: smartmet-library-timeseries-devel >= 22.10.25
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 22.9.9
-#TestRequires: smartmet-engine-observation >= 22.9.9
+#TestRequires: smartmet-engine-querydata >= 22.11.25
+#TestRequires: smartmet-engine-observation >= 22.11.26
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 22.4.14
 #TestRequires: gdal34
@@ -91,6 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Mon Nov 28 2022 Mika Heiskanen <mika.heiskanen@fmi.fi> - 22.11.28-1.fmi
+- Fixed debug querystring option to work
+- Silenced compiler warnings
+
 * Mon Sep 12 2022 Mika Heiskanen <mika.heiskanen@fmi.fi> - 22.9.12-1.fmi
 - Silenced compiler warnings
 
