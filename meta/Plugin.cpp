@@ -26,24 +26,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace
-{
-#if 0
-  std::string formatDouble(double in)
-  {
-	std::ostringstream os;
-	os << std::setprecision(6) << in;
-	return os.str();
-  }
-
-  std::string formatInt(int in)
-  {
-	std::ostringstream os;
-	os << in;
-	return os.str();
-  }
-#endif
-}  // namespace
+namespace bp = boost::posix_time;
 
 namespace SmartMet
 {
@@ -51,7 +34,156 @@ namespace Plugin
 {
 namespace Meta
 {
-namespace bp = boost::posix_time;
+namespace
+{
+void validate_directory(const boost::filesystem::path& dir)
+{
+  if (!boost::filesystem::exists(dir))
+    throw Fmi::Exception(BCP, "Directory '" + dir.string() + "' not found!");
+
+  if (!boost::filesystem::is_directory(dir))
+    throw Fmi::Exception(BCP, "'" + dir.string() + "' is not a directory!");
+}
+
+bool is_valid_file(const boost::filesystem::path& file)
+{
+  auto name = file.filename().string();
+
+  return (boost::filesystem::is_regular_file(file) and !boost::algorithm::starts_with(name, ".") and
+          !boost::algorithm::starts_with(name, "#") && boost::algorithm::ends_with(name, ".conf"));
+}
+
+std::vector<std::string> extract_parameters(const std::string& params)
+{
+  std::vector<std::string> ret;
+  if (params.empty())
+    return ret;
+
+  boost::algorithm::split(ret, params, boost::algorithm::is_any_of(","));
+  for (auto& param : ret)
+    Fmi::ascii_tolower(param);
+  return ret;
+}
+
+CTPP::CDT get_all_parameters(const Plugin::ForecastMap& forecastmap,
+                             const std::string& language,
+                             const std::string& units_key)
+{
+  CTPP::CDT hash;
+  // Empty parameters-vector means we want all
+  int propertiesCount = 0;
+  for (const auto& forecast : forecastmap)
+  {
+    auto langit = forecast.second.find(language);
+    if (langit != forecast.second.end())
+    {
+      // We found the requested translation
+
+      // Select correct unit of a parameter
+      if (units_key.empty())
+      {
+        hash["observableProperties"][propertiesCount]["uom"] = langit->second.unit;
+      }
+      else
+      {
+        // Select only the parameters that have units_key. The key exist (see above)
+        auto requested_unit = langit->second.unitMap.find(units_key);
+        if (requested_unit == langit->second.unitMap.end())
+          continue;
+        hash["observableProperties"][propertiesCount]["uom"] = requested_unit->second;
+      }
+
+      hash["observableProperties"][propertiesCount]["observablePropertyId"] = langit->second.name;
+      hash["observableProperties"][propertiesCount]["observablePropertyLabel"] =
+          langit->second.label;
+      hash["observableProperties"][propertiesCount]["basePhenomenon"] =
+          langit->second.basePhenomenon;
+
+      if (langit->second.isStatistical)
+      {
+        hash["observableProperties"][propertiesCount]["statisticalMeasureId"] =
+            langit->second.statId;
+        hash["observableProperties"][propertiesCount]["statisticalFunction"] =
+            langit->second.statFunc;
+        hash["observableProperties"][propertiesCount]["aggregationTimePeriod"] =
+            langit->second.timePeriod;
+        if (langit->second.hasOtherAggregation)
+        {
+          hash["observableProperties"][propertiesCount]["otherAggregation"]["statisticalFunction"] =
+              langit->second.otherStatFunc;
+          hash["observableProperties"][propertiesCount]["otherAggregation"]
+              ["aggregationTimePeriod"] = langit->second.otherTimePeriod;
+        }
+      }
+      propertiesCount++;
+    }
+  }
+  hash["propertiesCount"] = propertiesCount;
+  return hash;
+}
+
+CTPP::CDT get_wanted_parameters(const Plugin::ForecastMap& forecastmap,
+                                const std::string& language,
+                                const std::string& units_key,
+                                const std::vector<std::string>& parameters)
+{
+  CTPP::CDT hash;
+
+  // Return only the given parameters
+  int propertiesCount = 0;
+  for (const auto& param : parameters)
+  {
+    auto it = forecastmap.find(param);
+    if (it != forecastmap.end())
+    {
+      // We found a parameter with this name
+      auto langit = it->second.find(language);
+      if (langit != it->second.end())
+      {
+        // We found the requested translation
+        hash["observableProperties"][propertiesCount]["observablePropertyId"] = langit->second.name;
+        hash["observableProperties"][propertiesCount]["observablePropertyLabel"] =
+            langit->second.label;
+        hash["observableProperties"][propertiesCount]["basePhenomenon"] =
+            langit->second.basePhenomenon;
+
+        hash["observableProperties"][propertiesCount]["uom"] = langit->second.unit;
+
+        // Select other unit if requested and if defined.
+        if (!units_key.empty())
+        {
+          auto requested_unit = langit->second.unitMap.find(units_key);
+          if (requested_unit != langit->second.unitMap.end())
+            hash["observableProperties"][propertiesCount]["uom"] = requested_unit->second;
+        }
+
+        if (langit->second.isStatistical)
+        {
+          hash["observableProperties"][propertiesCount]["statisticalMeasureId"] =
+              langit->second.statId;
+          hash["observableProperties"][propertiesCount]["statisticalFunction"] =
+              langit->second.statFunc;
+          hash["observableProperties"][propertiesCount]["aggregationTimePeriod"] =
+              langit->second.timePeriod;
+          if (langit->second.hasOtherAggregation)
+          {
+            hash["observableProperties"][propertiesCount]["otherAggregation"]
+                ["statisticalFunction"] = langit->second.otherStatFunc;
+            hash["observableProperties"][propertiesCount]["otherAggregation"]
+                ["aggregationTimePeriod"] = langit->second.otherTimePeriod;
+          }
+        }
+
+        propertiesCount++;
+      }
+    }
+  }
+  hash["propertiesCount"] = propertiesCount;
+  return hash;
+}
+
+}  // namespace
+
 // ----------------------------------------------------------------------
 /*!
  * \brief Plugin constructor
@@ -309,103 +441,90 @@ void Plugin::parseDataQualityConfig()
   try
   {
     // Test folder path and file existencies
-    boost::filesystem::path features_dir(itsConfig.get_mandatory_path("dataQualityDefinitionDir"));
+    boost::filesystem::path features_dir = itsConfig.get_mandatory_path("dataQualityDefinitionDir");
 
-    if (!boost::filesystem::exists(features_dir))
-    {
-      throw Fmi::Exception(BCP, "Directory '" + features_dir.string() + "' not found!");
-    }
-
-    if (!boost::filesystem::is_directory(features_dir))
-    {
-      throw Fmi::Exception(BCP, "'" + features_dir.string() + "' is not a directory!");
-    }
-
-    auto defaultLanguage = itsConfig.get_mandatory_config_param<std::string>("defaultLanguage");
+    validate_directory(features_dir);
 
     // Iterate over all data quality code configurations.
     for (auto it = boost::filesystem::directory_iterator(features_dir);
          it != boost::filesystem::directory_iterator();
          ++it)
     {
-      const boost::filesystem::path entry = *it;
-      const auto fn = entry.filename().string();
-      if (boost::filesystem::is_regular_file(entry) and
-          not boost::algorithm::starts_with(fn, ".") and
-          not boost::algorithm::starts_with(fn, "#") and boost::algorithm::ends_with(fn, ".conf"))
-      {
-        boost::shared_ptr<SmartMet::Spine::ConfigBase> desc(
-            new SmartMet::Spine::ConfigBase(entry.string(), "Data quality description"));
-
-        try
-        {
-          // Get root of the data quality code configuration and form an entry into
-          // DataQualityRegistry.
-          auto& root = desc->get_root();
-          const bool disabled = desc->get_optional_config_param<bool>(root, "disabled", false);
-          const auto code = desc->get_mandatory_config_param<std::string>(root, "code");
-          auto& labelDesc = desc->get_mandatory_config_param<libconfig::Setting&>("label");
-          auto& descriptionDesc =
-              desc->get_mandatory_config_param<libconfig::Setting&>("description");
-
-          if (code.length() == 0)
-          {
-            std::ostringstream msg;
-            msg << SmartMet::Spine::log_time_str()
-                << ": [Meta] error reading Data quality description"
-                << " file '" << entry.string() << "'. Parameter 'code' is zero length.";
-            throw Fmi::Exception(BCP, msg.str());
-          }
-
-          if (disabled)
-          {
-            std::ostringstream msg;
-            msg << SmartMet::Spine::log_time_str() << ": [Meta] [Disabled] Data quality code='"
-                << code << "' config='" << entry.string() << "'\n";
-            std::cout << msg.str() << std::flush;
-          }
-          else
-          {
-            desc->assert_is_group(labelDesc);
-            desc->assert_is_group(descriptionDesc);
-
-            itsDataQualityRegistry.addMapEntry(code, defaultLanguage, labelDesc, descriptionDesc);
-
-            std::ostringstream msg;
-            msg << SmartMet::Spine::log_time_str() << ": [Meta] [Registered] Data quality code='"
-                << code << "' config='" << entry.string() << "' ";
-
-            std::vector<std::string> tmp;
-            if (desc->get_config_array("alias", tmp))
-            {
-              msg << "aliases ";
-              for (const auto& alias : tmp)
-              {
-                itsDataQualityRegistry.addMapEntryAlias(code, alias);
-                msg << "'" << alias << "' ";
-              }
-            }
-            msg << "\n";
-            std::cout << msg.str() << std::flush;
-          }
-        }
-        catch (const std::exception&)
-        {
-          std::cerr << SmartMet::Spine::log_time_str()
-                    << ": error reading data quality code configuration"
-                    << " file '" << entry.string() << "'" << std::endl;
-
-          Fmi::Exception exception(
-              BCP, "Error while reading data quality code configuration!", nullptr);
-          exception.addParameter("File", entry.string());
-          throw exception;
-        }
-      }
+      const boost::filesystem::path file = *it;
+      if (is_valid_file(file))
+        parseDataQualityConfig(file);
     }
   }
   catch (...)
   {
     throw Fmi::Exception::Trace(BCP, "Operation failed!");
+  }
+}
+
+void Plugin::parseDataQualityConfig(const boost::filesystem::path& file)
+{
+  try
+  {
+    boost::shared_ptr<SmartMet::Spine::ConfigBase> desc(
+        new SmartMet::Spine::ConfigBase(file.string(), "Data quality description"));
+
+    // Get root of the data quality code configuration and form an entry into
+    // DataQualityRegistry.
+    auto& root = desc->get_root();
+    const bool disabled = desc->get_optional_config_param<bool>(root, "disabled", false);
+    const auto code = desc->get_mandatory_config_param<std::string>(root, "code");
+    auto& labelDesc = desc->get_mandatory_config_param<libconfig::Setting&>("label");
+    auto& descriptionDesc = desc->get_mandatory_config_param<libconfig::Setting&>("description");
+
+    auto defaultLanguage = itsConfig.get_mandatory_config_param<std::string>("defaultLanguage");
+
+    std::ostringstream msg;
+    if (code.length() == 0)
+    {
+      msg << SmartMet::Spine::log_time_str() << ": [Meta] error reading Data quality description"
+          << " file '" << file.string() << "'. Parameter 'code' is zero length.";
+      throw Fmi::Exception(BCP, msg.str());
+    }
+
+    if (disabled)
+    {
+      msg << SmartMet::Spine::log_time_str() << ": [Meta] [Disabled] Data quality code='" << code
+          << "' config='" << file.string() << "'\n";
+      std::cout << msg.str() << std::flush;
+    }
+    else
+    {
+      desc->assert_is_group(labelDesc);
+      desc->assert_is_group(descriptionDesc);
+
+      itsDataQualityRegistry.addMapEntry(code, defaultLanguage, labelDesc, descriptionDesc);
+
+      msg << SmartMet::Spine::log_time_str() << ": [Meta] [Registered] Data quality code='" << code
+          << "' config='" << file.string() << "' ";
+
+      std::vector<std::string> tmp;
+      if (desc->get_config_array("alias", tmp))
+      {
+        msg << "aliases ";
+        for (const auto& alias : tmp)
+        {
+          itsDataQualityRegistry.addMapEntryAlias(code, alias);
+          msg << "'" << alias << "' ";
+        }
+      }
+      msg << "\n";
+      std::cout << msg.str() << std::flush;
+    }
+  }
+  catch (const std::exception&)
+  {
+    std::cerr << SmartMet::Spine::log_time_str()
+              << ": error reading data quality code configuration"
+              << " file '" << file.string() << "'" << std::endl;
+
+    Fmi::Exception exception(BCP, "Error while reading data quality code configuration!", nullptr);
+    exception.addParameter("File", file.string());
+    throw exception;
   }
 }
 
@@ -536,10 +655,10 @@ void parseObservablePropertiesResponse(
       hash["observableProperties"][prop.gmlId]["basePhenomenon"] = prop.basePhenomenon;
 
       boost::erase_all(prop.uom, " ");  // e.g. "ug S/m3"
-      if (not prop.uom.empty())
+      if (!prop.uom.empty())
         hash["observableProperties"][prop.gmlId]["uom"] = prop.uom;
       // No need to define if statisticalFunction is empty
-      if (not prop.statisticalFunction.empty())
+      if (!prop.statisticalFunction.empty())
       {
         hash["observableProperties"][prop.gmlId]["statisticalMeasureId"] =
             prop.statisticalMeasureId;
@@ -806,13 +925,13 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
     std::string units_key = SmartMet::Spine::optional_string(theRequest.getParameter("units"), "");
     Fmi::ascii_tolower(units_key);
 
-    CTPP::CDT hash;
-
     // If the value of units parameter is not configured throw an error.
-    if (!units_key.empty() and m_supportedUnits.find(units_key) == m_supportedUnits.end())
+    if (!units_key.empty() && m_supportedUnits.find(units_key) == m_supportedUnits.end())
     {
       std::ostringstream output;
       std::ostringstream log;
+
+      CTPP::CDT hash;
       hash["language"] = "eng";
       hash["exceptionCode"] = "InvalidParameterValue";
       hash["exceptionText"] = "Unknown units parameter value.";
@@ -824,122 +943,11 @@ std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor 
       return output.str();
     }
 
-    std::vector<std::string> parameters;
-    if (!observablePropertyParameters.empty())
-    {
-      boost::algorithm::split(
-          parameters, observablePropertyParameters, boost::algorithm::is_any_of(","));
-      for (auto& param : parameters)
-        Fmi::ascii_tolower(param);
-    }
+    std::vector<std::string> parameters = extract_parameters(observablePropertyParameters);
 
-    uint32_t propertiesCount = 0;
-
-    if (parameters.empty())
-    {
-      // Empty parameters-vector means we want all
-      for (const auto& forecast : itsForecastMap)
-      {
-        auto langit = forecast.second.find(language);
-        if (langit != forecast.second.end())
-        {
-          // We found the requested translation
-
-          // Select correct unit of a parameter
-          if (units_key.empty())
-          {
-            hash["observableProperties"][propertiesCount]["uom"] = langit->second.unit;
-          }
-          else
-          {
-            // Select only the parameters that have units_key. The key exist (see above)
-            auto requested_unit = langit->second.unitMap.find(units_key);
-            if (requested_unit == langit->second.unitMap.end())
-              continue;
-            hash["observableProperties"][propertiesCount]["uom"] = requested_unit->second;
-          }
-
-          hash["observableProperties"][propertiesCount]["observablePropertyId"] =
-              langit->second.name;
-          hash["observableProperties"][propertiesCount]["observablePropertyLabel"] =
-              langit->second.label;
-          hash["observableProperties"][propertiesCount]["basePhenomenon"] =
-              langit->second.basePhenomenon;
-
-          if (langit->second.isStatistical)
-          {
-            hash["observableProperties"][propertiesCount]["statisticalMeasureId"] =
-                langit->second.statId;
-            hash["observableProperties"][propertiesCount]["statisticalFunction"] =
-                langit->second.statFunc;
-            hash["observableProperties"][propertiesCount]["aggregationTimePeriod"] =
-                langit->second.timePeriod;
-            if (langit->second.hasOtherAggregation)
-            {
-              hash["observableProperties"][propertiesCount]["otherAggregation"]
-                  ["statisticalFunction"] = langit->second.otherStatFunc;
-              hash["observableProperties"][propertiesCount]["otherAggregation"]
-                  ["aggregationTimePeriod"] = langit->second.otherTimePeriod;
-            }
-          }
-          propertiesCount++;
-        }
-      }
-    }
-    else
-    {
-      // Return only the given parameters
-      for (const auto& param : parameters)
-      {
-        auto it = itsForecastMap.find(param);
-        if (it != itsForecastMap.end())
-        {
-          // We found a parameter with this name
-          auto langit = it->second.find(language);
-          if (langit != it->second.end())
-          {
-            // We found the requested translation
-            hash["observableProperties"][propertiesCount]["observablePropertyId"] =
-                langit->second.name;
-            hash["observableProperties"][propertiesCount]["observablePropertyLabel"] =
-                langit->second.label;
-            hash["observableProperties"][propertiesCount]["basePhenomenon"] =
-                langit->second.basePhenomenon;
-
-            hash["observableProperties"][propertiesCount]["uom"] = langit->second.unit;
-
-            // Select other unit if requested and if defined.
-            if (!units_key.empty())
-            {
-              auto requested_unit = langit->second.unitMap.find(units_key);
-              if (requested_unit != langit->second.unitMap.end())
-                hash["observableProperties"][propertiesCount]["uom"] = requested_unit->second;
-            }
-
-            if (langit->second.isStatistical)
-            {
-              hash["observableProperties"][propertiesCount]["statisticalMeasureId"] =
-                  langit->second.statId;
-              hash["observableProperties"][propertiesCount]["statisticalFunction"] =
-                  langit->second.statFunc;
-              hash["observableProperties"][propertiesCount]["aggregationTimePeriod"] =
-                  langit->second.timePeriod;
-              if (langit->second.hasOtherAggregation)
-              {
-                hash["observableProperties"][propertiesCount]["otherAggregation"]
-                    ["statisticalFunction"] = langit->second.otherStatFunc;
-                hash["observableProperties"][propertiesCount]["otherAggregation"]
-                    ["aggregationTimePeriod"] = langit->second.otherTimePeriod;
-              }
-            }
-
-            propertiesCount++;
-          }
-        }
-      }
-    }
-
-    hash["propertiesCount"] = propertiesCount;
+    auto hash = (parameters.empty()
+                     ? get_all_parameters(itsForecastMap, language, units_key)
+                     : get_wanted_parameters(itsForecastMap, language, units_key, parameters));
 
     theResponse.setHeader("Content-Type", "text/xml; charset=UTF-8");
 
@@ -967,7 +975,8 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
 
     try
     {
-      if (checkRequest(theRequest, theResponse, false)) {
+      if (checkRequest(theRequest, theResponse, false))
+      {
         return;
       }
 

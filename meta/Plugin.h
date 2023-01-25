@@ -85,6 +85,7 @@ class Plugin : public SmartMetPlugin
   void parseForecastConfig();
 
   void parseDataQualityConfig();
+  void parseDataQualityConfig(const boost::filesystem::path& file);
 
   const std::string itsModuleName;
 
@@ -100,8 +101,11 @@ class Plugin : public SmartMetPlugin
   Engine::Observation::Engine* itsObsEngine{nullptr};
 #endif
 
-  std::map<std::string, std::map<std::string, ForecastMetaData> >
-      itsForecastMap;  // parameter->language->metadata
+ public:
+  using ForecastMap = std::map<std::string, std::map<std::string, ForecastMetaData>>;
+
+ private:
+  ForecastMap itsForecastMap;  // parameter->language->metadata
 
   DataQualityRegistry itsDataQualityRegistry;
 
