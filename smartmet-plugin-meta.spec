@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 23.1.25
+Version: 23.2.8
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -23,16 +23,16 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 23.1.16
+BuildRequires: smartmet-library-spine-devel >= 23.2.8
 BuildRequires: smartmet-library-macgyver-devel >= 22.12.16
-BuildRequires: smartmet-library-timeseries-devel >= 22.10.25
+BuildRequires: smartmet-library-timeseries-devel >= 23.1.31
 BuildRequires: smartmet-engine-querydata-devel >= 22.12.15
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 23.1.24
+BuildRequires: smartmet-engine-observation-devel >= 23.2.8
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -40,22 +40,22 @@ BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
 Requires: smartmet-library-macgyver >= 22.12.16
-Requires: smartmet-server >= 23.1.10
+Requires: smartmet-server >= 23.2.1
 %if %{with observation}
-Requires: smartmet-engine-observation >= 23.1.24
+Requires: smartmet-engine-observation >= 23.2.8
 %endif
 Requires: smartmet-engine-querydata >= 22.12.15
-Requires: smartmet-library-spine >= 23.1.16
+Requires: smartmet-library-spine >= 23.2.8
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 22.10.25
+#TestRequires: smartmet-library-timeseries-devel >= 23.1.31
 #TestRequires: smartmet-engine-geonames
 #TestRequires: smartmet-engine-querydata >= 22.12.15
-#TestRequires: smartmet-engine-observation >= 23.1.24
+#TestRequires: smartmet-engine-observation >= 23.2.8
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 22.4.14
 #TestRequires: gdal34
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Wed Feb  8 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.2.8-1.fmi
+- Add host name to stack traces
+
 * Wed Jan 25 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.1.25-1.fmi
 - Silenced CodeChecker warnings
 
