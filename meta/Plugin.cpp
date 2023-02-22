@@ -258,8 +258,13 @@ void Plugin::init()
         template_dir + "/" +
         itsConfig.get_mandatory_config_param<std::string>("dataQualityTemplate");
 
-    if (!itsReactor->addContentHandler(
-            this, "/meta", boost::bind(&Plugin::callRequestHandler, this, _1, _2, _3)))
+    if (!itsReactor->addContentHandler(this,
+                                       "/meta",
+                                       [this](Spine::Reactor& theReactor,
+                                              const Spine::HTTP::Request& theRequest,
+                                              Spine::HTTP::Response& theResponse) {
+                                         callRequestHandler(theReactor, theRequest, theResponse);
+                                       }))
       throw Fmi::Exception(BCP, "Failed to register Meta plugin content handler");
   }
   catch (...)
