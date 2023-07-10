@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 23.2.22
+Version: 23.7.10
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -23,41 +23,41 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 23.2.8
-BuildRequires: smartmet-library-macgyver-devel >= 22.12.16
-BuildRequires: smartmet-library-timeseries-devel >= 23.1.31
-BuildRequires: smartmet-engine-querydata-devel >= 22.12.15
+BuildRequires: smartmet-library-spine-devel >= 23.6.21
+BuildRequires: smartmet-library-macgyver-devel >= 23.6.15
+BuildRequires: smartmet-library-timeseries-devel >= 23.6.15
+BuildRequires: smartmet-engine-querydata-devel >= 23.6.15
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 23.2.8
+BuildRequires: smartmet-engine-observation-devel >= 23.6.21
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 22.12.16
-Requires: smartmet-server >= 23.2.1
+Requires: smartmet-library-macgyver >= 23.6.15
+Requires: smartmet-server >= 23.5.19
 %if %{with observation}
-Requires: smartmet-engine-observation >= 23.2.8
+Requires: smartmet-engine-observation >= 23.6.21
 %endif
-Requires: smartmet-engine-querydata >= 22.12.15
-Requires: smartmet-library-spine >= 23.2.8
+Requires: smartmet-engine-querydata >= 23.6.15
+Requires: smartmet-library-spine >= 23.6.21
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 23.1.31
+#TestRequires: smartmet-library-timeseries-devel >= 23.6.15
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 22.12.15
-#TestRequires: smartmet-engine-observation >= 23.2.8
+#TestRequires: smartmet-engine-querydata >= 23.6.15
+#TestRequires: smartmet-engine-observation >= 23.6.21
 #TestRequires: smartmet-test-data
-#TestRequires: smartmet-test-db >= 22.4.14
+#TestRequires: smartmet-test-db >= 23.6.1
 #TestRequires: gdal34
 #TestRequires: geos310
 
@@ -91,6 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Mon Jul 10 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.7.10-1.fmi
+- Small speed optimization
+- Fixed handling of exceptionTemplate and dataQualityTemplate settings
+
 * Wed Feb 22 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.2.22-1.fmi
 - Silenced CodeChecker warnings
 
