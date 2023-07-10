@@ -252,9 +252,9 @@ void Plugin::init()
     parseDataQualityConfig();
 
     std::string template_dir = itsConfig.get_mandatory_path("templateDir");
-    std::string itsExceptionTemplateFile =
+    itsExceptionTemplateFile =
         template_dir + "/" + itsConfig.get_mandatory_config_param<std::string>("exceptionTemplate");
-    std::string itsDataQualityTemplateFile =
+    itsDataQualityTemplateFile =
         template_dir + "/" +
         itsConfig.get_mandatory_config_param<std::string>("dataQualityTemplate");
 
