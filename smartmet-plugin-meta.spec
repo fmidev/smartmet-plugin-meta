@@ -23,16 +23,16 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 23.2.8
+BuildRequires: smartmet-library-spine-devel >= 23.7.10
 BuildRequires: smartmet-library-macgyver-devel >= 22.12.16
-BuildRequires: smartmet-library-timeseries-devel >= 23.1.31
-BuildRequires: smartmet-engine-querydata-devel >= 22.12.15
+BuildRequires: smartmet-library-timeseries-devel >= 23.7.10
+BuildRequires: smartmet-engine-querydata-devel >= 23.7.10
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 23.2.8
+BuildRequires: smartmet-engine-observation-devel >= 23.7.11
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -42,20 +42,20 @@ Requires: libconfig17
 Requires: smartmet-library-macgyver >= 22.12.16
 Requires: smartmet-server >= 23.2.1
 %if %{with observation}
-Requires: smartmet-engine-observation >= 23.2.8
+Requires: smartmet-engine-observation >= 23.7.11
 %endif
-Requires: smartmet-engine-querydata >= 22.12.15
-Requires: smartmet-library-spine >= 23.2.8
+Requires: smartmet-engine-querydata >= 23.7.10
+Requires: smartmet-library-spine >= 23.7.10
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 23.1.31
+#TestRequires: smartmet-library-timeseries-devel >= 23.7.10
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 22.12.15
-#TestRequires: smartmet-engine-observation >= 23.2.8
+#TestRequires: smartmet-engine-querydata >= 23.7.10
+#TestRequires: smartmet-engine-observation >= 23.7.11
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 22.4.14
 #TestRequires: gdal35
