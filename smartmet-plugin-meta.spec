@@ -58,8 +58,8 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-engine-observation >= 23.2.8
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 22.4.14
-#TestRequires: gdal34
-#TestRequires: geos310
+#TestRequires: gdal35
+#TestRequires: geos311
 
 %description
 FMI SmartMet meta plugin
