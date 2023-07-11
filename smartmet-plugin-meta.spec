@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 23.2.22
+Version: 23.7.10
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -24,7 +24,7 @@ BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
 BuildRequires: smartmet-library-spine-devel >= 23.7.10
-BuildRequires: smartmet-library-macgyver-devel >= 22.12.16
+BuildRequires: smartmet-library-macgyver-devel >= 23.6.15
 BuildRequires: smartmet-library-timeseries-devel >= 23.7.10
 BuildRequires: smartmet-engine-querydata-devel >= 23.7.10
 BuildRequires: %{smartmet_boost}-devel
@@ -39,8 +39,8 @@ BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 22.12.16
-Requires: smartmet-server >= 23.2.1
+Requires: smartmet-library-macgyver >= 23.6.15
+Requires: smartmet-server >= 23.5.19
 %if %{with observation}
 Requires: smartmet-engine-observation >= 23.7.11
 %endif
@@ -68,7 +68,7 @@ FMI SmartMet meta plugin
 rm -rf $RPM_BUILD_ROOT
 
 %setup -q -n %{SPECNAME}
- 
+
 %build -q -n %{SPECNAME}
 make %{_smp_mflags} \
      %{?!with_observation:CFLAGS=-DWITHOUT_OBSERVATION}
@@ -91,6 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/smartmet/plugins/meta/templates/*.c2t
 
 %changelog
+* Mon Jul 10 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.7.10-1.fmi
+- Small speed optimization
+- Fixed handling of exceptionTemplate and dataQualityTemplate settings
+
 * Wed Feb 22 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.2.22-1.fmi
 - Silenced CodeChecker warnings
 

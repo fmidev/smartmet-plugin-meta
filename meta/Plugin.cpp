@@ -252,9 +252,9 @@ void Plugin::init()
     parseDataQualityConfig();
 
     std::string template_dir = itsConfig.get_mandatory_path("templateDir");
-    std::string itsExceptionTemplateFile =
+    itsExceptionTemplateFile =
         template_dir + "/" + itsConfig.get_mandatory_config_param<std::string>("exceptionTemplate");
-    std::string itsDataQualityTemplateFile =
+    itsDataQualityTemplateFile =
         template_dir + "/" +
         itsConfig.get_mandatory_config_param<std::string>("dataQualityTemplate");
 
@@ -1050,7 +1050,8 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
 
       std::string firstMessage = exception.what();
       boost::algorithm::replace_all(firstMessage, "\n", " ");
-      firstMessage = firstMessage.substr(0, 300);
+      if (firstMessage.size() > 300)
+        firstMessage.resize(300);
       theResponse.setHeader("X-Meta-Error", firstMessage);
     }
   }
