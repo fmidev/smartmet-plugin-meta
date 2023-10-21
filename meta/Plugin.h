@@ -111,6 +111,7 @@ class Plugin : public SmartMetPlugin
 
   std::string itsExceptionTemplateFile;
   std::string itsDataQualityTemplateFile;
+  std::string itsObservablePropertiesTemplateFile;
   Fmi::TemplateFactory itsTemplateFactory;
 
   // Map contains the keys configured in plugin parameter configuration.

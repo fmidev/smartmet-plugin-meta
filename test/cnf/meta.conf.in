@@ -1,9 +1,9 @@
 defaultLanguage = "eng";
 
-templateDir = "../cnf/templates";
+templateDir = "../../cnf/templates";
 
-observable_properties_template = "../cnf/templates/observable_properties.c2t";
-forecastTemplate = "../cnf//templates/forecast_properties.c2t";
+observable_properties_template = "observable_properties.c2t";
+forecastTemplate = "forecast_properties.c2t";
 dataQualityTemplate = "observation_data_quality.c2t";
 exceptionTemplate = "exception.c2t";
 
