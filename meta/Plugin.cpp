@@ -251,7 +251,8 @@ void Plugin::init()
     parseForecastConfig();
     parseDataQualityConfig();
 
-    std::string template_dir = itsConfig.get_mandatory_path("templateDir");
+    std::string template_dir =
+        itsConfig.get_optional_path("templateDir", "/usr/share/smartmet/meta");
     itsExceptionTemplateFile =
         template_dir + "/" + itsConfig.get_mandatory_config_param<std::string>("exceptionTemplate");
     itsDataQualityTemplateFile =
@@ -1104,7 +1105,7 @@ extern "C" void destroy(SmartMetPlugin* us)
 <tr><td>\b Parameter</td><td>\b Type</td><td>\b Use</td><td>\b Description</td></tr>
 <tr><td>defaultLanguage</td><td>string</td><td>mandatory</td><td>Specifies default
 language</td></tr>
-<tr><td>templateDir</td><td>string</td><td>mandatory</td><td>Specifies absolute path of a directory
+<tr><td>templateDir</td><td>string</td><td>optional</td><td>Specifies absolute path of a directory
 where to look for CTPP2 format template files.</td></tr>
 <tr><td>dataQualityTemplate</td><td>string</td><td>mandatory</td><td>Specifies file name of CTPP2
 template file.</td></tr>
