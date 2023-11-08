@@ -10,7 +10,7 @@
 #include <engines/observation/Utils.h>
 #endif
 #include <boost/date_time/local_time/local_time.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <macgyver/DateTime.h>
 #include <boost/filesystem.hpp>
 #include <ctpp2/CDT.hpp>
 #include <macgyver/Exception.h>
@@ -989,7 +989,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
       isdebug = ("debug" == Spine::optional_string(theRequest.getParameter("format"), ""));
 
       const int expires_seconds = 60;
-      bp::ptime t_now = bp::second_clock::universal_time();
+      Fmi::DateTime t_now = Fmi::SecondClock::universal_time();
 
       // Excecuting the query
 
@@ -1003,7 +1003,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
 
       // Adding response headers
 
-      bp::ptime t_expires = t_now + bp::seconds(expires_seconds);
+      Fmi::DateTime t_expires = t_now + Fmi::Seconds(expires_seconds);
       boost::shared_ptr<Fmi::TimeFormatter> tformat(Fmi::TimeFormatter::create("http"));
       std::string cachecontrol = "public, max-age=" + std::to_string(expires_seconds);
       std::string expiration = tformat->format(t_expires);

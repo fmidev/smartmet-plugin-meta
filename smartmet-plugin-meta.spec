@@ -24,7 +24,7 @@ BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
 BuildRequires: smartmet-library-spine-devel >= 23.7.28
-BuildRequires: smartmet-library-macgyver-devel >= 23.7.28
+BuildRequires: smartmet-library-macgyver-devel >= 23.11.8
 BuildRequires: smartmet-library-timeseries-devel >= 23.7.10
 BuildRequires: smartmet-engine-querydata-devel >= 23.7.10
 BuildRequires: %{smartmet_boost}-devel
@@ -39,7 +39,7 @@ BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 23.7.28
+Requires: smartmet-library-macgyver >= 23.11.8
 Requires: smartmet-server >= 23.5.19
 %if %{with observation}
 Requires: smartmet-engine-observation >= 23.7.11
