@@ -251,12 +251,18 @@ void Plugin::init()
     parseForecastConfig();
     parseDataQualityConfig();
 
-    std::string template_dir = itsConfig.get_mandatory_path("templateDir");
+    std::string template_dir =
+        itsConfig.get_optional_path("templateDir", "/usr/share/smartmet/meta");
     itsExceptionTemplateFile =
         template_dir + "/" + itsConfig.get_mandatory_config_param<std::string>("exceptionTemplate");
     itsDataQualityTemplateFile =
         template_dir + "/" +
         itsConfig.get_mandatory_config_param<std::string>("dataQualityTemplate");
+
+    itsObservablePropertiesTemplateFile =
+        template_dir + "/" +
+        itsConfig.get_optional_config_param<std::string>("observable_properties_template",
+                                                         "observable_properties.c2t");
 
     if (!itsReactor->addContentHandler(this,
                                        "/meta",
@@ -690,9 +696,7 @@ std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
     std::ostringstream output;
     std::ostringstream log;
 
-    auto tmpl = itsConfig.get_mandatory_config_param<std::string>("observable_properties_template");
-
-    itsTemplateFactory.get(tmpl)->process(hash, output, log);
+    itsTemplateFactory.get(itsObservablePropertiesTemplateFile)->process(hash, output, log);
 
     return output.str();
   }
@@ -1104,18 +1108,17 @@ extern "C" void destroy(SmartMetPlugin* us)
 <tr><td>\b Parameter</td><td>\b Type</td><td>\b Use</td><td>\b Description</td></tr>
 <tr><td>defaultLanguage</td><td>string</td><td>mandatory</td><td>Specifies default
 language</td></tr>
-<tr><td>templateDir</td><td>string</td><td>mandatory</td><td>Specifies absolute path of a directory
+<tr><td>templateDir</td><td>string</td><td>optional</td><td>Specifies absolute path of a directory
 where to look for CTPP2 format template files.</td></tr>
 <tr><td>dataQualityTemplate</td><td>string</td><td>mandatory</td><td>Specifies file name of CTPP2
 template file.</td></tr>
 <tr><td>exceptionTemplate</td><td>string</td><td>mandatory</td><td>Specifies file name of CTPP2
 template file.</td></tr>
-<tr><td>observable_properties_template</td><td>string</td><td>mandatory</td><td>Specifies absolute
-file name path of CTPP2 template file.</td></tr>
-<tr><td>forecastTemplate</td><td>string</td><td>mandatory</td><td>Specifies absolute file name path
+<tr><td>observable_properties_template</td><td>string</td><td>optional</td><td>Specifies file name
 of CTPP2 template file.</td></tr>
-<tr><td>forecast_parameters</td><td>string</td><td>mandatory</td><td>Specifies forcast parameter
-names configured into the configuration file.</td></tr>
+<tr><td>forecastTemplate</td><td>string</td><td>optional</td><td>Specifies file of CTPP2 template
+file.</td></tr> <tr><td>forecast_parameters</td><td>string</td><td>mandatory</td><td>Specifies
+forcast parameter names configured into the configuration file.</td></tr>
 <tr><td>dataQualityDefinitionDir</td><td>string</td><td>mandatory</td><td>Specifies absolute of a
 directory where to look data quality configuration files.</td></tr>
 </table>
