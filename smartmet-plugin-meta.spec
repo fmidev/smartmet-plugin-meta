@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 23.10.21
+Version: 23.12.5
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -23,39 +23,39 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 23.10.10
-BuildRequires: smartmet-library-macgyver-devel >= 23.11.8
-BuildRequires: smartmet-library-timeseries-devel >= 23.10.11
-BuildRequires: smartmet-engine-querydata-devel >= 23.10.12
+BuildRequires: smartmet-library-spine-devel >= 23.12.5
+BuildRequires: smartmet-library-macgyver-devel >= 23.11.21
+BuildRequires: smartmet-library-timeseries-devel >= 23.11.21
+BuildRequires: smartmet-engine-querydata-devel >= 23.12.4
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 23.10.18
+BuildRequires: smartmet-engine-observation-devel >= 23.12.4
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 23.11.8
-Requires: smartmet-server >= 23.8.30
+Requires: smartmet-library-macgyver >= 23.11.21
+Requires: smartmet-server >= 23.12.5
 %if %{with observation}
-Requires: smartmet-engine-observation >= 23.10.18
+Requires: smartmet-engine-observation >= 23.12.4
 %endif
-Requires: smartmet-engine-querydata >= 23.10.12
-Requires: smartmet-library-spine >= 23.10.10
+Requires: smartmet-engine-querydata >= 23.12.4
+Requires: smartmet-library-spine >= 23.12.5
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 23.10.11
+#TestRequires: smartmet-library-timeseries-devel >= 23.11.21
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 23.10.12
-#TestRequires: smartmet-engine-observation >= 23.10.18
+#TestRequires: smartmet-engine-querydata >= 23.12.4
+#TestRequires: smartmet-engine-observation >= 23.12.4
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 23.7.21
 #TestRequires: gdal35
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Tue Dec  5 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.12.5-1.fmi
+- Repackaged due to an ABI change in SmartMetPlugin
+
 * Sat Oct 21 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.10.21-1.fmi
 - Changed templateDir setting to be optional with default value /usr/share/smartmet/meta
 
