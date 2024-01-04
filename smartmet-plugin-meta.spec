@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 23.12.5
+Version: 24.1.4
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -25,14 +25,14 @@ BuildRequires: make
 BuildRequires: libconfig17-devel
 BuildRequires: smartmet-library-spine-devel >= 23.12.5
 BuildRequires: smartmet-library-macgyver-devel >= 23.11.21
-BuildRequires: smartmet-library-timeseries-devel >= 23.11.21
+BuildRequires: smartmet-library-timeseries-devel >= 24.1.4
 BuildRequires: smartmet-engine-querydata-devel >= 23.12.4
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 23.12.4
+BuildRequires: smartmet-engine-observation-devel >= 24.1.4
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -42,7 +42,7 @@ Requires: libconfig17
 Requires: smartmet-library-macgyver >= 23.11.21
 Requires: smartmet-server >= 23.12.5
 %if %{with observation}
-Requires: smartmet-engine-observation >= 23.12.4
+Requires: smartmet-engine-observation >= 24.1.4
 %endif
 Requires: smartmet-engine-querydata >= 23.12.4
 Requires: smartmet-library-spine >= 23.12.5
@@ -52,10 +52,10 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 23.11.21
+#TestRequires: smartmet-library-timeseries-devel >= 24.1.4
 #TestRequires: smartmet-engine-geonames
 #TestRequires: smartmet-engine-querydata >= 23.12.4
-#TestRequires: smartmet-engine-observation >= 23.12.4
+#TestRequires: smartmet-engine-observation >= 24.1.4
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 23.7.21
 #TestRequires: gdal35
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Thu Jan  4 2024 Mika Heiskanen <mika.heiskanen@fmi.fi> - 24.1.4-1.fmi
+- Repackaged due to ABI changes in low level libraries
+
 * Tue Dec  5 2023 Mika Heiskanen <mika.heiskanen@fmi.fi> - 23.12.5-1.fmi
 - Repackaged due to an ABI change in SmartMetPlugin
 
