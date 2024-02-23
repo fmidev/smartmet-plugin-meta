@@ -23,39 +23,39 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 23.12.5
-BuildRequires: smartmet-library-macgyver-devel >= 23.11.21
-BuildRequires: smartmet-library-timeseries-devel >= 24.1.4
-BuildRequires: smartmet-engine-querydata-devel >= 23.12.4
+BuildRequires: smartmet-library-spine-devel >= 24.2.8
+BuildRequires: smartmet-library-macgyver-devel >= 24.1.17
+BuildRequires: smartmet-library-timeseries-devel >= 24.2.23
+BuildRequires: smartmet-engine-querydata-devel >= 24.2.23
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 24.1.4
+BuildRequires: smartmet-engine-observation-devel >= 24.2.23
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 23.11.21
-Requires: smartmet-server >= 23.12.5
+Requires: smartmet-library-macgyver >= 24.1.17
+Requires: smartmet-server >= 24.2.22
 %if %{with observation}
-Requires: smartmet-engine-observation >= 24.1.4
+Requires: smartmet-engine-observation >= 24.2.23
 %endif
-Requires: smartmet-engine-querydata >= 23.12.4
-Requires: smartmet-library-spine >= 23.12.5
+Requires: smartmet-engine-querydata >= 24.2.23
+Requires: smartmet-library-spine >= 24.2.8
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 24.1.4
+#TestRequires: smartmet-library-timeseries-devel >= 24.2.23
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 23.12.4
-#TestRequires: smartmet-engine-observation >= 24.1.4
+#TestRequires: smartmet-engine-querydata >= 24.2.23
+#TestRequires: smartmet-engine-observation >= 24.2.23
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 23.7.21
 #TestRequires: gdal35
