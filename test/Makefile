@@ -1,5 +1,7 @@
 all:
 
+-include $(HOME)/.smartmet.mk
+
 clean:
 	rm -f PluginTest *~
 	rm -f cnf/geonames.conf
@@ -17,9 +19,15 @@ TEST_PREPARE_TARGETS += start-geonames-db
 TEST_FINISH_TARGETS += stop-geonames-db
 TEST_TARGET := dummy
 else
+ifdef LOCAL_TESTS_ONLY
+GEONAMES_HOST_EDIT := cat
+META_CONF_EDIT := cat
+TEST_TARGET := dummy
+else
 GEONAMES_HOST_EDIT := cat
 META_CONF_EDIT := cat
 TEST_TARGETS := oracle postgresql
+endif
 endif
 
 TESTER_PARAM := --handler=/meta --reactor-config=cnf/reactor_$(TEST_TARGET).conf --ignore input/.testignore_$(TEST_TARGET)
