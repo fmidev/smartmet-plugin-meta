@@ -10,9 +10,9 @@
 #include <engines/observation/Utils.h>
 #endif
 #include <boost/date_time/local_time/local_time.hpp>
-#include <macgyver/DateTime.h>
 #include <boost/filesystem.hpp>
 #include <ctpp2/CDT.hpp>
+#include <macgyver/DateTime.h>
 #include <macgyver/Exception.h>
 #include <macgyver/StringConversion.h>
 #include <macgyver/TimeZoneFactory.h>
@@ -26,8 +26,6 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
-namespace bp = boost::posix_time;
 
 namespace SmartMet
 {
