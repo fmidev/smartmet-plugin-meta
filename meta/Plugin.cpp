@@ -9,7 +9,6 @@
 #ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Utils.h>
 #endif
-#include <boost/date_time/local_time/local_time.hpp>
 #include <boost/filesystem.hpp>
 #include <ctpp2/CDT.hpp>
 #include <macgyver/DateTime.h>
