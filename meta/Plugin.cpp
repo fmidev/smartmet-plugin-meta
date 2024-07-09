@@ -9,7 +9,7 @@
 #ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Utils.h>
 #endif
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <ctpp2/CDT.hpp>
 #include <macgyver/DateTime.h>
 #include <macgyver/Exception.h>
@@ -34,20 +34,20 @@ namespace Meta
 {
 namespace
 {
-void validate_directory(const boost::filesystem::path& dir)
+void validate_directory(const std::filesystem::path& dir)
 {
-  if (!boost::filesystem::exists(dir))
+  if (!std::filesystem::exists(dir))
     throw Fmi::Exception(BCP, "Directory '" + dir.string() + "' not found!");
 
-  if (!boost::filesystem::is_directory(dir))
+  if (!std::filesystem::is_directory(dir))
     throw Fmi::Exception(BCP, "'" + dir.string() + "' is not a directory!");
 }
 
-bool is_valid_file(const boost::filesystem::path& file)
+bool is_valid_file(const std::filesystem::path& file)
 {
   auto name = file.filename().string();
 
-  return (boost::filesystem::is_regular_file(file) and !boost::algorithm::starts_with(name, ".") and
+  return (std::filesystem::is_regular_file(file) and !boost::algorithm::starts_with(name, ".") and
           !boost::algorithm::starts_with(name, "#") && boost::algorithm::ends_with(name, ".conf"));
 }
 
@@ -450,16 +450,16 @@ void Plugin::parseDataQualityConfig()
   try
   {
     // Test folder path and file existencies
-    boost::filesystem::path features_dir = itsConfig.get_mandatory_path("dataQualityDefinitionDir");
+    std::filesystem::path features_dir = itsConfig.get_mandatory_path("dataQualityDefinitionDir");
 
     validate_directory(features_dir);
 
     // Iterate over all data quality code configurations.
-    for (auto it = boost::filesystem::directory_iterator(features_dir);
-         it != boost::filesystem::directory_iterator();
+    for (auto it = std::filesystem::directory_iterator(features_dir);
+         it != std::filesystem::directory_iterator();
          ++it)
     {
-      const boost::filesystem::path file = *it;
+      const std::filesystem::path file = *it;
       if (is_valid_file(file))
         parseDataQualityConfig(file);
     }
@@ -470,11 +470,11 @@ void Plugin::parseDataQualityConfig()
   }
 }
 
-void Plugin::parseDataQualityConfig(const boost::filesystem::path& file)
+void Plugin::parseDataQualityConfig(const std::filesystem::path& file)
 {
   try
   {
-    boost::shared_ptr<SmartMet::Spine::ConfigBase> desc(
+    std::shared_ptr<SmartMet::Spine::ConfigBase> desc(
         new SmartMet::Spine::ConfigBase(file.string(), "Data quality description"));
 
     // Get root of the data quality code configuration and form an entry into
@@ -711,7 +711,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
   {
     std::string language =
         SmartMet::Spine::optional_string(theRequest.getParameter("language"), "eng");
-    boost::optional<std::string> code = theRequest.getParameter("qualityCode");
+    std::optional<std::string> code = theRequest.getParameter("qualityCode");
 
     CTPP::CDT hash;
     hash["language"] = language;
@@ -737,7 +737,7 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
     else if (itsDataQualityRegistry.getMapEntry(*code, mapEntry))
     {
       std::string realCode = *code;
-      itsDataQualityRegistry.getKey(realCode, code.get());
+      itsDataQualityRegistry.getKey(realCode, *code);
 
       hash["codeList"][realCode]["code"] = realCode;
       hash["codeList"][realCode]["label"] = mapEntry.label->get(language);
@@ -1005,7 +1005,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
       // Adding response headers
 
       Fmi::DateTime t_expires = t_now + Fmi::Seconds(expires_seconds);
-      boost::shared_ptr<Fmi::TimeFormatter> tformat(Fmi::TimeFormatter::create("http"));
+      std::shared_ptr<Fmi::TimeFormatter> tformat(Fmi::TimeFormatter::create("http"));
       std::string cachecontrol = "public, max-age=" + std::to_string(expires_seconds);
       std::string expiration = tformat->format(t_expires);
       std::string modification = tformat->format(t_now);

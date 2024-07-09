@@ -85,7 +85,7 @@ class Plugin : public SmartMetPlugin
   void parseForecastConfig();
 
   void parseDataQualityConfig();
-  void parseDataQualityConfig(const boost::filesystem::path& file);
+  void parseDataQualityConfig(const std::filesystem::path& file);
 
   const std::string itsModuleName;
 
