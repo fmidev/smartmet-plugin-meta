@@ -10,10 +10,10 @@ include $(shell echo $${PREFIX-/usr})/share/smartmet/devel/makefile.inc
 
 DEFINES = -DUNIX -D_REENTRANT
 
-LIBS += -L$(libdir) \
+LIBS += $(PREFIX_LDFLAGS) \
 	-lsmartmet-spine \
 	-lsmartmet-macgyver \
-	-lctpp2
+	$(REQUIRED_LIBS)
 
 TEMPLATES = $(wildcard cnf/templates/*.template)
 COMPILED_TEMPLATES = $(patsubst %.template, %.c2t, $(TEMPLATES))
