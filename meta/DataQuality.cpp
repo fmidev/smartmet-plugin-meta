@@ -1,6 +1,5 @@
 #include "DataQuality.h"
 #include <boost/algorithm/string.hpp>
-#include <boost/foreach.hpp>
 #include <macgyver/Exception.h>
 #include <macgyver/TypeName.h>
 #include <iostream>
