@@ -23,7 +23,7 @@ BuildRequires: libconfig17-devel
 BuildRequires: smartmet-library-spine-devel >= 24.8.7
 BuildRequires: smartmet-library-macgyver-devel >= 24.8.7
 BuildRequires: smartmet-library-timeseries-devel >= 24.8.7
-BuildRequires: smartmet-engine-querydata-devel >= 24.8.7
+BuildRequires: smartmet-engine-querydata-devel >= 24.9.2
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
@@ -41,7 +41,7 @@ Requires: smartmet-server >= 24.8.7
 %if %{with observation}
 Requires: smartmet-engine-observation >= 24.8.7
 %endif
-Requires: smartmet-engine-querydata >= 24.8.7
+Requires: smartmet-engine-querydata >= 24.9.2
 Requires: smartmet-library-spine >= 24.8.7
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
@@ -51,7 +51,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-library-spine-plugin-test
 #TestRequires: smartmet-library-timeseries-devel >= 24.8.7
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 24.8.7
+#TestRequires: smartmet-engine-querydata >= 24.9.2
 #TestRequires: smartmet-engine-observation >= 24.8.7
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 24.8.7
