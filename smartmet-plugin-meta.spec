@@ -103,6 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 * Fri Jul 12 2024 Andris Pavēnis <andris.pavenis@fmi.fi> 24.7.12-1.fmi
 - Replace many boost library types with C++ standard library ones
 
+* Mon Jun  3 2024 Mika Heiskanen <mika.heiskanen@fmi.fi> - 24.6.3-1.fmi
+- Repackaged due to ABI changes
+
 * Thu May 16 2024 Andris Pavēnis <andris.pavenis@fmi.fi> 24.5.16-1.fmi
 - Clean up boost date-time uses
 
