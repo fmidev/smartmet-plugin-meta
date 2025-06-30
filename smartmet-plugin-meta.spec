@@ -37,7 +37,6 @@ BuildRequires: smartmet-engine-observation-devel >= 25.2.18
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
-BuildRequires: imake
 Requires: ctpp2
 Requires: libconfig17
 Requires: smartmet-library-macgyver >= 25.2.18
