@@ -33,7 +33,7 @@ BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 25.2.18
+BuildRequires: smartmet-engine-observation-devel >= 25.8.22
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -42,7 +42,7 @@ Requires: libconfig17
 Requires: smartmet-library-macgyver >= 25.2.18
 Requires: smartmet-server >= 25.2.18
 %if %{with observation}
-Requires: smartmet-engine-observation >= 25.2.18
+Requires: smartmet-engine-observation >= 25.8.22
 %endif
 Requires: smartmet-engine-querydata >= 25.2.18
 Requires: smartmet-library-spine >= 25.2.18
