@@ -982,11 +982,6 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
 
     try
     {
-      if (checkRequest(theRequest, theResponse, false))
-      {
-        return;
-      }
-
       isdebug = ("debug" == Spine::optional_string(theRequest.getParameter("format"), ""));
 
       const int expires_seconds = 60;
