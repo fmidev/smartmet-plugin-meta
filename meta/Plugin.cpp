@@ -612,7 +612,7 @@ void Plugin::parseDataQualityConfig(const std::filesystem::path& file)
   {
     std::cerr << SmartMet::Spine::log_time_str()
               << ": error reading data quality code configuration"
-              << " file '" << file.string() << "'" << std::endl;
+              << " file '" << file.string() << "'\n";
 
     Fmi::Exception exception(BCP, "Error while reading data quality code configuration!", nullptr);
     exception.addParameter("File", file.string());
@@ -1013,7 +1013,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
       if (response.empty())
       {
         std::cerr << "Warning: Empty input for request " << theRequest.getQueryString() << " from "
-                  << theRequest.getClientIP() << std::endl;
+                  << theRequest.getClientIP() << '\n';
       }
 
 #ifdef MYDEBUG
