@@ -9,7 +9,6 @@
 #ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Utils.h>
 #endif
-#include <filesystem>
 #include <ctpp2/CDT.hpp>
 #include <macgyver/DateTime.h>
 #include <macgyver/Exception.h>
@@ -21,6 +20,7 @@
 #include <spine/Table.h>
 #include <spine/Value.h>
 #include <timeseries/TimeSeriesGeneratorOptions.h>
+#include <filesystem>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -180,6 +180,89 @@ CTPP::CDT get_wanted_parameters(const Plugin::ForecastMap& forecastmap,
   return hash;
 }
 
+#ifndef WITHOUT_OBSERVATION
+void updateObservableProperties(
+    const std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+        observableProperties,
+    const std::string& language)
+{
+  try
+  {
+    std::string quality_s;
+    std::string phenomenon_s;
+    if (language == "fi")
+    {
+      quality_s = " laatu";
+      phenomenon_s = "Laatu";
+    }
+    if (language == "en")
+    {
+      quality_s = " quality";
+      phenomenon_s = "Quality";
+    }
+
+    for (auto& prop : *observableProperties)
+    {
+      if (!prop.gmlId.empty())
+        prop.gmlId.append("-qc");
+      if (!prop.observablePropertyLabel.empty())
+        prop.observablePropertyLabel.append(quality_s);
+      prop.basePhenomenon = phenomenon_s;
+      prop.uom = "Index";
+      // block statistical fields to shown out.
+      prop.statisticalFunction.resize(0);
+    }
+  }
+  catch (...)
+  {
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
+  }
+}
+#endif
+
+#ifndef WITHOUT_OBSERVATION
+
+void parseObservablePropertiesResponse(
+    const std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
+        observableProperties,
+    CTPP::CDT& hash,
+    std::vector<std::string>&
+    /* parameters */)
+{
+  try
+  {
+    int propertiesCount = 0;
+
+    for (auto& prop : *observableProperties)
+    {
+      hash["observableProperties"][prop.gmlId]["observablePropertyId"] = prop.gmlId;
+      hash["observableProperties"][prop.gmlId]["observablePropertyLabel"] =
+          prop.observablePropertyLabel;
+      hash["observableProperties"][prop.gmlId]["basePhenomenon"] = prop.basePhenomenon;
+
+      boost::erase_all(prop.uom, " ");  // e.g. "ug S/m3"
+      if (!prop.uom.empty())
+        hash["observableProperties"][prop.gmlId]["uom"] = prop.uom;
+      // No need to define if statisticalFunction is empty
+      if (!prop.statisticalFunction.empty())
+      {
+        hash["observableProperties"][prop.gmlId]["statisticalMeasureId"] =
+            prop.statisticalMeasureId;
+        hash["observableProperties"][prop.gmlId]["statisticalFunction"] = prop.statisticalFunction;
+        hash["observableProperties"][prop.gmlId]["aggregationTimePeriod"] =
+            prop.aggregationTimePeriod;
+      }
+      propertiesCount++;
+    }
+    hash["propertiesCount"] = propertiesCount;
+  }
+  catch (...)
+  {
+    throw Fmi::Exception::Trace(BCP, "Operation failed!");
+  }
+}
+#endif
+
 }  // namespace
 
 // ----------------------------------------------------------------------
@@ -261,13 +344,13 @@ void Plugin::init()
         itsConfig.get_optional_config_param<std::string>("observable_properties_template",
                                                          "observable_properties.c2t");
 
-    if (!itsReactor->addContentHandler(this,
-                                       "/meta",
-                                       [this](Spine::Reactor& theReactor,
-                                              const Spine::HTTP::Request& theRequest,
-                                              Spine::HTTP::Response& theResponse) {
-                                         callRequestHandler(theReactor, theRequest, theResponse);
-                                       }))
+    if (!itsReactor->addContentHandler(
+            this,
+            "/meta",
+            [this](Spine::Reactor& theReactor,
+                   const Spine::HTTP::Request& theRequest,
+                   Spine::HTTP::Response& theResponse)
+            { callRequestHandler(theReactor, theRequest, theResponse); }))
       throw Fmi::Exception(BCP, "Failed to register Meta plugin content handler");
   }
   catch (...)
@@ -602,89 +685,6 @@ std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
     throw Fmi::Exception::Trace(BCP, "Operation failed!");
   }
 }
-
-#ifndef WITHOUT_OBSERVATION
-void updateObservableProperties(
-    const std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
-        observableProperties,
-    const std::string& language)
-{
-  try
-  {
-    std::string quality_s;
-    std::string phenomenon_s;
-    if (language == "fi")
-    {
-      quality_s = " laatu";
-      phenomenon_s = "Laatu";
-    }
-    if (language == "en")
-    {
-      quality_s = " quality";
-      phenomenon_s = "Quality";
-    }
-
-    for (auto& prop : *observableProperties)
-    {
-      if (!prop.gmlId.empty())
-        prop.gmlId.append("-qc");
-      if (!prop.observablePropertyLabel.empty())
-        prop.observablePropertyLabel.append(quality_s);
-      prop.basePhenomenon = phenomenon_s;
-      prop.uom = "Index";
-      // block statistical fields to shown out.
-      prop.statisticalFunction.resize(0);
-    }
-  }
-  catch (...)
-  {
-    throw Fmi::Exception::Trace(BCP, "Operation failed!");
-  }
-}
-#endif
-
-#ifndef WITHOUT_OBSERVATION
-
-void parseObservablePropertiesResponse(
-    const std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
-        observableProperties,
-    CTPP::CDT& hash,
-    std::vector<std::string>&
-    /* parameters */)
-{
-  try
-  {
-    int propertiesCount = 0;
-
-    for (auto& prop : *observableProperties)
-    {
-      hash["observableProperties"][prop.gmlId]["observablePropertyId"] = prop.gmlId;
-      hash["observableProperties"][prop.gmlId]["observablePropertyLabel"] =
-          prop.observablePropertyLabel;
-      hash["observableProperties"][prop.gmlId]["basePhenomenon"] = prop.basePhenomenon;
-
-      boost::erase_all(prop.uom, " ");  // e.g. "ug S/m3"
-      if (!prop.uom.empty())
-        hash["observableProperties"][prop.gmlId]["uom"] = prop.uom;
-      // No need to define if statisticalFunction is empty
-      if (!prop.statisticalFunction.empty())
-      {
-        hash["observableProperties"][prop.gmlId]["statisticalMeasureId"] =
-            prop.statisticalMeasureId;
-        hash["observableProperties"][prop.gmlId]["statisticalFunction"] = prop.statisticalFunction;
-        hash["observableProperties"][prop.gmlId]["aggregationTimePeriod"] =
-            prop.aggregationTimePeriod;
-      }
-      propertiesCount++;
-    }
-    hash["propertiesCount"] = propertiesCount;
-  }
-  catch (...)
-  {
-    throw Fmi::Exception::Trace(BCP, "Operation failed!");
-  }
-}
-#endif
 
 std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
 {
