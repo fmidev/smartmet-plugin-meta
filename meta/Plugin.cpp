@@ -571,7 +571,7 @@ void Plugin::parseDataQualityConfig(const std::filesystem::path& file)
     auto defaultLanguage = itsConfig.get_mandatory_config_param<std::string>("defaultLanguage");
 
     std::ostringstream msg;
-    if (code.length() == 0)
+    if (code.empty())
     {
       msg << SmartMet::Spine::log_time_str() << ": [Meta] error reading Data quality description"
           << " file '" << file.string() << "'. Parameter 'code' is zero length.";
