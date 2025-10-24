@@ -93,12 +93,12 @@ class Plugin : public SmartMetPlugin
 
   Spine::Reactor* itsReactor{nullptr};
 
-  Engine::Geonames::Engine* itsGeoEngine{nullptr};
+  std::shared_ptr<Engine::Geonames::Engine> itsGeoEngine;
 
-  Engine::Querydata::Engine* itsQEngine{nullptr};
+  std::shared_ptr<Engine::Querydata::Engine> itsQEngine;
 
 #ifndef WITHOUT_OBSERVATION
-  Engine::Observation::Engine* itsObsEngine{nullptr};
+  std::shared_ptr<Engine::Observation::Engine> itsObsEngine;
 #endif
 
  public:

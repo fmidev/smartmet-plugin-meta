@@ -296,19 +296,14 @@ void Plugin::init()
   try
   {
     // Obtain the QEngine pointer
-    itsQEngine = reinterpret_cast<SmartMet::Engine::Querydata::Engine*>(
-        itsReactor->getSingleton("Querydata", nullptr));
+    itsQEngine = itsReactor->getEngine<SmartMet::Engine::Querydata::Engine>("Querydata", nullptr);
 
     // ObsEngine needs also GeoEngine, get it
-    itsGeoEngine = reinterpret_cast<SmartMet::Engine::Geonames::Engine*>(
-        itsReactor->getSingleton("Geonames", nullptr));
-    if (itsGeoEngine == nullptr)
-      throw Fmi::Exception(BCP, "Geonames engine unavailable");
+    itsGeoEngine = itsReactor->getEngine<SmartMet::Engine::Geonames::Engine>("Geonames", nullptr);
 
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
-    itsObsEngine = reinterpret_cast<SmartMet::Engine::Observation::Engine*>(
-        itsReactor->getSingleton("Observation", nullptr));
+    itsObsEngine = itsReactor->getEngine<SmartMet::Engine::Observation::Engine>("Observation", nullptr);
 #endif
 
 #ifndef WITHOUT_OBSERVATION
