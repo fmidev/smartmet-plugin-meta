@@ -303,7 +303,8 @@ void Plugin::init()
 
 #ifndef WITHOUT_OBSERVATION
     // Obtain the ObsEngine pointer
-    itsObsEngine = itsReactor->getEngine<SmartMet::Engine::Observation::Engine>("Observation", nullptr);
+    itsObsEngine =
+        itsReactor->getEngine<SmartMet::Engine::Observation::Engine>("Observation", nullptr);
 #endif
 
 #ifndef WITHOUT_OBSERVATION
@@ -339,13 +340,13 @@ void Plugin::init()
         itsConfig.get_optional_config_param<std::string>("observable_properties_template",
                                                          "observable_properties.c2t");
 
-    if (!itsReactor->addContentHandler(
-            this,
-            "/meta",
-            [this](Spine::Reactor& theReactor,
-                   const Spine::HTTP::Request& theRequest,
-                   Spine::HTTP::Response& theResponse)
-            { callRequestHandler(theReactor, theRequest, theResponse); }))
+    if (!itsReactor->addContentHandler(this,
+                                       "/meta",
+                                       [this](Spine::Reactor& theReactor,
+                                              const Spine::HTTP::Request& theRequest,
+                                              Spine::HTTP::Response& theResponse) {
+                                         callRequestHandler(theReactor, theRequest, theResponse);
+                                       }))
       throw Fmi::Exception(BCP, "Failed to register Meta plugin content handler");
   }
   catch (...)
