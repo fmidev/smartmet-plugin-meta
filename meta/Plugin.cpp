@@ -1013,7 +1013,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
       }
 
 #ifdef MYDEBUG
-      std::cout << "Output:" << std::endl << response << std::endl;
+      std::cout << "Output:\n" << response << '\n';
 #endif
     }
     catch (...)
