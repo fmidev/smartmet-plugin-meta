@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 25.10.27
+Version: 26.1.13
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -33,7 +33,7 @@ BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 25.10.27
+BuildRequires: smartmet-engine-observation-devel >= 26.1.13
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -42,7 +42,7 @@ Requires: libconfig17
 Requires: smartmet-library-macgyver >= 25.2.18
 Requires: smartmet-server >= 25.10.27
 %if %{with observation}
-Requires: smartmet-engine-observation >= 25.10.27
+Requires: smartmet-engine-observation >= 26.1.13
 %endif
 Requires: smartmet-engine-querydata >= 25.2.18
 Requires: smartmet-library-spine >= 25.10.27
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Tue Jan 13 2026 Andris Pavēnis <andris.pavenis@fmi.fi> 26.1.13-1.fmi
+- Repackage due to smartmet-engine-observation ABI changes
+
 * Mon Oct 27 2025 Andris Pavēnis <andris.pavenis@fmi.fi> 25.10.27-1.fmi
 - Update due to smartmet-library-spine ABI changes
 
