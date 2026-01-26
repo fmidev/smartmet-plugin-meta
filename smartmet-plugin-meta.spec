@@ -58,7 +58,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-engine-observation >= 25.10.27
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 25.2.18
-#TestRequires: gdal310
+#TestRequires: gdal312
 #TestRequires: geos313
 
 %description
