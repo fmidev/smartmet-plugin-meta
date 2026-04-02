@@ -1,20 +1,8 @@
-Table of Contents
-=================
+# smartmet-plugin-meta
 
-  * [SmartMet Server](#SmartMet Server)
-  * [Introduction](#Introduction)
-    * [Example: Quality code request](#example-quality-code-request)
-    * [Example: observableProperty](#example-observableproperty)
+Part of [SmartMet Server](https://github.com/fmidev/smartmet-server). See the [SmartMet Server documentation](https://github.com/fmidev/smartmet-server) for a full overview of the ecosystem.
 
-# SmartMet Server
-
-[SmartMet Server](https://github.com/fmidev/smartmet-server) is a data
-and product server for MetOcean data. It provides a high capacity and
-high availability data and product server for MetOcean data. The
-server is written in C++, since 2008 it has been in operational use by
-the Finnish Meteorological Institute FMI.
-
-# Introduction 
+## Introduction 
 
 The purpose of the meta plugin is to provide access to the meta data of observations.
 We can specify the language in which we would like to have the the metadata in the request. 
@@ -28,7 +16,7 @@ For the meta plugin  the following access parameters are available:
 
 
 
-## Example: Quality code request
+### Example: Quality code request
 
 There are 10 quality codes which are the following:
 
@@ -68,7 +56,7 @@ The response to the meta data request for the quality code 0 is given below.
 ````
 
 
-## Example: observableProperty
+### Example: observableProperty
 
 In the example below shows the metadata request for the observableProperty, "Air temperature".
 
@@ -94,4 +82,3 @@ The response to the meta data request for the observableProperty, "Air temperatu
 </ObservableProperty>
 
 ````
-
