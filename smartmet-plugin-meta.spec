@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 26.2.4
+Version: 26.4.13
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -24,40 +24,40 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 26.2.4
-BuildRequires: smartmet-library-macgyver-devel >= 26.2.4
-BuildRequires: smartmet-library-timeseries-devel >= 26.2.4
-BuildRequires: smartmet-engine-querydata-devel >= 26.2.4
+BuildRequires: smartmet-library-spine-devel >= 26.4.13
+BuildRequires: smartmet-library-macgyver-devel >= 26.4.13
+BuildRequires: smartmet-library-timeseries-devel >= 26.4.13
+BuildRequires: smartmet-engine-querydata-devel >= 26.4.13
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 26.2.4
+BuildRequires: smartmet-engine-observation-devel >= 26.4.13
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 26.2.4
-Requires: smartmet-server >= 26.2.4
+Requires: smartmet-library-macgyver >= 26.4.13
+Requires: smartmet-server >= 26.4.13
 %if %{with observation}
-Requires: smartmet-engine-observation >= 26.2.4
+Requires: smartmet-engine-observation >= 26.4.13
 %endif
-Requires: smartmet-engine-querydata >= 26.2.4
-Requires: smartmet-library-spine >= 26.2.4
+Requires: smartmet-engine-querydata >= 26.4.13
+Requires: smartmet-library-spine >= 26.4.13
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: libconfig17
 #TestRequires: smartmet-utils-devel
 #TestRequires: smartmet-library-spine-plugin-test
-#TestRequires: smartmet-library-timeseries-devel >= 26.2.4
+#TestRequires: smartmet-library-timeseries-devel >= 26.4.13
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 26.2.4
-#TestRequires: smartmet-engine-observation >= 26.2.4
+#TestRequires: smartmet-engine-querydata >= 26.4.13
+#TestRequires: smartmet-engine-observation >= 26.4.13
 #TestRequires: smartmet-test-data
-#TestRequires: smartmet-test-db >= 26.2.4
+#TestRequires: smartmet-test-db >= 26.2.17
 #TestRequires: gdal312
 #TestRequires: geos313
 
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Mon Apr 13 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.4.13-1.fmi
+- Repackaged due to API changes
+
 * Wed Feb  4 2026 Andris Pavēnis <andris.pavenis@fmi.fi> 26.2.4-1.fmi
 - Update to proj-9.7, gdal-3.12, fmt-12
 
