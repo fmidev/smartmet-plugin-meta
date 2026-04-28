@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 26.4.13
+Version: 26.4.28
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -24,7 +24,7 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 26.4.13
+BuildRequires: smartmet-library-spine-devel >= 26.4.27
 BuildRequires: smartmet-library-macgyver-devel >= 26.4.13
 BuildRequires: smartmet-library-timeseries-devel >= 26.4.13
 BuildRequires: smartmet-engine-querydata-devel >= 26.4.13
@@ -45,7 +45,7 @@ Requires: smartmet-server >= 26.4.13
 Requires: smartmet-engine-observation >= 26.4.13
 %endif
 Requires: smartmet-engine-querydata >= 26.4.13
-Requires: smartmet-library-spine >= 26.4.13
+Requires: smartmet-library-spine >= 26.4.27
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Tue Apr 28 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.4.28-1.fmi
+- Repackaged due to API changes
+
 * Mon Apr 13 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.4.13-1.fmi
 - Repackaged due to API changes
 
