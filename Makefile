@@ -12,6 +12,7 @@ DEFINES = -DUNIX -D_REENTRANT
 
 LIBS += $(PREFIX_LDFLAGS) \
 	-lsmartmet-spine \
+	-lsmartmet-timeseries \
 	-lsmartmet-macgyver \
 	$(REQUIRED_LIBS)
 

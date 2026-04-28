@@ -4,7 +4,7 @@
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
 Version: 26.4.28
-Release: 1%{?dist}.fmi
+Release: 2%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
 URL: https://github.com/fmidev/smartmet-plugin-meta
@@ -46,6 +46,7 @@ Requires: smartmet-engine-observation >= 26.4.13
 %endif
 Requires: smartmet-engine-querydata >= 26.4.13
 Requires: smartmet-library-spine >= 26.4.27
+Requires: smartmet-library-timeseries >= 26.4.13
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
 Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
@@ -91,6 +92,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Tue Apr 28 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.4.28-2.fmi
+- Link explicitly against smartmet-library-timeseries and add the
+  matching runtime Requires (the plugin uses TimeSeries::parseTimes
+  but was relying on transitive linking, with no spec declaration)
+
 * Tue Apr 28 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.4.28-1.fmi
 - Repackaged due to API changes
 
