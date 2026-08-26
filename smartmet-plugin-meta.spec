@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 26.6.24
+Version: 26.8.26
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -24,28 +24,28 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 26.6.24
-BuildRequires: smartmet-library-macgyver-devel >= 26.6.15
+BuildRequires: smartmet-library-spine-devel >= 26.8.24
+BuildRequires: smartmet-library-macgyver-devel >= 26.8.19
 BuildRequires: smartmet-library-timeseries-devel >= 26.5.5
-BuildRequires: smartmet-engine-querydata-devel >= 26.6.24
+BuildRequires: smartmet-engine-querydata-devel >= 26.8.24
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 26.6.24
+BuildRequires: smartmet-engine-observation-devel >= 26.8.24
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 26.6.15
-Requires: smartmet-server >= 26.6.24
+Requires: smartmet-library-macgyver >= 26.8.19
+Requires: smartmet-server >= 26.8.21
 %if %{with observation}
-Requires: smartmet-engine-observation >= 26.6.24
+Requires: smartmet-engine-observation >= 26.8.24
 %endif
-Requires: smartmet-engine-querydata >= 26.6.24
-Requires: smartmet-library-spine >= 26.6.24
+Requires: smartmet-engine-querydata >= 26.8.24
+Requires: smartmet-library-spine >= 26.8.24
 Requires: smartmet-library-timeseries >= 26.5.5
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
@@ -55,8 +55,8 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-library-spine-plugin-test
 #TestRequires: smartmet-library-timeseries-devel >= 26.5.5
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 26.6.24
-#TestRequires: smartmet-engine-observation >= 26.6.24
+#TestRequires: smartmet-engine-querydata >= 26.8.24
+#TestRequires: smartmet-engine-observation >= 26.8.24
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 26.5.8
 #TestRequires: gdal312
@@ -92,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Wed Aug 26 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.8.26-1.fmi
+- QEngine ABI changed
+
 * Wed Jun 24 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.6.24-1.fmi
 - Mass rebuild
 
