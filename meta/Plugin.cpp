@@ -735,7 +735,9 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
       std::string realCode = *code;
       itsDataQualityRegistry.getKey(realCode, *code);
 
-      hash["codeList"][realCode]["code"] = realCode;
+      // The code is request-controlled and is emitted into the text/xml response by the
+      // template without any auto-escaping, so escape it here to prevent XML injection.
+      hash["codeList"][realCode]["code"] = Fmi::safexmlescape(realCode);
       hash["codeList"][realCode]["label"] = mapEntry.label->get(language);
       hash["codeList"][realCode]["description"] = mapEntry.description->get(language);
     }
