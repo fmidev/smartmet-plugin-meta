@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Category xmlns="http://www.opengis.net/swe/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
+  
+  <quality>
+   <Category id="qc-1">
+    <label>Good quality</label>
+    <description>Automatically quality controlled value. Value should fulfill the requirements that are set for the station type, the measuring device and the variable. Measured value has passed all the quality tests.</description>
+    <value>1</value>
+   </Category>
+  </quality>
+</Category>
