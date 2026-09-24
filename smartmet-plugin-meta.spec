@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 26.9.13
+Version: 26.9.24
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -27,7 +27,7 @@ BuildRequires: libconfig17-devel
 BuildRequires: smartmet-library-spine-devel >= 26.9.23
 BuildRequires: smartmet-library-macgyver-devel >= 26.9.23
 BuildRequires: smartmet-library-timeseries-devel >= 26.9.16
-BuildRequires: smartmet-engine-querydata-devel >= 26.9.16
+BuildRequires: smartmet-engine-querydata-devel >= 26.9.23
 BuildRequires: %{smartmet_boost}-devel
 BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
@@ -44,7 +44,7 @@ Requires: smartmet-server >= 26.9.2
 %if %{with observation}
 Requires: smartmet-engine-observation >= 26.9.23
 %endif
-Requires: smartmet-engine-querydata >= 26.9.16
+Requires: smartmet-engine-querydata >= 26.9.23
 Requires: smartmet-library-spine >= 26.9.23
 Requires: smartmet-library-timeseries >= 26.9.16
 Provides: %{SPECNAME}
@@ -55,7 +55,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-library-spine-plugin-test
 #TestRequires: smartmet-library-timeseries-devel >= 26.9.16
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 26.9.16
+#TestRequires: smartmet-engine-querydata >= 26.9.23
 #TestRequires: smartmet-engine-observation >= 26.9.23
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 26.5.8
@@ -92,10 +92,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
-* Wed Sep 23 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.9.13-1.fmi
+* Thu Sep 24 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.9.24-1.fmi
 - Repackaged due to base library ABI changes
 * Wed Sep 16 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.9.16-1.fmi
-- Repackaged due to QEngine ABI changes (smartmet-engine-querydata >= 26.9.16)
+- Repackaged due to QEngine ABI changes (smartmet-engine-querydata >= 26.9.23)
 
 * Wed Aug 26 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.8.26-1.fmi
 - QEngine ABI changed
