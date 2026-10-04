@@ -1,0 +1,2 @@
+GET /meta?language=eng&observableProperty=forecast&param=Temperature&units=nosuchunits HTTP/1.0
+

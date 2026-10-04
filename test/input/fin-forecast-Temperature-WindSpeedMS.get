@@ -1,0 +1,2 @@
+GET /meta?language=fin&observableProperty=forecast&param=Temperature,WindSpeedMS HTTP/1.0
+

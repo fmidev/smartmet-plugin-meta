@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CategoryRange xmlns="http://www.opengis.net/swe/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
+  
+  <quality>
+   <Category id="qc-0">
+    <label>Unknown quality</label>
+    <description>Value is not quality controlled and it may be erroneous. This quality code is typically given for observations that are not checked in any way. For example foreign synops and road weather observations.</description>
+    <value>0</value>
+   </Category>
+  </quality>
+  <quality>
+   <Category id="qc-1">
+    <label>Good quality</label>
+    <description>Automatically quality controlled value. Value should fulfill the requirements that are set for the station type, the measuring device and the variable. Measured value has passed all the quality tests.</description>
+    <value>1</value>
+   </Category>
+  </quality>
+  <quality>
+   <Category id="qc-2">
+    <label>Good quality</label>
+    <description>Manually quality controlled value. Value should fulfill the requirements that are set for the station type, the measuring device and the variable.</description>
+    <value>2</value>
+   </Category>
+  </quality>
+  <quality>
+   <Category id="qc-3">
+    <label>Accepted quality</label>
+    <description>Automatically quality controlled value. Value does not necessarily fulfill all the requirements that are set for the station type, the measuring device and the variable. Value has not necessarily fulfilled all the tests but it is found to be adequate for most of the application. Value is not necessarily original observation but it might be corrected. Value may be inaccurate.</description>
+    <value>3</value>
+   </Category>
+  </quality>
+  <quality>
+   <Category id="qc-4">
+    <label>Accepted quality</label>
+    <description>Manually quality checked value. Value does not necessarily fulfill all the requirements that are set for the station type, the measuring device and the variable. Initially value has not necessarily fulfilled all the quality tests but it is found to be adequate for most of the application. Value is not necessarily original observation but it might be corrected. Value may be inaccurate.</description>
+    <value>4</value>
+   </Category>
+  </quality>
+  <quality>
+   <Category id="qc-5">
+    <label>Missing value</label>
+    <description>Missing value in database. Typically this kind of measurement row is not stored into database but when value is missing also measurement row will be missing. Nevertheless, quality code 5 can still be used in some situations or with some variables.</description>
+    <value>5</value>
+   </Category>
+  </quality>
+</CategoryRange>

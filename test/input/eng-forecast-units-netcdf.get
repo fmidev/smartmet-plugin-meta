@@ -1,0 +1,2 @@
+GET /meta?language=eng&observableProperty=forecast&param=Temperature,Humidity&units=netcdf HTTP/1.0
+

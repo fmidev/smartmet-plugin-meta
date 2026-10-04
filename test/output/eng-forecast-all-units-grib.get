@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompositeObservableProperty xmlns="http://inspire.ec.europa.eu/schemas/omop/2.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  gml:id="prop-1"
+  xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/omop/2.9 http://inspire.ec.europa.eu/draft-schemas/omop/2.9/ObservableProperties.xsd">
+  <count>41</count>
+    <component>
+      <ObservableProperty gml:id="dewpoint">
+        <label>Dew point</label>
+      	<basePhenomenon>Humidity</basePhenomenon>
+      	<uom uom="K"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="eastwardicevelocity">
+        <label>Eastward ice velocity</label>
+      	<basePhenomenon>Velocity</basePhenomenon>
+      	<uom uom="m/s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="geopheight">
+        <label>Geopotential height</label>
+      	<basePhenomenon>Height</basePhenomenon>
+      	<uom uom="gpm"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="highcloudcover">
+        <label>High cloud cover</label>
+      	<basePhenomenon>Cloudiness</basePhenomenon>
+      	<uom uom="(0-1)"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="hourlymaximumgust">
+        <label>Hourly maximum wind gust</label>
+      	<basePhenomenon>Wind</basePhenomenon>
+      	<uom uom="m/s"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-max-PT1H-hourlymaximumgust---">
+            <statisticalFunction>max</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="humidity">
+        <label>Humidity</label>
+      	<basePhenomenon>Humidity</basePhenomenon>
+      	<uom uom="%"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="iceconcentration">
+        <label>Ice concentration</label>
+      	<basePhenomenon>Concentration</basePhenomenon>
+      	<uom uom="(0-1)"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="lowcloudcover">
+        <label>Low cloud cover</label>
+      	<basePhenomenon>Cloudiness</basePhenomenon>
+      	<uom uom="(0-1)"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="maximumwind">
+        <label>Maximum wind speed</label>
+      	<basePhenomenon>Wind</basePhenomenon>
+      	<uom uom="m/s"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-max-PT1H-maximumwind---">
+            <statisticalFunction>max</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+		<otherAggregation>
+                        <StatisticalMeasure gml:id="stat-other-max-PT1H-maximumwind---"><statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT10M</aggregationTimePeriod>
+                        </StatisticalMeasure>
+                    </otherAggregation>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="meanicethickness">
+        <label>Mean ice thickness</label>
+      	<basePhenomenon>Thickness</basePhenomenon>
+      	<uom uom="m"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="mediumcloudcover">
+        <label>Medium cloud cover</label>
+      	<basePhenomenon>Cloudiness</basePhenomenon>
+      	<uom uom="(0-1)"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="monthlymeantemperature">
+        <label>Monthly mean temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="K"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-P1M-monthlymeantemperature---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>P1M</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="monthlyprecipitation">
+        <label>Monthly precipitation sum</label>
+      	<basePhenomenon>Precipitation</basePhenomenon>
+      	<uom uom="mm"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-sum-P1M-monthlyprecipitation---">
+            <statisticalFunction>sum</statisticalFunction><aggregationTimePeriod>P1M</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="northwardicevelocity">
+        <label>Northward ice velocity</label>
+      	<basePhenomenon>Velocity</basePhenomenon>
+      	<uom uom="m/s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="precipitation1h">
+        <label>Precipitation amount 1 hour</label>
+      	<basePhenomenon>Precipitation</basePhenomenon>
+      	<uom uom="kg/m2"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-sum-PT1H-precipitation1h---">
+            <statisticalFunction>sum</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="precipitationamount">
+        <label>Precipitation amount</label>
+      	<basePhenomenon>Precipitation</basePhenomenon>
+      	<uom uom="kg/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="pressure">
+        <label>Air pressure</label>
+      	<basePhenomenon>Pressure</basePhenomenon>
+      	<uom uom="Pa"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="pseudoadiabaticpotentialtemperature">
+        <label>Pseudo adiabatic potential temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="K"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationdiffuseaccumulation">
+        <label>Diffuse short wave radiation accumulation at the surface</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="J/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationglobal">
+        <label>Global radiation</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="W/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationglobalaccumulation">
+        <label>Global radiation accumulation</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="J/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationlw">
+        <label>Long wave radiation</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="W/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationlwaccumulation">
+        <label>Long wave radiation accumulation</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="J/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationnetsurfacelwaccumulation">
+        <label>Net thermal radiation accumulation at the surface</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="J/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationnetsurfaceswaccumulation">
+        <label>Net short wave radiation accumulation at the surface</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="J/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="radiationnettopatmlw">
+        <label>Top net thermal radiation</label>
+      	<basePhenomenon>Radiation</basePhenomenon>
+      	<uom uom="W/m2"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="salinity">
+        <label>Salinity</label>
+      	<basePhenomenon>Water phenomenon</basePhenomenon>
+      	<uom uom="psu"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="seawatervelocityu">
+        <label>U-component of sea water current</label>
+      	<basePhenomenon>Current</basePhenomenon>
+      	<uom uom="m/s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="seawatervelocityv">
+        <label>V-component of sea water current</label>
+      	<basePhenomenon>Current</basePhenomenon>
+      	<uom uom="m/s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="sigwaveheight">
+        <label>Significant height of combined wind waves and swell</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="m"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="sigwaveperiod">
+        <label>Mean wave period</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="temperature">
+        <label>Air temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="K"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="temperaturesea">
+        <label>Sea temperature</label>
+      	<basePhenomenon>Temperature</basePhenomenon>
+      	<uom uom="K"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-PT1M-temperaturesea---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT1M</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="totalcloudcover">
+        <label>Total cloud cover</label>
+      	<basePhenomenon>Cloudiness</basePhenomenon>
+      	<uom uom="(0-1)"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="velocitypotential">
+        <label>Vertical velocity</label>
+      	<basePhenomenon>Velocity</basePhenomenon>
+      	<uom uom="Pa/s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="verticalvelocitymms">
+        <label>Vertical velocity upward</label>
+      	<basePhenomenon>Velocity</basePhenomenon>
+      	<uom uom="m/s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="wavedirection">
+        <label>Wave direction</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="deg"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="waveperiod">
+        <label>Mean wave period</label>
+      	<basePhenomenon>Sea roll</basePhenomenon>
+      	<uom uom="s"/>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="windgust">
+        <label>Wind gust</label>
+      	<basePhenomenon>Wind</basePhenomenon>
+      	<uom uom="m/s"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-max-PT1H-windgust---">
+            <statisticalFunction>max</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+		<otherAggregation>
+                        <StatisticalMeasure gml:id="stat-other-max-PT1H-windgust---"><statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT3S</aggregationTimePeriod>
+                        </StatisticalMeasure>
+                    </otherAggregation>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="windums">
+        <label>U-component of wind vector</label>
+      	<basePhenomenon>Wind</basePhenomenon>
+      	<uom uom="m/s"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-PT1H-windums---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  
+    <component>
+      <ObservableProperty gml:id="windvms">
+        <label>V-component of wind</label>
+      	<basePhenomenon>Wind</basePhenomenon>
+      	<uom uom="m/s"/>
+      	<statisticalMeasure>     
+          <StatisticalMeasure gml:id="stat-avg-PT1H-windvms---">
+            <statisticalFunction>avg</statisticalFunction><aggregationTimePeriod>PT1H</aggregationTimePeriod>
+          </StatisticalMeasure>
+        </statisticalMeasure>
+      </ObservableProperty>
+    </component>  </CompositeObservableProperty>

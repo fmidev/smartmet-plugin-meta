@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Category xmlns="http://www.opengis.net/swe/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
+  
+  <quality>
+   <Category id="qc-1">
+    <label>Hyvä laatu</label>
+    <description>Automaattisesti laatutarkastettu arvo. Arvon pitäisi täyttää asematyypille, havaintolaitteelle ja suureelle asetetut vaatimukset. Arvo on läpäissyt kaikki laatutestit.</description>
+    <value>1</value>
+   </Category>
+  </quality>
+</Category>
