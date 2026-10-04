@@ -337,7 +337,7 @@ TemperatureSea:
 {
 	name = "TemperatureSea";
 	label = { eng = "Sea temperature"; fin = "Veden lämpötila"; };
-        units = { default = "degC"; grib = "decC"; netcdf = "K"; };
+        units = { default = "degC"; grib = "K"; netcdf = "K"; };
 	base_phenomenon = {eng = "Temperature"; fin = "Lämpötila"; };
 	is_statistical = true;
 	statistical_function = "avg";
