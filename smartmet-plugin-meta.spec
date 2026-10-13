@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 26.10.3
+Version: 26.10.13
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -24,7 +24,7 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 26.10.3
+BuildRequires: smartmet-library-spine-devel >= 26.10.13
 BuildRequires: smartmet-library-macgyver-devel >= 26.10.3
 BuildRequires: smartmet-library-timeseries-devel >= 26.10.3
 BuildRequires: smartmet-engine-querydata-devel >= 26.10.3
@@ -33,7 +33,7 @@ BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 26.10.3
+BuildRequires: smartmet-engine-observation-devel >= 26.10.13
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -42,10 +42,10 @@ Requires: libconfig17
 Requires: smartmet-library-macgyver >= 26.10.3
 Requires: smartmet-server >= 26.9.2
 %if %{with observation}
-Requires: smartmet-engine-observation >= 26.10.3
+Requires: smartmet-engine-observation >= 26.10.13
 %endif
 Requires: smartmet-engine-querydata >= 26.10.3
-Requires: smartmet-library-spine >= 26.10.3
+Requires: smartmet-library-spine >= 26.10.13
 Requires: smartmet-library-timeseries >= 26.10.3
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
@@ -56,7 +56,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-library-timeseries-devel >= 26.10.3
 #TestRequires: smartmet-engine-geonames
 #TestRequires: smartmet-engine-querydata >= 26.10.3
-#TestRequires: smartmet-engine-observation >= 26.10.3
+#TestRequires: smartmet-engine-observation >= 26.10.13
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 26.5.8
 #TestRequires: gdal312
@@ -92,6 +92,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Tue Oct 13 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.10.13-1.fmi
+- Declare member functions and parameters const where nothing is modified (const correctness), no functional changes
+- Requires 26.10.13 versions of spine, engine-observation due to their ABI changes
+
 * Sat Oct 03 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.10.3-1.fmi
 - Repackaged due to the macgyver AtomicSharedPtr ABI change
 

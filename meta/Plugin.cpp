@@ -226,7 +226,7 @@ void parseObservablePropertiesResponse(
     const std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >&
         observableProperties,
     CTPP::CDT& hash,
-    std::vector<std::string>&
+    const std::vector<std::string>&
     /* parameters */)
 {
   try
@@ -626,7 +626,7 @@ int Plugin::getRequiredAPIVersion() const
 {
   return SMARTMET_API_VERSION;
 }
-std::string Plugin::query(SmartMet::Spine::Reactor& theReactor,
+std::string Plugin::query(const SmartMet::Spine::Reactor& theReactor,
                           const SmartMet::Spine::HTTP::Request& theRequest,
                           SmartMet::Spine::HTTP::Response& theResponse)
 {
@@ -699,7 +699,7 @@ std::string Plugin::formatObservablePropertiesResponse(CTPP::CDT& hash)
   }
 }
 
-std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReactor */,
+std::string Plugin::getDataQualityMetadata(const SmartMet::Spine::Reactor& /* theReactor */,
                                            const SmartMet::Spine::HTTP::Request& theRequest,
                                            SmartMet::Spine::HTTP::Response& theResponse)
 {
@@ -775,9 +775,9 @@ std::string Plugin::getDataQualityMetadata(SmartMet::Spine::Reactor& /* theReact
 }
 
 #ifndef WITHOUT_OBSERVATION
-std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
+std::string Plugin::getFlashCount(const SmartMet::Spine::Reactor& /* theReactor */,
                                   const SmartMet::Spine::HTTP::Request& theRequest,
-                                  SmartMet::Spine::HTTP::Response& /* theResponse */)
+                                  const SmartMet::Spine::HTTP::Response& /* theResponse */)
 {
   try
   {
@@ -818,7 +818,7 @@ std::string Plugin::getFlashCount(SmartMet::Spine::Reactor& /* theReactor */,
 #endif
 
 #ifndef WITHOUT_OBSERVATION
-std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor */,
+std::string Plugin::getObsEngineMetadata(const SmartMet::Spine::Reactor& /* theReactor */,
                                          const SmartMet::Spine::HTTP::Request& theRequest,
                                          SmartMet::Spine::HTTP::Response& theResponse)
 {
@@ -914,7 +914,7 @@ std::string Plugin::getObsEngineMetadata(SmartMet::Spine::Reactor& /* theReactor
 }
 #endif
 
-std::string Plugin::getForecastMetadata(SmartMet::Spine::Reactor& /* theReactor */,
+std::string Plugin::getForecastMetadata(const SmartMet::Spine::Reactor& /* theReactor */,
                                         const SmartMet::Spine::HTTP::Request& theRequest,
                                         SmartMet::Spine::HTTP::Response& theResponse)
 {

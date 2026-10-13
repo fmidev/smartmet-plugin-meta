@@ -53,7 +53,7 @@ class Plugin : public SmartMetPlugin
                       Spine::HTTP::Response& theResponse) override;
 
  private:
-  std::string query(Spine::Reactor& theReactor,
+  std::string query(const Spine::Reactor& theReactor,
                     const Spine::HTTP::Request& theRequest,
                     Spine::HTTP::Response& theResponse);
 
@@ -61,22 +61,22 @@ class Plugin : public SmartMetPlugin
    *  \brief Existence of emplate directory and files are checked and initilized.
    *  \exception std::runtime_error Directory or file is not found.
    */
-  std::string getDataQualityMetadata(Spine::Reactor& theReactor,
+  std::string getDataQualityMetadata(const Spine::Reactor& theReactor,
                                      const Spine::HTTP::Request& theRequest,
                                      Spine::HTTP::Response& theResponse);
 
-  std::string getForecastMetadata(Spine::Reactor& theReactor,
+  std::string getForecastMetadata(const Spine::Reactor& theReactor,
                                   const Spine::HTTP::Request& theRequest,
                                   Spine::HTTP::Response& theResponse);
 
   std::string formatObservablePropertiesResponse(CTPP::CDT& hash);
 
 #ifndef WITHOUT_OBSERVATION
-  std::string getFlashCount(Spine::Reactor& /* theReactor */,
+  std::string getFlashCount(const Spine::Reactor& /* theReactor */,
                             const Spine::HTTP::Request& theRequest,
-                            Spine::HTTP::Response& theResponse);
+                            const Spine::HTTP::Response& theResponse);
 
-  std::string getObsEngineMetadata(Spine::Reactor& theReactor,
+  std::string getObsEngineMetadata(const Spine::Reactor& theReactor,
                                    const Spine::HTTP::Request& theRequest,
                                    Spine::HTTP::Response& theResponse);
 
