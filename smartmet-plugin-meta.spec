@@ -33,7 +33,7 @@ BuildRequires: smartmet-engine-geonames-devel
 %if %{with observation}
 # BuildRequires: oracle-instantclient-devel
 # BuildRequires: oracle-instantclient11.2-devel
-BuildRequires: smartmet-engine-observation-devel >= 26.10.15
+BuildRequires: smartmet-engine-observation-devel >= 26.10.15-3
 %endif
 BuildRequires: ctpp2
 BuildRequires: protobuf
@@ -42,7 +42,7 @@ Requires: libconfig17
 Requires: smartmet-library-macgyver >= 26.10.15
 Requires: smartmet-server >= 26.10.15
 %if %{with observation}
-Requires: smartmet-engine-observation >= 26.10.15
+Requires: smartmet-engine-observation >= 26.10.15-3
 %endif
 Requires: smartmet-engine-querydata >= 26.10.15
 Requires: smartmet-library-spine >= 26.10.15
@@ -56,7 +56,7 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-library-timeseries-devel >= 26.10.15
 #TestRequires: smartmet-engine-geonames
 #TestRequires: smartmet-engine-querydata >= 26.10.15
-#TestRequires: smartmet-engine-observation >= 26.10.15
+#TestRequires: smartmet-engine-observation >= 26.10.15-3
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 26.5.8
 #TestRequires: gdal312
