@@ -6,7 +6,7 @@ The purpose of this module is to provide access to the meta data of observations
 
 Following access parameters are available:
 - @b qualityCode
-- @b observableProperty
+- @b observableProperty (observation, forecast or flashcount)
 
 <hr>
 
@@ -15,7 +15,7 @@ Following access parameters are available:
 http://data.fmi.fi/meta?qualitycode=0&language=fin&fmi-apikey=YOUR-FMI-APIKEY&
 @endverbatim
 
-- Quality code request example:
+- Observable property request example:
 @verbatim
 http://data.fmi.fi/fmi-apikey/YOUR-FMI-APIKEY/meta?observableProperty=observation&param=TA&language=eng
 @endverbatim

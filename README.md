@@ -12,7 +12,12 @@ Currently the plugin supports both  Finnish (fin) and English (eng) languages.
 For the meta plugin  the following access parameters are available:
 
 * qualityCode
-* observableProperty
+* observableProperty, with the values
+  * `observation` — metadata of the observed parameters given with `param` (from the observation engine)
+  * `forecast` — metadata of the forecast parameters given with `param` (from the plugin configuration); `units` selects one of the configured unit systems
+  * `flashcount` — the number of lightning strikes (JSON) for the locations and the time period of the request; the time zone `tz` is required
+
+The `language` option selects the language of the response, the default is `eng`.
 
 
 
