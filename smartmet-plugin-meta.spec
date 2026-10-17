@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 26.10.16
+Version: 26.10.17
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -39,13 +39,13 @@ BuildRequires: ctpp2
 BuildRequires: protobuf
 Requires: ctpp2
 Requires: libconfig17
-Requires: smartmet-library-macgyver >= 26.10.16
-Requires: smartmet-server >= 26.10.16
+Requires: smartmet-library-macgyver >= 26.10.17
+Requires: smartmet-server >= 26.10.17
 %if %{with observation}
-Requires: smartmet-engine-observation >= 26.10.16
+Requires: smartmet-engine-observation >= 26.10.17
 %endif
-Requires: smartmet-engine-querydata >= 26.10.16
-Requires: smartmet-library-spine >= 26.10.16
+Requires: smartmet-engine-querydata >= 26.10.17
+Requires: smartmet-library-spine >= 26.10.17
 Requires: smartmet-library-timeseries >= 26.10.16
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
@@ -55,8 +55,8 @@ Obsoletes: smartmet-brainstorm-metaplugin-debuginfo < 16.11.1
 #TestRequires: smartmet-library-spine-plugin-test
 #TestRequires: smartmet-library-timeseries-devel >= 26.10.16
 #TestRequires: smartmet-engine-geonames
-#TestRequires: smartmet-engine-querydata >= 26.10.16
-#TestRequires: smartmet-engine-observation >= 26.10.16
+#TestRequires: smartmet-engine-querydata >= 26.10.17
+#TestRequires: smartmet-engine-observation >= 26.10.17
 #TestRequires: smartmet-test-data
 #TestRequires: smartmet-test-db >= 26.5.8
 #TestRequires: gdal312
@@ -92,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Sat Oct 17 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.10.17-1.fmi
+- Rebuilt against the new library versions
+
 * Fri Oct 16 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.10.16-1.fmi
 - Rebuilt due to ABI changes in macgyver, spine, newbase and other libraries
 
