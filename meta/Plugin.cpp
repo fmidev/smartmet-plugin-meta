@@ -871,24 +871,34 @@ std::string Plugin::getObsEngineMetadata(const SmartMet::Spine::Reactor& /* theR
       }
     }
 
+    // Some database drivers (SpatiaLite, mobile data) return a null pointer instead of an
+    // empty result
+    auto queryObservableProperties = [&](std::vector<std::string>& params)
+    {
+      auto result = itsObsEngine->observablePropertyQuery(params, language);
+      if (!result)
+        result = std::make_shared<
+            std::vector<SmartMet::Engine::Observation::ObservableProperty> >();
+      return result;
+    };
+
     // If parameter map is empty, all metadata is returned by the engine
     std::shared_ptr<std::vector<SmartMet::Engine::Observation::ObservableProperty> >
         observableProperties;
     if (parameters.empty() and qc_parameters.empty())
     {
-      observableProperties = itsObsEngine->observablePropertyQuery(parameters, language);
+      observableProperties = queryObservableProperties(parameters);
     }
     else
     {
       if (!parameters.empty())
       {
-        observableProperties = itsObsEngine->observablePropertyQuery(parameters, language);
+        observableProperties = queryObservableProperties(parameters);
       }
 
       if (not qc_parameters.empty())
       {
-        auto qc_observableProperties =
-            itsObsEngine->observablePropertyQuery(qc_parameters, language);
+        auto qc_observableProperties = queryObservableProperties(qc_parameters);
         updateObservableProperties(qc_observableProperties, language);
 
         if (observableProperties == nullptr)

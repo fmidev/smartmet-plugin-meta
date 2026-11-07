@@ -3,7 +3,7 @@
 %define SPECNAME smartmet-plugin-%{DIRNAME}
 Summary: SmartMet meta plugin
 Name: %{SPECNAME}
-Version: 26.11.5
+Version: 26.11.7
 Release: 1%{?dist}.fmi
 License: MIT
 Group: SmartMet/Plugins
@@ -92,6 +92,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/smartmet/meta/*.c2t
 
 %changelog
+* Sat Nov  7 2026 Mika Heiskanen <mika.heiskanen@fmi.fi> - 26.11.7-1.fmi
+- Fixed a crash when the observation engine returns no observable properties (SpatiaLite and mobile data drivers)
+
 * Thu Nov  5 2026 Andris Pavēnis <andris.pavenis@fmi.fi> 26.11.5-1.fmi
 - Repackage due to ABI changes
 
