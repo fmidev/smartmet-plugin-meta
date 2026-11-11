@@ -995,7 +995,7 @@ void Plugin::requestHandler(SmartMet::Spine::Reactor& theReactor,
       const int expires_seconds = 60;
       Fmi::DateTime t_now = Fmi::SecondClock::universal_time();
 
-      // Excecuting the query
+      // Executing the query
 
       std::string response = query(theReactor, theRequest, theResponse);
 
@@ -1118,7 +1118,7 @@ template file.</td></tr>
 of CTPP2 template file.</td></tr>
 <tr><td>forecastTemplate</td><td>string</td><td>optional</td><td>Specifies file of CTPP2 template
 file.</td></tr> <tr><td>forecast_parameters</td><td>string</td><td>mandatory</td><td>Specifies
-forcast parameter names configured into the configuration file.</td></tr>
+forecast parameter names configured into the configuration file.</td></tr>
 <tr><td>dataQualityDefinitionDir</td><td>string</td><td>mandatory</td><td>Specifies absolute of a
 directory where to look data quality configuration files.</td></tr>
 </table>

@@ -58,7 +58,7 @@ class Plugin : public SmartMetPlugin
                     Spine::HTTP::Response& theResponse);
 
   /**
-   *  \brief Existence of emplate directory and files are checked and initilized.
+   *  \brief Existence of emplate directory and files are checked and initialized.
    *  \exception std::runtime_error Directory or file is not found.
    */
   std::string getDataQualityMetadata(const Spine::Reactor& theReactor,

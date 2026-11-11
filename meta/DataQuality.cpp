@@ -40,7 +40,7 @@ bool DataQualityRegistry::addMapEntryAlias(const std::string& code, const std::s
 
     if (isMapEntryAlias(codeAlias))
     {
-      throw Fmi::Exception(BCP, "Dublicate alias '" + codeAlias + "' found!");
+      throw Fmi::Exception(BCP, "Duplicate alias '" + codeAlias + "' found!");
     }
 
     m_codeAliasMap[codeAlias] = code;
@@ -203,7 +203,7 @@ label:
 };
 description:
 {
-    eng = "Manually quality controlled value. Value is completely erroneus. Value is completely
+    eng = "Manually quality controlled value. Value is completely erroneous. Value is completely
 useless in every application and can be removed from database.";
     fin = "Manuaalisesti laatutarkastettu arvo. Arvo on varmasti täysin virheellinen. Arvo on täysin
 käyttökelvoton kaikille sovelluksille ja se voidaan jatkossa kokonaan poistaa tietokannasta.";
