@@ -341,7 +341,7 @@ void Plugin::init()
                                                          "observable_properties.c2t");
 
     if (!itsReactor->addContentHandler(this,
-                                       "/meta",
+                                       Spine::Reactor::HandlerOptions("/meta"),
                                        [this](Spine::Reactor& theReactor,
                                               const Spine::HTTP::Request& theRequest,
                                               Spine::HTTP::Response& theResponse) {

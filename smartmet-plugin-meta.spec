@@ -24,7 +24,7 @@ BuildRequires: rpm-build
 BuildRequires: gcc-c++
 BuildRequires: make
 BuildRequires: libconfig17-devel
-BuildRequires: smartmet-library-spine-devel >= 26.11.4
+BuildRequires: smartmet-library-spine-devel >= 26.11.11
 BuildRequires: smartmet-library-macgyver-devel >= 26.11.3
 BuildRequires: smartmet-library-timeseries-devel >= 26.11.4
 BuildRequires: smartmet-engine-querydata-devel >= 26.11.5
@@ -45,7 +45,7 @@ Requires: smartmet-server >= 26.10.17
 Requires: smartmet-engine-observation >= 26.11.5
 %endif
 Requires: smartmet-engine-querydata >= 26.11.5
-Requires: smartmet-library-spine >= 26.11.4
+Requires: smartmet-library-spine >= 26.11.11
 Requires: smartmet-library-timeseries >= 26.11.4
 Provides: %{SPECNAME}
 Obsoletes: smartmet-brainstorm-metaplugin < 16.11.1
