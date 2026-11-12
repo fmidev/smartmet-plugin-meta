@@ -1,11 +1,14 @@
 #include "DataQuality.h"
-#include <boost/algorithm/string.hpp>
 #include <macgyver/Exception.h>
-#include <macgyver/TypeName.h>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
+#include <cctype>
+#include <cstddef>
 #include <string>
+#include <utility>
+
+namespace libconfig
+{
+class Setting;
+}  // namespace libconfig
 
 namespace SmartMet
 {

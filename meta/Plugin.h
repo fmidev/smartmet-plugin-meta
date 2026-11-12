@@ -7,21 +7,40 @@
 #pragma once
 
 #include "DataQuality.h"
-
-#include <engines/geonames/Engine.h>
-#include <engines/querydata/Engine.h>
-#include <spine/ConfigBase.h>
-#include <spine/Reactor.h>
-#include <spine/SmartMetPlugin.h>
-#include <timeseries/OptionParsers.h>
-#ifndef WITHOUT_OBSERVATION
-#include <engines/observation/Engine.h>
-#include <engines/observation/ObservableProperty.h>
-#endif
-#include <ctpp2/CDT.hpp>
+#include "ForecastMetaData.h"
 #include <macgyver/TemplateFactory.h>
+#include <spine/ConfigBase.h>
+#include <spine/SmartMetPlugin.h>
+#include <filesystem>
+#include <map>
+#include <memory>
 #include <string>
-#include <utility>
+
+namespace CTPP
+{
+class CDT;
+}  // namespace CTPP
+namespace SmartMet::Engine::Geonames
+{
+class Engine;
+}  // namespace SmartMet::Engine::Geonames
+namespace SmartMet::Engine::Observation
+{
+class Engine;
+}  // namespace SmartMet::Engine::Observation
+namespace SmartMet::Engine::Querydata
+{
+class Engine;
+}  // namespace SmartMet::Engine::Querydata
+namespace SmartMet::Spine::HTTP
+{
+class Request;
+class Response;
+}  // namespace SmartMet::Spine::HTTP
+namespace SmartMet::Spine
+{
+class Reactor;
+}  // namespace SmartMet::Spine
 
 namespace SmartMet
 {
@@ -29,7 +48,6 @@ namespace Plugin
 {
 namespace Meta
 {
-struct ForecastMetaData;
 
 class Plugin : public SmartMetPlugin
 {

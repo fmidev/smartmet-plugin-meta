@@ -9,22 +9,36 @@
 #ifndef WITHOUT_OBSERVATION
 #include <engines/observation/Utils.h>
 #endif
+#include <boost/algorithm/string.hpp>
+#include <boost/bimap.hpp>
 #include <ctpp2/CDT.hpp>
+#include <engines/geonames/Engine.h>
+#include <engines/observation/Engine.h>
+#include <engines/observation/ObservableProperty.h>
+#include <engines/querydata/Engine.h>
 #include <macgyver/DateTime.h>
 #include <macgyver/Exception.h>
+#include <macgyver/LocalDateTime.h>
 #include <macgyver/StringConversion.h>
+#include <macgyver/TemplateFormatter.h>
+#include <macgyver/TimeFormatter.h>
+#include <macgyver/TimeParser.h>
 #include <macgyver/TimeZoneFactory.h>
 #include <spine/Convenience.h>
+#include <spine/HTTP.h>
 #include <spine/HostInfo.h>
+#include <spine/MultiLanguageString.h>
+#include <spine/Reactor.h>
 #include <spine/SmartMet.h>
-#include <spine/Table.h>
-#include <spine/Value.h>
 #include <timeseries/TimeSeriesGeneratorOptions.h>
+#include <exception>
 #include <filesystem>
-#include <iomanip>
 #include <iostream>
+#include <libconfig.h++>
+#include <optional>
 #include <sstream>
-#include <stdexcept>
+#include <utility>
+#include <vector>
 
 namespace SmartMet
 {

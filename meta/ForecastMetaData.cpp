@@ -1,5 +1,6 @@
 
 #include "ForecastMetaData.h"
+#include <utility>
 
 namespace SmartMet
 {
